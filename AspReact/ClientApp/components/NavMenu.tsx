@@ -11,6 +11,7 @@ export class NavMenu extends React.Component<{}, {}> {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
+                        <span className='icon-bar'></span>
                     </button>
                     <Link className='navbar-brand' to={ '/' }>AspReact</Link>
                 </div>
@@ -30,6 +31,11 @@ export class NavMenu extends React.Component<{}, {}> {
                         <li>
                             <NavLink to={ '/fetchdata' } activeClassName='active'>
                                 <span className='glyphicon glyphicon-th-list'></span> Fetch data
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/hlcDetail'} activeClassName='active'>
+                                <span className='glyphicon glyphicon-th-list'></span> HLC Detail
                             </NavLink>
                         </li>
                     </ul>

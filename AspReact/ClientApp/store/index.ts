@@ -1,8 +1,10 @@
 import * as WeatherForecasts from './WeatherForecasts';
 import * as Counter from './Counter';
+import * as HlcDetail from './HlcDetail';
 
 // The top-level state object
 export interface ApplicationState {
+    hlcDetail: HlcDetail.HlcDetailState;
     counter: Counter.CounterState;
     weatherForecasts: WeatherForecasts.WeatherForecastsState;
 }
@@ -11,6 +13,7 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
+    hlcDetail: HlcDetail.reducer,
     counter: Counter.reducer,
     weatherForecasts: WeatherForecasts.reducer
 };
