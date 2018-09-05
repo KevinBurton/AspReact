@@ -1,0 +1,6 @@
+﻿<div id="ResearchAgenda">
+  <div className="form-group">
+    <Label id="ResearchAgenda_Label" text="ResearchAgenda(S)  " required={this.props.ResearchAgenda[0].ID.IsRequired} />
+    
+  </div>
+</div>

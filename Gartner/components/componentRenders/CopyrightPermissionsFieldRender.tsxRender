@@ -1,0 +1,16 @@
+﻿            <div id="CopyrightPermissions">
+                <div >
+                    <div className="form-group" >
+                        <Label id="CopyrightPermissions_Label" text="COPYRIGHT PERMISSIONS  " required={this.props.CopyrightPermissionsField.CopyrightPermissions.IsRequired} />
+                        <div  >
+                            <TextArea className="form-control"
+                                id='CopyrightPermissions'
+                                value={this.props.CopyrightPermissionsField.CopyrightPermissions.Value}
+                                onChange={this.handleChange}
+                                onBlur={this.upsertChange}
+                                maxLength={this.props.CopyrightPermissionsField.CopyrightPermissions.MaxLength} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        

@@ -1,0 +1,27 @@
+﻿<div id="primaryOwner">
+            <div>
+                <div className="form-group" >
+                    <Label id="PrimaryOwner_Label" text="PRIMARY OWNER  " required={this.props.PrimaryOwner.EmployeeId.IsRequired} />
+                    <span className="pull-right" >
+                        <HelpButton title="Primary Owner" text={primaryOwnerHelpText} />
+                    </span>
+
+                    <div>
+                        { (this.props.PrimaryOwner.EmployeeId.DefaultValue) ?
+            <ComboBox
+            id="primaryOwnerList"
+            name="primaryOwnerList"
+            onSelect={(selectedItem) => this.savePrimaryOwner(selectedItem) }
+            url="/GenericApiHelper/GetEmployees"
+            dataTextField="DisplayText"
+            dataValueField="EmployeeId"
+            placeholder="Search Employee By Name"
+            isEnabled= {true}
+            selectedValue={this.props.PrimaryOwner.EmployeeId.DefaultValue}
+            ></ComboBox>
+            : <div></div> }
+                    </div>
+                </div>
+            </div>
+        </div>
+   

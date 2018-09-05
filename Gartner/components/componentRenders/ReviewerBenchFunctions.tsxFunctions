@@ -1,0 +1,25 @@
+﻿    getNames: function (DelegateNames: string) {
+        return DelegateNames.split(';');
+
+    },
+
+    getEmails: function (DelegateEmails: string) {
+        return DelegateEmails.split(';');
+
+    },
+
+    getDelegates: function (Reviewer: any) {
+        let names = this.getNames(Reviewer.DelegateNames.Value);
+        let emails = this.getEmails(Reviewer.DelegateEmails.Value);
+        let delString = [{
+            Email: '',
+            Name: ''
+        }]
+
+        for (var i = 0; i < names.length; i++) {
+            delString.push({ Email: emails[i], Name: names[i] });
+        }
+
+        return delString;
+
+    },

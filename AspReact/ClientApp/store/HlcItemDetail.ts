@@ -3,7 +3,7 @@ import { Action, Reducer } from 'redux';
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
-export interface HlcDetailState {
+export interface HlcItemDetailState {
     itemId: number;
 }
 
@@ -12,30 +12,30 @@ export interface HlcDetailState {
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
 
-interface ReviewerCounAction { type: 'REVIEWER_COUNT' }
-interface EmployeeCountAction { type: 'EMPLOYEE_COUNT' }
+interface ItemIdAction { type: 'ITEM_ID' }
+interface BaseUrlAction { type: 'BASE_URL' }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = ReviewerCounAction | EmployeeCountAction;
+type KnownAction = ItemIdAction | BaseUrlAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    increment: () => <ReviewerCounAction>{ type: 'REVIEWER_COUNT' },
-    decrement: () => <EmployeeCountAction>{ type: 'EMPLOYEE_COUNT' }
+    itemId: () => <ItemIdAction>{ type: 'ITEM_ID' },
+    baseUrl: () => <BaseUrlAction>{ type: 'BASE_URL' }
 };
 
 // ----------------
 // REDUCER - For a given state and action, returns the new state. To support time travel, this must not mutate the old state.
 
-export const reducer: Reducer<HlcDetailState> = (state: HlcDetailState, action: KnownAction) => {
+export const reducer: Reducer<HlcItemDetailState> = (state: HlcItemDetailState, action: KnownAction) => {
     switch (action.type) {
-        case 'REVIEWER_COUNT':
+        case 'ITEM_ID':
             break;
-        case 'EMPLOYEE_COUNT':
+        case 'BASE_URL':
             break;
         default:
             // The following line guarantees that every action in the KnownAction union has been covered by a case above

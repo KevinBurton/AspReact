@@ -1,0 +1,11 @@
+﻿
+    makePrimary: function (Owner: any) {
+        if (Owner != "") {
+		 this.componentDescriptor.dataDictionary['ID'] = Owner.ID.Value;
+            this.componentDescriptor.dataDictionary['EmployeeId'] = Owner.EmployeeId.Value;
+            this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
+            this.componentDescriptor.dataDictionary['ItemAuthorTypeId'] = "MakePrimary";  
+            this.props.componentData(this.componentDescriptor, 'Upsert'); 
+        }
+
+    },

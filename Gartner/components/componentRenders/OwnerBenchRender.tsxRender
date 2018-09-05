@@ -1,0 +1,91 @@
+﻿<div id="OwnerBench">
+  <div className="form-group">
+    <Label id="Owner_Label" text="OWNER(S)  " required={this.props.OwnerBench[0].ID.IsRequired} />
+    <div>
+      <EmployeePicker id={"addOwnerEmployeePicker"}
+          buttonText="Add"
+          onSelect={(employee) =>this.upsertChange(employee) }
+        isEnabled={this.props.OwnerBench[0].EmployeeId.IsEnabled}/>
+      </div>
+
+    <div className="table-responsive">
+      <table className="table table-condensed">
+        <tbody>
+          {OwnerBench[0].ID.Value != '0' ?
+          OwnerBench.sort((a, b) => {
+          var nameA = a.FullName.Value.toUpperCase();
+          var nameB = b.FullName.Value.toUpperCase();
+          if (nameA < nameB) {
+                                                    return -1;
+                                                } else if (nameA > nameB) {
+                                                    return 1;
+                                                } else {
+                                                    return 0;
+                                                }
+                                            })
+                                                .filter((Owner) => { return Owner.ItemAuthorTypeId.Value == '1'; })
+                                                .map((Owner: any) => (
+                                                    <tr  key={"Owner.ID.Value"}>
+            <td  className="text-middle" >
+              {Owner.FullName.Value} ({Owner.ItemAuthorTypeId.DefaultValue})
+            </td>
+          </tr>
+          )
+          )
+          : <tr></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+
+    <div className="table-responsive">
+      <table className="table table-condensed">
+        <tbody>
+
+          {OwnerBench[0].ID.Value != '0' ?
+
+          OwnerBench.sort((a, b) => {
+          var nameA = a.FullName.Value.toUpperCase();
+          var nameB = b.FullName.Value.toUpperCase();
+          if (nameA < nameB) {
+                                                    return -1;
+                                                } else if (nameA > nameB) {
+                                                    return 1;
+                                                } else {
+                                                    return 0;
+                                                }
+                                            })
+                                                .filter((Owner) => { return Owner.ItemAuthorTypeId.Value != '1'; })
+                                                .map((Owner: any) => (
+                                                    <tr  key={Owner.ID.Value}>
+            <td  className="text-middle" >
+              {Owner.FullName.Value} ({Owner.ItemAuthorTypeId.DefaultValue})
+            </td>
+            {Owner.ActionButton.DefaultValue == 'Make Primary' ?
+            <td className="text-right">
+              <button type="button"
+                  className="btn btn-xs btn-custom btn-secondary"
+                  onClick={() =>this.makePrimary(Owner) }
+                disabled={!Owner.ActionButton.IsEnabled}>Make Primary
+              </button>
+              <button type="button"
+                  className="btn btn-xs btn-custom delete-button"
+                  onClick={() =>this.deleteSelected(Owner) }
+                disabled={!Owner.ActionButton.IsEnabled}>
+                <span className="icon-trash">
+                </span>
+              </button>
+            </td>
+            :
+            <td></td>}
+          </tr>
+          )
+          )
+          : <tr></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
