@@ -8,7 +8,7 @@ type TitleDescriptionProps =
     TitleDescriptionStore.TitleDescriptionState
     & typeof TitleDescriptionStore.actionCreators;
 
-class TitleDescription extends React.Component<TitleDescriptionProps, {}> {
+class TitleDescription extends React.Component<TitleDescriptionProps, any> {
     public render() {
         return <div>
             <h1>l</h1>
