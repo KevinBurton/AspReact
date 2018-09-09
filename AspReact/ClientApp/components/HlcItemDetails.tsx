@@ -2,14 +2,15 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import TitleDescription from './TitleDescription';
-import {DownloadTemplateButtonContainer} from './DownloadTemplateButton';
+import DownloadTemplateButton from './DownloadTemplateButton';
+import ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage';
+
 import { HlcItemStatusDatesContainer } from './HlcItemStatusDates';
 import {HLCBasicInfoContainer} from './HLCBasicInfo';
 import { ReviewerBenchContainer } from './ReviewerBench';
 import { OwnerBenchContainer } from './OwnerBench';
 import { SpeakerBenchContainer } from './SpeakerBench';
 import { SupportTeamContainer } from './SupportTeam';
-import { ViewParentAssociationItemWorkFlowStageContainer } from './ViewParentAssociationItemWorkFlowStage';
 import { HlcSessionFileDetailsContainer } from './HLCSessionFileDetails';
 import { VendorBenchContainer } from './VendorBench';
 import { ResearchAgendaContainer } from './ResearchAgenda';
@@ -17,6 +18,7 @@ import { DiscussionContainer } from './Discussion';
 import { QVRBenchContainer } from './QVRBench';
 
 export interface HlcItemDetailProps {
+  itemId : 0
 }
 
 export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any>({
@@ -49,8 +51,8 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
 
                     <div id="downloadTemplate" className="col-xs-12 col-sm-12 col-md-4">
                         <div className="right-rail pull-right">
-                            <DownloadTemplateButtonContainer/>
-                            <ViewParentAssociationItemWorkFlowStageContainer />
+                            <DownloadTemplateButton />
+                            <ViewParentAssociationItemWorkFlowStage />
                         </div>
                     </div>
                 </div>
