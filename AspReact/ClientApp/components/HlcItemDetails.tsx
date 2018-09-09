@@ -70,7 +70,7 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
                                 Peer Review
                             </a>
                         </li>
-                        <HlcSessionFileDetails sfdType='List' />
+                        <HlcSessionFileDetails sfdType='List' SessionFileDetail={null}/>
                     </ul>
                     <div className="tab-content" id="item-details-main">
                         <div id="hlcItemDetails" className="tab-pane active" role="tabpanel">
@@ -117,7 +117,7 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
                                 </div>
                             </div>
                         </div>
-                        <HlcSessionFileDetails sfdType='Content' />
+                        <HlcSessionFileDetails sfdType='Content' SessionFileDetail={null}/>
                     </div>
                 </div>
 

@@ -32,7 +32,7 @@ enum SfdType {
 
 export interface SessionFileDetailsProps {
     SessionFileDetail: any;
-    sfdType: SfdType;
+    sfdType: string;
 }
 
 export const HlcSessionFileDetailsComponent = React.createClass<SessionFileDetailsProps, any>({
