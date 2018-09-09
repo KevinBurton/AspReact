@@ -4,9 +4,11 @@ import * as HlcDetail from './HlcDetail';
 import * as TitleDescription from './TitleDescription'
 import * as DownloadTemplateButton from './DownloadTemplateButton'
 import * as ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage'
+import * as HlcItemStatusDatesComponent from './HlcItemStatusDatesComponent'
 
 // The top-level state object
 export interface ApplicationState {
+    hlcItemStatusDatesComponent: HlcItemStatusDatesComponent.HlcItemStatusDatesComponentState;
     viewParentAssociationItemWorkFlowStage: ViewParentAssociationItemWorkFlowStage.ViewParentAssociationItemWorkFlowStageState;
     downloadTemplateButton: DownloadTemplateButton.DownloadTemplateButtonState;
     titleDescription: TitleDescription.TitleDescriptionState;
@@ -19,6 +21,7 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
+    hlcItemStatusDatesComponent: HlcItemStatusDatesComponent.reducer,
     viewParentAssociationItemWorkFlowStage: ViewParentAssociationItemWorkFlowStage.reducer,
     downloadTemplateButton: DownloadTemplateButton.reducer,
     titleDescription: TitleDescription.reducer,

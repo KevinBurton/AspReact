@@ -1,21 +1,18 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import TitleDescription from './TitleDescription';
 import DownloadTemplateButton from './DownloadTemplateButton';
 import ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage';
-
-import { HlcItemStatusDatesContainer } from './HlcItemStatusDates';
-import {HLCBasicInfoContainer} from './HLCBasicInfo';
-import { ReviewerBenchContainer } from './ReviewerBench';
-import { OwnerBenchContainer } from './OwnerBench';
-import { SpeakerBenchContainer } from './SpeakerBench';
-import { SupportTeamContainer } from './SupportTeam';
-import { HlcSessionFileDetailsContainer } from './HLCSessionFileDetails';
-import { VendorBenchContainer } from './VendorBench';
-import { ResearchAgendaContainer } from './ResearchAgenda';
-import { DiscussionContainer } from './Discussion';
-import { QVRBenchContainer } from './QVRBench';
+import HlcSessionFileDetails  from './HLCSessionFileDetails';
+import HlcItemStatusDates from './HlcItemStatusDates';
+import HLCBasicInfo from './HLCBasicInfo';
+import OwnerBench from './OwnerBench';
+import ReviewerBench from './ReviewerBench';
+import SpeakerBench from './SpeakerBench';
+import SupportTeam from './SupportTeam';
+import ResearchAgenda from './ResearchAgenda';
+import Discussion from './Discussion';
+import QVRBench from './QVRBench';
 
 export interface HlcItemDetailProps {
   itemId : 0
@@ -69,17 +66,17 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
                                 Peer Review
                             </a>
                         </li>
-                        <HlcSessionFileDetailsContainer sfdType='List' />
+                        <HlcSessionFileDetails sfdType='List' />
                     </ul>
                     <div className="tab-content" id="item-details-main">
                         <div id="hlcItemDetails" className="tab-pane active" role="tabpanel">
                             <div  className="row">
 
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                                    <HLCBasicInfoContainer/>
+                                    <HLCBasicInfo/>
                                 </div>
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                                    <HlcItemStatusDatesContainer />
+                                    <HlcItemStatusDates />
                                     <div className="portlet">
                                         <div className="portlet-title">
                                             <div className="caption">
@@ -87,20 +84,20 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
                                             </div>
                                         </div>
                                         <div className="portlet-body">
-                                            <OwnerBenchContainer />
-                                            <ReviewerBenchContainer />
-                                            <SpeakerBenchContainer />
-                                            <SupportTeamContainer />
+                                            <OwnerBench />
+                                            <ReviewerBench />
+                                            <SpeakerBench />
+                                            <SupportTeam />
                                         </div>
                                     </div>
-                                    <ResearchAgendaContainer />
+                                    <ResearchAgenda />
                                 </div>
                             </div>
                         </div>
                         <div role="tabpanel" className="tab-pane fade" id="peerReviewTabDetails">
                             <div  className="row">
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                                    <DiscussionContainer />
+                                    <Discussion />
                                 </div>
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
                                     <div className="portlet">
@@ -110,13 +107,13 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
                                             </div>
                                         </div>
                                         <div className="portlet-body">
-                                            <QVRBenchContainer />
+                                            <QVRBench />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <HlcSessionFileDetailsContainer sfdType='Content' />
+                        <HlcSessionFileDetails sfdType='Content' />
                     </div>
                 </div>
 
