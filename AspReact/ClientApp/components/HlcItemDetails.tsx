@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import TitleDescription from './TitleDescription';
 import DownloadTemplateButton from './DownloadTemplateButton';
 import ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage';
@@ -13,10 +14,13 @@ import SupportTeam from './SupportTeam';
 import ResearchAgenda from './ResearchAgenda';
 import Discussion from './Discussion';
 import QVRBench from './QVRBench';
+import { ApplicationState }  from '../store';
+import * as HlcItemDetailStore from '../store/HlcItemDetail';
 
-export interface HlcItemDetailProps {
-  itemId : 0
-}
+type HlcItemDetailProps =
+    HlcItemDetailStore.HlcItemDetailState
+    & typeof HlcItemDetailStore.actionCreators
+    & RouteComponentProps<{}>;
 
 export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any>({
 
