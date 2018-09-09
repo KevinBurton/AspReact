@@ -35,7 +35,7 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
             <div>
                 <div  className="row">
                     <div  className="col-xs-12 col-sm-12 col-md-8">
-                        <TitleDescription />
+                        <TitleDescription itemId={0}/>
 
                         <div className="form-group">
                             <span className="icon-documents"></span>{itemId}

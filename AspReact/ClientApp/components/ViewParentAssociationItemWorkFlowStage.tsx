@@ -40,7 +40,7 @@ export const ViewParentAssociationItemWorkFlowStage = React.createClass<ViewPare
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     if (!state.SessionCategory) {
         const { itemId } = state;
 

@@ -1,23 +1,16 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
+
 import HelpButton from './HelpButton';
 import { Input, FormGroup, TextArea, Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 
 
 export interface OwnerBenchProps {
-	getComponentData: (component: Object) => void;
 	OwnerBench: Object;
-	componentDescriptor: ComponentDescriptor;
-	updateState: Function;
 }
-
-
-
 
 export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
 
@@ -100,7 +93,7 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
                                                     return 0;
                                                 }
                                             })
-                                                .filter((Owner) => { return Owner.ItemAuthorTypeId.Value == '1'; })
+                                                .filter((Owner: any) => { return Owner.ItemAuthorTypeId.Value == '1'; })
                                                 .map((Owner: any) => (
                                                     <tr  key={Owner.ID.Value}>
                                                         <td  className="text-middle" width="50%" >
@@ -122,7 +115,7 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
 
                                         {OwnerBench[0].ID.Value != '0' ?
 
-                                            OwnerBench.sort((a, b) => {
+                                            OwnerBench.sort((a: any, b: any) => {
                                                 var nameA = a.FullName.Value.toUpperCase();
                                                 var nameB = b.FullName.Value.toUpperCase();
                                                 if (nameA < nameB) {
@@ -133,7 +126,7 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
                                                     return 0;
                                                 }
                                             })
-                                                .filter((Owner) => { return Owner.ItemAuthorTypeId.Value != '1'; })
+                                                .filter((Owner: any) => { return Owner.ItemAuthorTypeId.Value != '1'; })
                                                 .map((Owner: any) => (
                                                     <tr  key={Owner.ID.Value}>
                                                         <td  className="text-middle"  width="50%">
@@ -141,7 +134,7 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
                                                         </td>
                                                         {Owner.ActionButton.DefaultValue == 'Make Primary' ?
                                                             <td width="50%">
-                                                                <button type="button" 
+                                                                <button type="button"
                                                                     className="btn btn-xs btn-custom btn-secondary btn-hlc"
                                                                     onClick={() => this.makePrimary(Owner) }
                                                                     disabled={!Owner.ActionButton.IsEnabled}>Make Primary
@@ -168,14 +161,13 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
 	if (!state.OwnerBench) {
 		const { itemId } = state;
 		return {
 			itemId: state.itemId,
 			eventEmitter: state.eventEmitter,
 			OwnerBench: [{
-
 				ID: { Value: '' }
 				, EmployeeId: { Value: '' }
 				, FullName: { Value: '' }
@@ -191,13 +183,6 @@ const mapStateToProps = (state) => {
 		OwnerBench: state.OwnerBench
 	};
 };
-
-export const OwnerBenchContainer =
-	connect(
-		mapStateToProps,
-		actions
-	)(OwnerBenchComponent) as React.ClassicComponentClass<any>;
-
 
 export default OwnerBenchComponent;
 

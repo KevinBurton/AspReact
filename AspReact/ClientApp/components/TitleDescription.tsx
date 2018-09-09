@@ -5,8 +5,7 @@ import { ApplicationState }  from '../store';
 import * as TitleDescriptionStore from '../store/TitleDescription';
 
 type TitleDescriptionProps =
-    TitleDescriptionStore.TitleDescriptionState
-    & typeof TitleDescriptionStore.actionCreators;
+    TitleDescriptionStore.TitleDescriptionState;
 
 class TitleDescription extends React.Component<TitleDescriptionProps, any> {
     public render() {

@@ -40,7 +40,7 @@ export const DownloadTemplateButton = React.createClass<DownloadTemplateButtonPr
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     if (!state.SessionCategory) {
         const { itemId } = state;
 
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-  (state: ApplicationState) => state.downloadTemplatButton, // Selects which state properties are merged into the component's props
+  (state: ApplicationState) => state.downloadTemplateButton, // Selects which state properties are merged into the component's props
   DownloadTemplateButtonStore.actionCreators                 // Selects which action creators are merged into the component's props
 )(DownloadTemplateButton) as typeof DownloadTemplateButton;
 ;
