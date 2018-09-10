@@ -19,7 +19,7 @@ import { SeriesDefinitionContainer } from './SeriesDefinition';
 import { VendorBenchContainer } from './VendorBench';
 
 export interface HLCBasicInfoProps {
-    HLCBasicInfo: Object;
+    HLCBasicInfo?: Object;
 }
 
 export const HLCBasicInfoComponent = React.createClass<HLCBasicInfoProps, any>({

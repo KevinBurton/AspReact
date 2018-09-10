@@ -5,15 +5,15 @@ import { ComponentDescriptor } from '../models/generic';
 const HlcItemStatusDatesHelpText = "Status dates are based on the event currently selected for the session. When there is no event selected, all status dates will be blank. You will see the event-specific target dates for: promote to Peer Review, promote to Management Review, promote to Editing, and Complete date. Once a session is submitted for approval, the Status Dates section will show approvals and promotions of the session throughout the workflow process.";
 import PQFModal from './PQFModal';
 import objectAssign from '../utils/objectAssign';
+import { ApplicationState }  from '../store';
+import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 
 export interface HlcItemStatusDatesProps {
-	componentData: (component: Object) => void;
-	componentDescriptor: ComponentDescriptor;
-	HlcItemStatusDates: [any];
-	getFormattedDate?: (date: String) => String;
+	componentDescriptor?: ComponentDescriptor;
+	HlcItemStatusDates?: [any];
 }
 
-export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesProps, any>({
+export const HlcItemStatusDates = React.createClass<HlcItemStatusDatesProps, any>({
 
 	componentWillMount() {
 		this.componentDescriptor = {
@@ -56,7 +56,7 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 		this.componentDescriptor.dataDictionary['ItemId'] = hlcItemStatusDate.ItemId.Value;
 		this.componentDescriptor.dataDictionary['ItemStatusId'] = hlcItemStatusDate.ItemStatusId.Value;
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
-		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date 
+		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
@@ -80,15 +80,16 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 		this.componentDescriptor.dataDictionary['ItemId'] = hlcItemStatusDate.ItemId.Value;
 		this.componentDescriptor.dataDictionary['ItemStatusId'] = hlcItemStatusDate.ItemStatusId.Value;
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
-		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date 
+		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
-        this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        var self = this;
-        this.componentDescriptor.onComponentOperationComplete = () => {
+    var self = this;
+    this.componentDescriptor.onComponentOperationComplete = () => {
             self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
             self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
         };
+
 		this.props.componentData(this.componentDescriptor, 'Promote');
 	},
  	upsertPromoteWithModalChange: function(hlcItemStatusDate: any) {
@@ -108,13 +109,14 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
 		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '1';
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
-        this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        var self = this;
-        this.componentDescriptor.onComponentOperationComplete = () => {
+    var self = this;
+    this.componentDescriptor.onComponentOperationComplete = () => {
             self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
             self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
-        };
+    };
+
 		this.props.componentData(this.componentDescriptor, 'Demote');
 	},
 
@@ -163,7 +165,7 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 		$(this.modalSelector).modal("hide");
 		const hisdList = this.props.HlcItemStatusDates;
 
-        return (
+    return (
 
 			<div className="portlet" >
 				<div className="portlet-title">
@@ -178,7 +180,7 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 				<div className="portlet-body" id="hlc-status-dates">
 					<div className="slimScrollDiv">
 						<div className="scrolly">
-						   
+
 							<table>
 								<tbody>
                                     {(typeof (hisdList[0]) !== 'undefined' && (typeof (hisdList[0].ID.Value) !== 'undefined' || hisdList[0].ID.Value != null)) && hisdList[0].ID.Value != '0'   ?
@@ -235,11 +237,11 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 																Submit
 															</button>
 															: <div></div>}
-													  
+
 														{(hisd.ApproveButton.IsVisible == true) ?
 															<button type= "submit" className= "btn-link" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
 																<span className="icon-check"></span>
-															</button> 
+															</button>
 															: <div></div>}
 
 														{(hisd.DeclineButton.IsVisible == true) ?
@@ -251,7 +253,7 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 														{(hisd.PromoteButton.IsVisible == true) ?
 															<button type="submit" className="btn-link btn-action" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
 																{hisd.PromoteButton.DefaultValue}
-																</button> 
+																</button>
 															: <div></div>}
 														{(hisd.PromoteWithModalButton.IsVisible == true) ?
 															<div>
@@ -276,18 +278,18 @@ export const HlcItemStatusDatesComponent = React.createClass<HlcItemStatusDatesP
 									}
 								</tbody>
 							</table>
-						  
+
 						</div>
 					</div>
 				</div>
 			</div>
-				
+
 
 		);
 	}
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
 	if (!state.HlcItemStatusDates) {
 		const { itemId } = state;
 		return {
@@ -329,6 +331,6 @@ const mapStateToProps = (state) => {
 
 // Wire up the React component to the Redux store
 export default connect(
-    (state: ApplicationState) => state.hlcItemStatusDatesComponent, // Selects which state properties are merged into the component's props
-    HlcItemStatusDatesComponentStore.actionCreators                 // Selects which action creators are merged into the component's props
-)(HlcItemStatusDatesComponent) as typeof HlcItemStatusDatesComponent;
+    (state: ApplicationState) => state.hlcItemStatusDates, // Selects which state properties are merged into the component's props
+    HlcItemStatusDatesStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(HlcItemStatusDates) as typeof HlcItemStatusDates;

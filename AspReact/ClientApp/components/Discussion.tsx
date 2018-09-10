@@ -2,24 +2,20 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
 import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import Avatar from './Avatar';
 import DiscussionDetail from './DiscussionDetail';
 import DiscussionAddModal from './DiscussionAddModal';
-
+import { ApplicationState }  from '../store';
+import * as DiscussionStore from '../store/Discussion';
 
 export interface DiscussionProps {
-	getComponentData: (component: Object) => void;
-	Discussion: Object;
-	componentDescriptor: ComponentDescriptor;
-
+	Discussion?: Object;
 }
 
-export const DiscussionComponent = React.createClass<DiscussionProps, any>({
+export const Discussion = React.createClass<DiscussionProps, any>({
 
 	componentWillMount() {
 		this.componentDescriptor = {
@@ -39,7 +35,7 @@ export const DiscussionComponent = React.createClass<DiscussionProps, any>({
 
 	render() {
 
-		
+
 		const Discussion = this.props.Discussion;
 		return (
 			<div id="Discussion">
@@ -78,7 +74,7 @@ export const DiscussionComponent = React.createClass<DiscussionProps, any>({
 	}
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
 	if (!state.Discussion) {
 		return {
 			itemId: state.itemId,
@@ -131,12 +127,8 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export const DiscussionContainer =
-	connect(
-		mapStateToProps,
-		actions
-	)(DiscussionComponent) as React.ClassicComponentClass<any>;
-
-
-export default DiscussionComponent;
-
+// Wire up the React component to the Redux store
+export default connect(
+  (state: ApplicationState) => state.discussion, // Selects which state properties are merged into the component's props
+  DiscussionStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(Discussion) as typeof Discussion;

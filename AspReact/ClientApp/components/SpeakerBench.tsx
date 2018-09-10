@@ -2,23 +2,18 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
 import HelpButton from './HelpButton';
 import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
-
+import { ApplicationState }  from '../store';
+import * as SpeakerBenchStore from '../store/SpeakerBench';
 
 export interface SpeakerBenchProps {
-    getComponentData: (component: Object) => void;
-    SpeakerBench: Object;
-    componentDescriptor: ComponentDescriptor;
-
+    SpeakerBench?: Object;
 }
 
-
-export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
+export const SpeakerBench = React.createClass<SpeakerBenchProps, any>({
 
     componentWillMount() {
         this.componentDescriptor = {
@@ -32,9 +27,6 @@ export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
         this.props.componentData(this.componentDescriptor, 'GetData');
 
     },
-
-
-
 
     upsertChange: function (employee: any) {
         if (employee != '') {
@@ -55,8 +47,6 @@ export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
         }
     },
 
-
-
     render() {
         const SpeakerBench = this.props.SpeakerBench;
         return (
@@ -74,7 +64,7 @@ export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
                         <table className="table table-condensed">
                             <tbody>
                                 {SpeakerBench[0].ID.Value != '0' ?
-                                    SpeakerBench.sort((a, b) => {
+                                    SpeakerBench.sort((a: any, b: any) => {
                                         var nameA = a.FullName.Value.toUpperCase();
                                         var nameB = b.FullName.Value.toUpperCase();
                                         if (nameA < nameB) {
@@ -91,7 +81,7 @@ export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
                                                 {Speaker.FullName.Value} ({Speaker.EmployeeId.Value})
                                             </td>
                                             <td>
-                                                <button type="button" width="50%" 
+                                                <button type="button" width="50%"
                                                     className="btn btn-xs btn-custom delete-button"
                                                     onClick={() => this.deleteSelected(Speaker) }
                                                     disabled={!this.props.SpeakerBench[0].EmployeeId.IsEnabled}>
@@ -112,7 +102,7 @@ export const SpeakerBenchComponent = React.createClass<SpeakerBenchProps, any>({
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     if (!state.SpeakerBench) {
         return {
             itemId: state.itemId,
@@ -132,12 +122,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const SpeakerBenchContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(SpeakerBenchComponent) as React.ClassicComponentClass<any>;
-
-
-export default SpeakerBenchComponent;
-
+// Wire up the React component to the Redux store
+export default connect(
+  (state: ApplicationState) => state.speakerBench, // Selects which state properties are merged into the component's props
+  SpeakerBenchStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(SpeakerBench) as typeof SpeakerBench;

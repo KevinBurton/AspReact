@@ -4,11 +4,29 @@ import * as HlcDetail from './HlcDetail';
 import * as TitleDescription from './TitleDescription'
 import * as DownloadTemplateButton from './DownloadTemplateButton'
 import * as ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage'
-import * as HlcItemStatusDatesComponent from './HlcItemStatusDatesComponent'
+import * as HlcItemStatusDates from './HlcItemStatusDates'
+import * as ReviewerBench from './ReviewerBench'
+import * as OwnerBench from './OwnerBench'
+import * as SpeakerBench from './SpeakerBench'
+import * as SupportTeam from './SupportTeam'
+import * as ResearchAgenda from './ResearchAgenda'
+import * as Discussion from './Discussion'
+import * as QVRBench from './QVRBench'
+import * as EditorBench from './EditorBench'
+import * as GraphicDesignerBench from './GraphicDesignerBench'
 
 // The top-level state object
 export interface ApplicationState {
-    hlcItemStatusDatesComponent: HlcItemStatusDatesComponent.HlcItemStatusDatesComponentState;
+    graphicDesignerBench: GraphicDesignerBench.GraphicDesignerBenchState;
+    editorBench: EditorBench.EditorBenchState;
+    qvrBench: QVRBench.QVRBenchState;
+    discussion: Discussion.DiscussionState;
+    researchAgenda: ResearchAgenda.ResearchAgendaState;
+    supportTeam: SupportTeam.SupportTeamState;
+    speakerBench: SpeakerBench.SpeakerBenchState;
+    ownerBench: OwnerBench.OwnerBenchState;
+    reviewerBench: ReviewerBench.ReviewerBenchState;
+    hlcItemStatusDates: HlcItemStatusDates.HlcItemStatusDatesState;
     viewParentAssociationItemWorkFlowStage: ViewParentAssociationItemWorkFlowStage.ViewParentAssociationItemWorkFlowStageState;
     downloadTemplateButton: DownloadTemplateButton.DownloadTemplateButtonState;
     titleDescription: TitleDescription.TitleDescriptionState;
@@ -21,7 +39,16 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
-    hlcItemStatusDatesComponent: HlcItemStatusDatesComponent.reducer,
+    graphicDesignerBench: GraphicDesignerBench.reducer,
+    editorBench: EditorBench.reducer,
+    qvrBench: QVRBench.reducer,
+    discussion: Discussion.reducer,
+    researchAgenda: ResearchAgenda.reducer,
+    supportTeam: SupportTeam.reducer,
+    speakerBench: SpeakerBench.reducer,
+    ownerBench: OwnerBench.reducer,
+    reviewerBench: ReviewerBench.reducer,
+    hlcItemStatusDates: HlcItemStatusDates.reducer,
     viewParentAssociationItemWorkFlowStage: ViewParentAssociationItemWorkFlowStage.reducer,
     downloadTemplateButton: DownloadTemplateButton.reducer,
     titleDescription: TitleDescription.reducer,

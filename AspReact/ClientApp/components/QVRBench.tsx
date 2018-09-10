@@ -1,35 +1,30 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
 import HelpButton from './HelpButton';
 import { Input, FormGroup, TextArea, Label } from './Form';
 import { UserDelegatesContainer }  from './UserDelegates';
 import EmployeePicker from './EmployeePicker';
-import { SetComponentDescriptorRefresh } from '../utils/eventEmitter';
 import CheckBox from './CheckBox';
 import { ReviewerAddContainer } from './ReviewerAdd';
-import Rating from './QVR/Rating';
+import Rating from './Rating';
 import objectAssign from '../utils/objectAssign';
+import { ApplicationState }  from '../store';
+import * as QVRBenchStore from '../store/QVRBench';
 
 export interface QVRBenchProps {
-    getComponentData: (component: Object) => void;
-    QVRBench: Object;
-    componentDescriptor: ComponentDescriptor;
-    updateState: Function;
-    QVRBenchRefresh: () => void;
+    QVRBench?: Object;
 }
 
-export const QVRBenchComponent = React.createClass<QVRBenchProps, any>({
+export const QVRBench = React.createClass<QVRBenchProps, any>({
 
     componentWillMount() {
         this.componentDescriptor = {
             name: 'QVRBench',
             returnObjectIndexed: false,
             dataDictionary: {
-                ID: '0', ItemId: '', Reason: '', ReviewedByEmployeeId: '', ReviewStatus: '', ReviewTimeUTC: '', EmployeeId: '', Description: '', ItemReviewerTypeId: '', 
+                ID: '0', ItemId: '', Reason: '', ReviewedByEmployeeId: '', ReviewStatus: '', ReviewTimeUTC: '', EmployeeId: '', Description: '', ItemReviewerTypeId: '',
                 Rating: '', QvrReasonId: '', Name: '', QvrComment: '', QvrId: ''
             }
         }
@@ -79,7 +74,7 @@ export const QVRBenchComponent = React.createClass<QVRBenchProps, any>({
 
         }
     },
-    
+
     getNames: function (DelegateNames: string) {
         return DelegateNames.split(';');
 
@@ -115,7 +110,7 @@ export const QVRBenchComponent = React.createClass<QVRBenchProps, any>({
                     <div>
                         <ReviewerAddContainer/>
                     </div>
-                  
+
                     <div>
                         <p>Rate your reviewers by selecting 1-5 stars.</p>
                     </div>
@@ -156,8 +151,8 @@ export const QVRBenchComponent = React.createClass<QVRBenchProps, any>({
                                 }
                             </tbody>
                         </table>
-                       
-                      
+
+
                     </div>
                 </div>
             </div>
@@ -167,7 +162,7 @@ export const QVRBenchComponent = React.createClass<QVRBenchProps, any>({
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     if (!state.QVRBench) {
         const { itemId } = state;
         return {
@@ -202,12 +197,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const QVRBenchContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(QVRBenchComponent) as React.ClassicComponentClass<any>;
-
-
-export default QVRBenchComponent;
+// Wire up the React component to the Redux store
+export default connect(
+  (state: ApplicationState) => state.qvrBench, // Selects which state properties are merged into the component's props
+  QVRBenchStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(QVRBench) as typeof QVRBench;
 

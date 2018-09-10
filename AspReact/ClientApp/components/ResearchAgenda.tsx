@@ -1,24 +1,18 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
 import HelpButton from './HelpButton';
 import { Label } from './Form';
 import objectAssign from '../utils/objectAssign';
+import { ApplicationState }  from '../store';
+import * as ResearchAgendaStore from '../store/ResearchAgenda';
 
 export interface ResearchAgendaProps {
-
-    getComponentData: (component: Object) => void;
-    ResearchAgenda: Object;
-    componentDescriptor: ComponentDescriptor;
-    getInitialState: Function;
-    updateState: Function;
-    itemid: string;
+    ResearchAgenda?: Object;
 }
 
-export const ResearchAgendaComponent = React.createClass<ResearchAgendaProps, any>({
+export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
 
 
     componentWillMount() {
@@ -104,7 +98,7 @@ export const ResearchAgendaComponent = React.createClass<ResearchAgendaProps, an
                                 placeholder="Select Research Agenda"
                                 isEnabled= {true}
                                 ></ComboBox>
-                      
+
 
 
                         <div className="table-responsive">
@@ -191,7 +185,7 @@ export const ResearchAgendaComponent = React.createClass<ResearchAgendaProps, an
                         </div>
                     </div>
                 </div>
-          
+
         );
     }
 });
@@ -231,13 +225,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const ResearchAgendaContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(ResearchAgendaComponent) as React.ClassicComponentClass<any>;
-
-
-export default ResearchAgendaComponent;
+// Wire up the React component to the Redux store
+export default connect(
+  (state: ApplicationState) => state.titleDescription, // Selects which state properties are merged into the component's props
+  ResearchAgendaStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(ResearchAgenda) as typeof ResearchAgenda;
 
 

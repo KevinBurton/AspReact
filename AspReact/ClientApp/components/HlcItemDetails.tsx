@@ -22,7 +22,7 @@ type HlcItemDetailProps =
     & typeof HlcItemDetailStore.actionCreators
     & RouteComponentProps<{}>;
 
-export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any>({
+export const HlcItemDetails = React.createClass<HlcItemDetailProps, any>({
 
     render() {
         let urlStr = window.location.href;
@@ -35,7 +35,7 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
             <div>
                 <div  className="row">
                     <div  className="col-xs-12 col-sm-12 col-md-8">
-                        <TitleDescription itemId={0}/>
+                        <TitleDescription/>
 
                         <div className="form-group">
                             <span className="icon-documents"></span>{itemId}
@@ -126,4 +126,4 @@ export const HlcItemDetailsComponent = React.createClass<HlcItemDetailProps, any
     }
 });
 
-export default HlcItemDetailsComponent;
+export default HlcItemDetails;

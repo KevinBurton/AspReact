@@ -1,12 +1,12 @@
-﻿export default function objectAssign(target: any) {
+﻿export default function objectAssign(...target: any[]) {
     'use strict';
     if (target === undefined || target === null) {
         throw new TypeError('Cannot convert undefined or null to object');
     }
 
-    var output = Object(target);
-    for (var index = 1; index < arguments.length; index++) {
-        var source = arguments[index];
+    var output = Object(target[0]);
+    for (var index = 1; index < target.length; index++) {
+        var source = target[index];
         if (source !== undefined && source !== null) {
             for (var nextKey in source) {
                 if (source.hasOwnProperty(nextKey)) {

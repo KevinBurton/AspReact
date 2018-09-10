@@ -6,13 +6,15 @@ import { ComponentDescriptor } from '../models/generic';
 import HelpButton from './HelpButton';
 import { Input, FormGroup, TextArea, Label } from './Form';
 import EmployeePicker from './EmployeePicker';
+import { ApplicationState }  from '../store';
+import * as OwnerBenchStore from '../store/OwnerBench';
 
 
 export interface OwnerBenchProps {
-	OwnerBench: Object;
+	OwnerBench?: Object;
 }
 
-export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
+export const OwnerBench = React.createClass<OwnerBenchProps, any>({
 
     componentWillMount() {
         this.componentDescriptor = {
@@ -82,7 +84,7 @@ export const OwnerBenchComponent = React.createClass<OwnerBenchProps, any>({
                                 <table className="table table-condensed">
                                     <tbody>
                                         {OwnerBench[0].ID.Value != '0' ?
-                                            OwnerBench.sort((a, b) => {
+                                            OwnerBench.sort((a: any, b: any) => {
                                                 var nameA = a.FullName.Value.toUpperCase();
                                                 var nameB = b.FullName.Value.toUpperCase();
                                                 if (nameA < nameB) {
@@ -184,5 +186,10 @@ const mapStateToProps = (state: any) => {
 	};
 };
 
-export default OwnerBenchComponent;
+// Wire up the React component to the Redux store
+export default connect(
+  (state: ApplicationState) => state.ownerBench, // Selects which state properties are merged into the component's props
+  OwnerBenchStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(OwnerBench) as typeof OwnerBench;
+
 

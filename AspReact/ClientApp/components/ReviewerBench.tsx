@@ -1,19 +1,18 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
 import { Input, FormGroup, TextArea, Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import objectAssign from '../utils/objectAssign';
+import { ApplicationState }  from '../store';
+import * as ReviewerBenchStore from '../store/ReviewerBench';
 
 export interface ReviewerBenchProps {
-    getComponentData: (component: Object) => void;
-    ReviewerBench: Object;
-    componentDescriptor: ComponentDescriptor;
+    ReviewerBench?: Object;
 }
 
-export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>({
+export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
 
     componentWillMount() {
         this.componentDescriptor = {
@@ -155,7 +154,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                             return 0;
                                         }
                                     })
-                                        .filter((Reviewer) => { return Reviewer.ItemReviewerTypeId.Value == '2' && Reviewer.ReviewStatus.Value == 'N'; })
+                                        .filter((Reviewer: any) => { return Reviewer.ItemReviewerTypeId.Value == '2' && Reviewer.ReviewStatus.Value == 'N'; })
                                         .map((Reviewer: any) => (
                                             <tr  key={Reviewer.ID.Value}>
                                                 <td  className="text-middle" width="50%" >
@@ -169,7 +168,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                                             onClick={() => this.toggleReviewComplete(Reviewer) }
                                                             disabled={!Reviewer.ActionButton.IsEnabled}> Click to Complete
                                                         </button>
-                                                        
+
                                                     </td>
                                                     :
                                                     <td></td>}
@@ -197,7 +196,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                                 return 0;
                                             }
                                         })
-                                            .filter((Reviewer) => { return Reviewer.ItemReviewerTypeId.Value == '2' && Reviewer.ReviewStatus.Value == 'Y'; })
+                                            .filter((Reviewer:any) => { return Reviewer.ItemReviewerTypeId.Value == '2' && Reviewer.ReviewStatus.Value == 'Y'; })
                                             .map((Reviewer: any) => (
                                                 <tr  key={Reviewer.ID.Value}>
                                                     <td className="text-middle" width="50%">
@@ -210,7 +209,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                                                 onClick={() => this.toggleReviewComplete(Reviewer) }
                                                                 disabled={!Reviewer.ActionButton.IsEnabled}> Completed
                                                             </button>
-                                                            
+
                                                         </td>
                                                         :
                                                         <td></td>}
@@ -242,7 +241,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                             return 0;
                                         }
                                     })
-                                        .filter((Reviewer) => { return Reviewer.ItemReviewerTypeId.Value == '1' && Reviewer.ReviewStatus.Value == 'N'; })
+                                        .filter((Reviewer:any) => { return Reviewer.ItemReviewerTypeId.Value == '1' && Reviewer.ReviewStatus.Value == 'N'; })
                                         .map((Reviewer: any) => (
                                             <tr  key={Reviewer.ID.Value}>
                                                 <td  className="text-middle" width="50%" >
@@ -291,7 +290,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
                                                 return 0;
                                             }
                                         })
-                                            .filter((Reviewer) => { return Reviewer.ItemReviewerTypeId.Value == '1' && Reviewer.ReviewStatus.Value == 'Y'; })
+                                            .filter((Reviewer:any) => { return Reviewer.ItemReviewerTypeId.Value == '1' && Reviewer.ReviewStatus.Value == 'Y'; })
                                             .map((Reviewer: any) => (
                                                 <tr  key={Reviewer.ID.Value}>
                                                     <td className="text-middle">
@@ -330,7 +329,7 @@ export const ReviewerBenchComponent = React.createClass<ReviewerBenchProps, any>
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
     if (!state.ReviewerBench) {
         const { itemId } = state;
         return {
@@ -359,12 +358,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const ReviewerBenchContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(ReviewerBenchComponent) as React.ClassicComponentClass<any>;
+export default connect(
+  (state: ApplicationState) => state.reviewerBench, // Selects which state properties are merged into the component's props
+  ReviewerBenchStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(ReviewerBench) as typeof ReviewerBench;
 
-
-export default ReviewerBenchComponent;
 
