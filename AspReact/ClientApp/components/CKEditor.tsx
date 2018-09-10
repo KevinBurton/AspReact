@@ -86,4 +86,4 @@ export class CKEditor extends React.Component<CKEditorProps & React.HTMLAttribut
 	render() {
 		return <textarea className={this.props.activeClass} rows={10} cols={80}></textarea>;
 	}
-});
+}
