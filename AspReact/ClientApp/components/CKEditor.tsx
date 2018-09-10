@@ -24,34 +24,42 @@ declare global {
 }
 
 export interface CKEditorProps {
-	content: String,
+	content: string,
 	config?: any,
-	activeClass?: String
+	activeClass?: string
 	events?: any
 }
 
-export const CKEditor = React.createClass<CKEditorProps, any>({
+// https://stackoverflow.com/questions/44369706/react-typescript-usage-of-classname-prop
+export class CKEditor extends React.Component<CKEditorProps & React.HTMLAttributes<HTMLTextAreaElement>, any> {
+	constructor(props: any) {
+		super(props);
+		this.unmounting = false;
+		this.editorInstance = null;
+		// This binding is necessary to make 'this'work in the callback
+		this.getInitialState = this.getInitialState.bind(this);
+		this.onLoad = this.onLoad.bind(this);
+	}
+	unmounting: boolean;
+	editorInstance: any;
 
-	unmounting: false,
-	editorInstance: null,
-
-	getInitialState: function () {
+	getInitialState() {
 		return { config: this.props.config };
-	},
+	}
 
 	componentDidMount() {
 		this.onLoad();
-	},
+	}
 
 	componentWillUnmount() {
 		this.unmounting = true;
-	},
+	}
 
 	componentDidUpdate() {
 		if (this.editorInstance && this.editorInstance.getData() !== this.props.content) {
 			this.editorInstance.setData(this.props.content);
 		}
-	},
+	}
 
 	onLoad() {
 		if (this.unmounting) return;
@@ -73,9 +81,9 @@ export const CKEditor = React.createClass<CKEditorProps, any>({
 
 			this.editorInstance.on(event, eventHandler);
 		}
-	},
+	}
 
 	render() {
-		return <textarea className={this.props.activeClass} rows="10" cols="80"></textarea>;
+		return <textarea className={this.props.activeClass} rows={10} cols={80}></textarea>;
 	}
 });
