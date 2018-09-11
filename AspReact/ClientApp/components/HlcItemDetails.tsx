@@ -6,7 +6,7 @@ import DownloadTemplateButton from './DownloadTemplateButton';
 import ViewParentAssociationItemWorkFlowStage from './ViewParentAssociationItemWorkFlowStage';
 import HlcSessionFileDetails  from './HLCSessionFileDetails';
 import HlcItemStatusDates from './HlcItemStatusDates';
-import HLCBasicInfo from './HLCBasicInfo';
+import HlcBasicInfo from './HlcBasicInfo';
 import OwnerBench from './OwnerBench';
 import ReviewerBench from './ReviewerBench';
 import SpeakerBench from './SpeakerBench';
@@ -77,7 +77,7 @@ export const HlcItemDetails = React.createClass<HlcItemDetailProps, any>({
                             <div  className="row">
 
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                                    <HLCBasicInfo/>
+                                    <HlcBasicInfo/>
                                 </div>
                                 <div  className="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                                     <HlcItemStatusDates />

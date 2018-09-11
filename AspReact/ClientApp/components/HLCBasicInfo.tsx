@@ -17,12 +17,14 @@ import { TotalPagesFieldContainer } from './TotalPagesField';
 import { ContentAspectContainer } from './ContentAspectField';
 import { SeriesDefinitionContainer } from './SeriesDefinition';
 import { VendorBenchContainer } from './VendorBench';
+import { ApplicationState }  from '../store';
+import * as HlcBasicInfoStore from '../store/HlcBasicInfo';
 
-export interface HLCBasicInfoProps {
-    HLCBasicInfo?: Object;
+export interface HlcBasicInfoProps {
+    HlcBasicInfo?: Object;
 }
 
-export const HLCBasicInfoComponent = React.createClass<HLCBasicInfoProps, any>({
+class HLcBasicInfo extends React.Component<HlcBasicInfoProps, any> {
 
     render() {
 
@@ -51,7 +53,7 @@ export const HLCBasicInfoComponent = React.createClass<HLCBasicInfoProps, any>({
             </div>
         );
     }
-});
+};
 
 const mapStateToProps = (state: any) => {
     if (!state.HLCBasicInfo) {
@@ -67,12 +69,10 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export const HLCBasicInfoContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(HLCBasicInfoComponent as React.ClassicComponentClass<any>);
-
-export default HLCBasicInfoComponent;
+// Wire up the React component to the Redux store
+export default connect(
+    (state: ApplicationState) => state.hlcBasicInfo, // Selects which state properties are merged into the component's props
+    HlcBasicInfoStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(HlcCBasicInfo) as typeof HlcCBasicInfo;
 
 

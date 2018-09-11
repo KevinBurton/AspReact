@@ -14,9 +14,11 @@ import * as Discussion from './Discussion'
 import * as QVRBench from './QVRBench'
 import * as EditorBench from './EditorBench'
 import * as GraphicDesignerBench from './GraphicDesignerBench'
+import * as HlcBasicInfo from './HlcBasicInfo'
 
 // The top-level state object
 export interface ApplicationState {
+    hlcBasicInfo: HlcBasicInfo.HlcBasicInfoState;
     graphicDesignerBench: GraphicDesignerBench.GraphicDesignerBenchState;
     editorBench: EditorBench.EditorBenchState;
     qvrBench: QVRBench.QVRBenchState;
@@ -39,6 +41,7 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
+    hlcBasicInfo: HlcBasicInfo.reducer,
     graphicDesignerBench: GraphicDesignerBench.reducer,
     editorBench: EditorBench.reducer,
     qvrBench: QVRBench.reducer,
