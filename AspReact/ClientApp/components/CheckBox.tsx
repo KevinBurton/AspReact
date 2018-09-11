@@ -11,7 +11,7 @@ export interface CheckBoxProps {
 
 const CheckBox = (props: CheckBoxProps) => {
 
-	const onCheckBoxChange = (event) => {
+	const onCheckBoxChange = (event: any) => {
 		event.preventDefault();
 		if (props.isDisabled) {
 			return;

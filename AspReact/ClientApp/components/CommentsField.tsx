@@ -1,67 +1,62 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
 import { TextArea, Label } from './Form';
+import { ApplicationState }  from '../store';
+import * as CommentsStore from '../store/Comments';
 
 export interface CommentsFieldProps {
 
     getComponentData: (component: Object) => void;
-    Comments: Object;
+    Comments: any;
     componentDescriptor: ComponentDescriptor;
     updateState: Function;
 }
 
-export const CommentsComponent = React.createClass<CommentsFieldProps, any>({
-
-    componentWillMount() {
-
+class Comments extends React.Component<CommentsFieldProps, any> {
+    componentDescriptor: ComponentDescriptor;
+    constructor(props) {
+        super(props);
         this.componentDescriptor = {
             name: 'CommentsField',
             returnObjectIndexed: true,
             stateFunction:
             '(objectAssign.default({}, state, { CommentsField: action.newObject[0]});)',
             dataDictionary: {
-                ID: '', Comments: ''
+                ID: '', 
+                Comments: ''
             }
         }
 
         this.componentDescriptor.dataDictionary = {
-            ID: this.props.CommentsField.ID.Value,
-            Comments: this.props.CommentsField.Comments.Value
+            ID: this.props.Comments.ID.Value,
+            Comments: this.props.Comments.Comments.Value
         }
 
         this.props.componentData(this.componentDescriptor, 'GetData');
 
-
-    },
-
-
-    componentDidMount() {
-
-
-    },
+        // Bindings
+        this.upsertChange = this.upsertChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
     componentDidUpdate() {
-
         this.componentDescriptor.dataDictionary = {
             ID: this.props.CommentsField.ID.Value,
             Comments: this.props.CommentsField.Comments.Value
         }
+    }
 
-    },
-
-    upsertChange: function (e) {
+    upsertChange(e) {
         this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
         this.props.componentData(this.componentDescriptor, 'Upsert');
-
-    },
+    }
 
     handleChange(e) {
         this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
-    },
+    }
 
-    render() {
+    public render() {
 
         return (
             <div id="Comments">
@@ -81,7 +76,7 @@ export const CommentsComponent = React.createClass<CommentsFieldProps, any>({
             </div>
         );
     }
-});
+}
 
 const mapStateToProps = (state) => {
     if (!state.CommentsField) {
@@ -105,14 +100,10 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const CommentsFieldContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(CommentsComponent) as React.ClassicComponentClass<any>;
-
-
-export default CommentsComponent;
-
+// Wire up the React component to the Redux store
+export default connect(
+    (state: ApplicationState) => state.comments, // Selects which state properties are merged into the component's props
+    CommentsStore.actionCreators                 // Selects which action creators are merged into the component's props
+)(Comments) as typeof Comments;
 
 

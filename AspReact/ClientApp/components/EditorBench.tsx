@@ -27,11 +27,6 @@ const EditorBench = React.createClass<EditorBenchProps, any>({
         this.props.componentData(this.componentDescriptor, 'GetData');
     },
 
-
-    componentDidMount() {
-
-    },
-
     upsertChange: function (employee: any) {
 
         this.componentDescriptor.dataDictionary['EmployeeId'] = employee.id;

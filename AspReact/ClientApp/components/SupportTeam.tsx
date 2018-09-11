@@ -28,20 +28,6 @@ export const SupportTeam = React.createClass<SupportTeamProps, any>({
     }
 });
 
-const mapStateToProps = (state: any) => {
-    if (!state.SupportTeam) {
-        const { itemId } = state;
-        return {
-            itemId: state.itemId
-
-        };
-    }
-
-    return {
-        itemId: state.itemId
-    };
-};
-
 // Wire up the React component to the Redux store
 export default connect(
   (state: ApplicationState) => state.supportTeam, // Selects which state properties are merged into the component's props
