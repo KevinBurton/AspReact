@@ -41,8 +41,9 @@ export interface BaseData {
 
 export interface ComponentDescriptor {
     name: string;
+    returnObjectType: string;
     returnObjectIndexed: boolean;
     stateFunction: string;
-    dataDictionary: string[];
+    dataDictionary: object;
     onComponentOperationComplete: Function;
 }
