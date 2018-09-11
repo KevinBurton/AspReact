@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Employee, EmployeeBench } from '../models/employee';
 import EmployeePicker from './EmployeePicker';
-import { ComponentDescriptor } from '../models/generic';
 import { Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as EditorBenchStore from '../store/EditorBench';

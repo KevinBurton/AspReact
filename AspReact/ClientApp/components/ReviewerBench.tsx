@@ -1,8 +1,6 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
-import { Input, FormGroup, TextArea, Label } from './Form';
+import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
