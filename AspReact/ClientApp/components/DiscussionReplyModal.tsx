@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/genericActions';
 import { ComponentDescriptor, IOption } from '../models/generic';

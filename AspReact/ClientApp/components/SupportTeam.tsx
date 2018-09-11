@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
 
-import { GraphicDesignerBenchContainer } from './GraphicDesignerBench';
-import { EditorBenchContainer } from './EditorBench';
+import GraphicDesignerBench from './GraphicDesignerBench';
+import EditorBench from './EditorBench';
 
 import { ApplicationState }  from '../store';
 import * as SupportTeamStore from '../store/SupportTeam';
@@ -21,8 +19,8 @@ export const SupportTeam = React.createClass<SupportTeamProps, any>({
             <div >
                 <div>
 
-                    <GraphicDesignerBenchContainer />
-                    <EditorBenchContainer />
+                    <GraphicDesignerBench />
+                    <EditorBench />
 
                 </div>
             </div>

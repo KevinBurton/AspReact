@@ -1,9 +1,6 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/genericActions';
-import { ComponentDescriptor, IOption } from '../models/generic';
-import { Input, FormGroup, TextArea, Label } from './Form';
 import * as ajax from '../utils/ajax';
 
 let fileSrc;
@@ -11,7 +8,7 @@ const urlStr = window.location.href;
 const itemId = urlStr.substring(urlStr.lastIndexOf('/') + 1);
 
 ajax.get<any>('/api/GenericDataHandler/GetSessionFileSrc/?id=' + itemId)
-    .then((fileSrcUrl) => {
+    .then((fileSrcUrl: string) => {
         console.log('fileSrcUrl: ', fileSrcUrl);
         fileSrc = fileSrcUrl;
         setFileSrc(fileSrc);

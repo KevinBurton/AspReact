@@ -1,8 +1,6 @@
 ﻿﻿import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { ComponentDescriptor, IOption } from '../models/generic';
-import { Input, FormGroup, TextArea, Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as DownloadTemplateButtonStore from '../store/DownloadTemplateButton';
 
@@ -10,7 +8,6 @@ export interface DownloadTemplateButtonProps {
     SessionFileDetail?: Object;
     componentDescriptor?: ComponentDescriptor;
 }
-
 
 export const DownloadTemplateButton = React.createClass<DownloadTemplateButtonProps, any>({
     componentWillMount() {

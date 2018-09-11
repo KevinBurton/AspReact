@@ -1,12 +1,5 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
-import HelpButton from './HelpButton';
-import { Input, FormGroup, TextArea, Label } from './Form';
-import { UserDelegatesContainer }  from './UserDelegates';
-import EmployeePicker from './EmployeePicker';
-import CheckBox from './CheckBox';
 import { ReviewerAddContainer } from './ReviewerAdd';
 import Rating from './Rating';
 import objectAssign from '../utils/objectAssign';

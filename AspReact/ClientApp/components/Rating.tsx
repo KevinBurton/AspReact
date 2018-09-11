@@ -1,5 +1,4 @@
 ﻿import * as React from 'react';
-import objectAssign from '../utils/objectAssign';
 
 export interface RatingProps {
 	isDisabled: boolean;

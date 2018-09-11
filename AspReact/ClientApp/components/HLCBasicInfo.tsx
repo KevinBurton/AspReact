@@ -1,8 +1,6 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 
-import { ComponentDescriptor } from '../models/generic';
 import { ContentFocusContainer } from './ContentFocusField';
 import { ContentMaturityContainer } from './ContentMaturityField';
 import { LanguageContainer } from './LanguageField';
@@ -10,7 +8,6 @@ import { ResearchElementTypeFieldContainer } from './ResearchElementTypeField';
 import { IndustryFieldContainer } from './IndustryField';
 import { SessionAlignsToContainer } from './SessionAlignsToField';
 import { CommentsFieldContainer } from './CommentsField';
-import { CopyrightPermissionsFieldContainer } from './CopyrightPermissionsField';
 import { SessionCategoryContainer } from './SessionCategory';
 import { NeedsExternalReviewFieldContainer } from './NeedsExternalReviewField';
 import { TotalPagesFieldContainer } from './TotalPagesField';

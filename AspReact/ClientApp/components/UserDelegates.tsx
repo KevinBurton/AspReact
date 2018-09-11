@@ -1,9 +1,5 @@
 ﻿import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { Input, FormGroup, TextArea, Label } from './Form';
-import { ComponentDescriptor } from '../models/generic';
-
 
 export interface UserDelegatesProps {
     UserDelegates?: Object;

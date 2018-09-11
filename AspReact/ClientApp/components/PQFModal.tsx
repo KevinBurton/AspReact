@@ -1,8 +1,7 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/genericActions';
-import { ComponentDescriptor, IOption } from '../models/generic';
-import { Input, FormGroup, TextArea, Label } from './Form';
+import { ComponentDescriptor } from '../models/generic';
 import CheckBox from './Checkbox';
 import CheckList from './CheckList';
 import CheckListRow from './CheckListRow';

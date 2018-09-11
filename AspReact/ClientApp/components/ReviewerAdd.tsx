@@ -1,18 +1,11 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
-import HelpButton from './HelpButton';
-import { Input, FormGroup, TextArea, Label } from './Form';
-import { UserDelegatesContainer }  from './UserDelegates';
+import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
-import CheckBox from './CheckBox';
-
 
 export interface ReviewerAddProps {
     ReviewerAdd?: Object;
 }
-
 
 export const ReviewerAddComponent = React.createClass<ReviewerAddProps, any>({
 

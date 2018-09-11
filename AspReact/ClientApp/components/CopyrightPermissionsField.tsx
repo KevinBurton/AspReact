@@ -1,12 +1,9 @@
 
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
-import ComboBox from './kendo/ComboBox';
-import HelpButton from './HelpButton';
-import { Input, FormGroup, TextArea, Label } from './Form';
+import { TextArea, Label } from './Form';
 
 
 

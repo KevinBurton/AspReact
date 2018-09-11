@@ -5,7 +5,6 @@ import { ComponentDescriptor, IOption } from '../models/generic';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
 
-
 export interface ResearchElementTypeFieldProps { 
 
     getComponentData: (component: Object) => void;

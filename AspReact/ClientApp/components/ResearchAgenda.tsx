@@ -1,9 +1,5 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
-import HelpButton from './HelpButton';
-import { Label } from './Form';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as ResearchAgendaStore from '../store/ResearchAgenda';
