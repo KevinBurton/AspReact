@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
+
 import { ComponentDescriptor } from '../models/generic';
 import { ContentFocusContainer } from './ContentFocusField';
 import { ContentMaturityContainer } from './ContentMaturityField';
@@ -53,7 +53,7 @@ export const HLCBasicInfoComponent = React.createClass<HLCBasicInfoProps, any>({
     }
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     if (!state.HLCBasicInfo) {
         const { itemId } = state;
         return {

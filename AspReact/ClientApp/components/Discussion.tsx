@@ -1,11 +1,7 @@
 
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/generic';
-import { Label } from './Form';
-import EmployeePicker from './EmployeePicker';
-import Avatar from './Avatar';
 import DiscussionDetail from './DiscussionDetail';
 import DiscussionAddModal from './DiscussionAddModal';
 import { ApplicationState }  from '../store';
@@ -13,28 +9,32 @@ import * as DiscussionStore from '../store/Discussion';
 
 export interface DiscussionProps {
 	Discussion?: Object;
+	componentData?: (a:ComponentDescriptor, b:string) => void;
 }
 
-export const Discussion = React.createClass<DiscussionProps, any>({
-
-	componentWillMount() {
+class Discussion extends React.Component<DiscussionProps, any> {
+ 	componentDescriptor: any;
+	constructor(props: any) {
+		super(props);
 		this.componentDescriptor = {
 			name: 'Discussion',
 			returnObjectIndexed: false,
 			dataDictionary: {
 				ID: '0', ItemId: '', CommentDetail: '', FlagValue: '', ParentId: ''
 			}
-		}
-		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
+		};
+		this.openAdd = this.openAdd.bind(this);
+	}
+	
+	componentWillMount() {
 		this.props.componentData(this.componentDescriptor, 'GetData');
-	},
+	}
 
-	openAdd: function () {
+	openAdd() {
 		var result = $("#showDiscussionAddModal").trigger("click");
-	},
+	}
 
 	render() {
-
 
 		const Discussion = this.props.Discussion;
 		return (
@@ -48,7 +48,7 @@ export const Discussion = React.createClass<DiscussionProps, any>({
 						Add Comment
 					</button>
 					<div>
-						{Discussion[0].ID.Value != '0' ?
+						{Discussion && (<any[]>Discussion)[0] && Discussion[0].ID.Value != '0' ?
 							Discussion.map((Discussion: any) => (
 								<div key={Discussion.ID.Value}>
 									{Discussion.ParentId.Value == '' ?
@@ -72,60 +72,7 @@ export const Discussion = React.createClass<DiscussionProps, any>({
 			</div>
 		);
 	}
-});
-
-const mapStateToProps = (state: any) => {
-	if (!state.Discussion) {
-		return {
-			itemId: state.itemId,
-			Discussion: [
-			{
-			    ID: {
-			        Value: '0'
-			    },
-			    ItemId: {
-			        Value: ''
-			    },
-			    Subject: {
-			        Value: ''
-			    },
-			    CommentDetail: {
-			        Value: ''
-			    },
-			    CommenterRole: {
-			        Value: ''
-			    },
-			    CreatedByEmployeeId: {
-			        Value: ''
-			    },
-			    FullName: {
-			        Value: ''
-			    },
-			    CreatedTimeUTC: {
-			        Value: ''
-			    },
-			    ParentId: {
-			        Value: ''
-			    },
-			    FlagValue: {
-			        Value: ''
-			    },
-			    AllowedToUploadFile: {
-			        Value: ''
-			    },
-			    Attachments:[
-                {
-                    Value: ''
-                }]
-			}]
-		};
-	}
-
-	return {
-		itemId: state.itemId,
-		Discussion: state.Discussion
-	};
-};
+}
 
 // Wire up the React component to the Redux store
 export default connect(
