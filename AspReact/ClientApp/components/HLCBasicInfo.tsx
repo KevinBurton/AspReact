@@ -24,7 +24,7 @@ export interface HlcBasicInfoProps {
     HlcBasicInfo?: Object;
 }
 
-class HLcBasicInfo extends React.Component<HlcBasicInfoProps, any> {
+class HlcBasicInfo extends React.Component<HlcBasicInfoProps, any> {
 
     render() {
 
@@ -53,26 +53,10 @@ class HLcBasicInfo extends React.Component<HlcBasicInfoProps, any> {
             </div>
         );
     }
-};
-
-const mapStateToProps = (state: any) => {
-    if (!state.HLCBasicInfo) {
-        const { itemId } = state;
-        return {
-            itemId: state.itemId
-
-        };
-    }
-
-    return {
-        itemId: state.itemId
-    };
-};
+}
 
 // Wire up the React component to the Redux store
 export default connect(
     (state: ApplicationState) => state.hlcBasicInfo, // Selects which state properties are merged into the component's props
     HlcBasicInfoStore.actionCreators                 // Selects which action creators are merged into the component's props
-)(HlcCBasicInfo) as typeof HlcCBasicInfo;
-
-
+)(HlcBasicInfo) as typeof HlcBasicInfo;
