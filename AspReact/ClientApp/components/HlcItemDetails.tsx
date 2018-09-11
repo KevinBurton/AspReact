@@ -21,9 +21,9 @@ type HlcItemDetailProps =
     & typeof HlcItemDetailStore.actionCreators
     & RouteComponentProps<{}>;
 
-export const HlcItemDetails = React.createClass<HlcItemDetailProps, any>({
+export default class HlcItemDetails extends React.Component<HlcItemDetailProps, any> {
 
-    render() {
+    public render() {
         let urlStr = window.location.href;
         let itemId = urlStr.substring(urlStr.lastIndexOf('/') + 1);
         const fileSrc = "http://sharedv.gartner.com/alfcppui/page/ap/ws/cppui/" + itemId;
@@ -123,6 +123,4 @@ export const HlcItemDetails = React.createClass<HlcItemDetailProps, any>({
             </div>
         );
     }
-});
-
-export default HlcItemDetails;
+}
