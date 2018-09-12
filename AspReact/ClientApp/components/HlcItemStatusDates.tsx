@@ -6,11 +6,18 @@ import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 
 export interface HlcItemStatusDatesProps {
+  itemId?: number;
 	componentDescriptor?: ComponentDescriptor;
-	HlcItemStatusDates?: [any];
+  HlcItemStatusDates?: [any];
 }
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
+  static defaultProps = {
+    itemId: 0
+  }
+  componentData(componentDescriptor: ComponentDescriptor, operation: string) {
+    
+  }
 	componentDescriptor: ComponentDescriptor;
 	plannedDateList: string[];
 	modalSelector: string;
@@ -30,23 +37,35 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 				DateValue: '',
 				EmployeeId: ''
 			},
-			onComponentOperationComplete: () => void
-		}
-		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        const self = this;
-        this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
-            var componentDescriptor = objectAssign({}, self.componentDescriptor, {
-                dataDictionary: { ItemId: itemId }
-            });
-            self.props.componentData(componentDescriptor, 'GetData');
-        });
-		this.props.componentData(this.componentDescriptor, 'GetData');		
+			onComponentOperationComplete: () => {}
+    };
+
 		this.plannedDateList =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use']
-		this.modalSelector = '#showPQFModal'
-	}
-    componentWillUnmount() {
-        this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
-    }
+    this.modalSelector = '#showPQFModal';
+
+    // Bindings
+    this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
+    this.upsertPromoteWithModalChange = this.upsertPromoteWithModalChange.bind(this);
+    this.upsertDemoteChange = this.upsertDemoteChange.bind(this);
+    this.upsertPromoteChange = this.upsertPromoteChange.bind(this);
+    this.upsertDateChange = this.upsertDateChange.bind(this);
+    this.getFormattedDate = this.getFormattedDate.bind(this);
+  }
+  componentWillMount() {
+    // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
+		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
+    const self = this;
+    this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
+        var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+            dataDictionary: { ItemId: itemId }
+        });
+        self.props.componentData(componentDescriptor, 'GetData');
+    });
+		this.props.componentData(this.componentDescriptor, 'GetData');
+  }
+  componentWillUnmount() {
+    this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
+  }
 	upsertSubmitChange(hlcItemStatusDate: any) {
 
 		let formattedDate = new Intl.DateTimeFormat('en-GB', {
@@ -61,18 +80,17 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
 		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
-        this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        var self = this;
-        this.componentDescriptor.onComponentOperationComplete = () => {
-            self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
-            self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
-        };
+    var self = this;
+    this.componentDescriptor.onComponentOperationComplete = () => {
+        self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
+        self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
+    };
 		this.props.componentData(this.componentDescriptor, 'Submit');
 	}
 
 	upsertPromoteChange(hlcItemStatusDate: any) {
-
 		let formattedDate = new Intl.DateTimeFormat('en-GB', {
 			year: 'numeric',
 			month: 'long',
@@ -112,7 +130,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
 		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '1';
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
-    	this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     var self = this;
     this.componentDescriptor.onComponentOperationComplete = () => {
@@ -121,9 +139,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
     };
 
 		this.props.componentData(this.componentDescriptor, 'Demote');
-	},
+	}
 
-		upsertDateChange: function (date: any, hlcItemStatusDate: any) {
+	upsertDateChange(date: any, hlcItemStatusDate: any) {
 
 			let formattedDate = new Intl.DateTimeFormat('en-GB', {
 				year: 'numeric',
@@ -163,7 +181,6 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		const hisdList = this.props.HlcItemStatusDates;
 
 		return (
-
 				<div className="portlet" >
 					<div className="portlet-title">
 						<div className="caption">
@@ -275,17 +292,13 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 										}
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
 				</div>
-
-
 			);
 		}
-});
-
+}
 
 // Wire up the React component to the Redux store
 export default connect(

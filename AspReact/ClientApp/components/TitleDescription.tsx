@@ -21,12 +21,12 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
             returnObjectIndexed: false,
             stateFunction:
             '(objectAssign.default({}, state, { TitleDescription: action.newObject});)',
+            onComponentOperationComplete: () => {},
             dataDictionary: {
                 ID: 0,
                 ItemId: 0,
                 VendorId: 0
-            },
-            onComponentOperationComplete: () => void
+            }
         };
         // Bindings
         this.handleChange = this.handleChange.bind(this);
