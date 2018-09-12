@@ -31,7 +31,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 				EmployeeId: ''
 			},
 			onComponentOperationComplete: () => void
-		}
+		};
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         const self = this;
         this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
@@ -40,13 +40,19 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
             });
             self.props.componentData(componentDescriptor, 'GetData');
         });
-		this.props.componentData(this.componentDescriptor, 'GetData');		
+		this.props.componentData(this.componentDescriptor, 'GetData');
 		this.plannedDateList =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use']
-		this.modalSelector = '#showPQFModal'
+    this.modalSelector = '#showPQFModal';
+    this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
+    this.upsertPromoteWithModalChange = this.upsertPromoteWithModalChange.bind(this);
+    this.upsertDemoteChange = this.upsertDemoteChange.bind(this);
+    this.upsertPromoteChange = this.upsertPromoteChange.bind(this);
+    this.upsertDateChange = this.upsertDateChange.bind(this);
+    this.getFormattedDate = this.getFormattedDate.bind(this);
 	}
-    componentWillUnmount() {
+  componentWillUnmount() {
         this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
-    }
+  }
 	upsertSubmitChange(hlcItemStatusDate: any) {
 
 		let formattedDate = new Intl.DateTimeFormat('en-GB', {
@@ -61,18 +67,17 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
 		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '3'; //Actual End Date
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
-        this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        var self = this;
-        this.componentDescriptor.onComponentOperationComplete = () => {
-            self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
-            self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
-        };
+    var self = this;
+    this.componentDescriptor.onComponentOperationComplete = () => {
+        self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
+        self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
+    };
 		this.props.componentData(this.componentDescriptor, 'Submit');
 	}
 
 	upsertPromoteChange(hlcItemStatusDate: any) {
-
 		let formattedDate = new Intl.DateTimeFormat('en-GB', {
 			year: 'numeric',
 			month: 'long',
@@ -112,7 +117,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['EmployeeId'] = "UseModifiedByUserId";
 		this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = '1';
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
-    	this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
+    this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     var self = this;
     this.componentDescriptor.onComponentOperationComplete = () => {
@@ -121,9 +126,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
     };
 
 		this.props.componentData(this.componentDescriptor, 'Demote');
-	},
+	}
 
-		upsertDateChange: function (date: any, hlcItemStatusDate: any) {
+	upsertDateChange(date: any, hlcItemStatusDate: any) {
 
 			let formattedDate = new Intl.DateTimeFormat('en-GB', {
 				year: 'numeric',
@@ -163,7 +168,6 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		const hisdList = this.props.HlcItemStatusDates;
 
 		return (
-
 				<div className="portlet" >
 					<div className="portlet-title">
 						<div className="caption">
@@ -275,17 +279,13 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 										}
 									</tbody>
 								</table>
-
 							</div>
 						</div>
 					</div>
 				</div>
-
-
 			);
 		}
-});
-
+}
 
 // Wire up the React component to the Redux store
 export default connect(
