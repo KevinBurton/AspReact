@@ -6,11 +6,18 @@ import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 
 export interface HlcItemStatusDatesProps {
+  itemId?: number;
 	componentDescriptor?: ComponentDescriptor;
-	HlcItemStatusDates?: [any];
+  HlcItemStatusDates?: [any];
 }
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
+  static defaultProps = {
+    itemId: 0
+  }
+  componentData(componentDescriptor: ComponentDescriptor, operation: string) {
+    
+  }
 	componentDescriptor: ComponentDescriptor;
 	plannedDateList: string[];
 	modalSelector: string;
@@ -30,28 +37,34 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 				DateValue: '',
 				EmployeeId: ''
 			},
-			onComponentOperationComplete: () => void
-		};
-		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        const self = this;
-        this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
-            var componentDescriptor = objectAssign({}, self.componentDescriptor, {
-                dataDictionary: { ItemId: itemId }
-            });
-            self.props.componentData(componentDescriptor, 'GetData');
-        });
-		this.props.componentData(this.componentDescriptor, 'GetData');
+			onComponentOperationComplete: () => {}
+    };
+
 		this.plannedDateList =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use']
     this.modalSelector = '#showPQFModal';
+
+    // Bindings
     this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
     this.upsertPromoteWithModalChange = this.upsertPromoteWithModalChange.bind(this);
     this.upsertDemoteChange = this.upsertDemoteChange.bind(this);
     this.upsertPromoteChange = this.upsertPromoteChange.bind(this);
     this.upsertDateChange = this.upsertDateChange.bind(this);
     this.getFormattedDate = this.getFormattedDate.bind(this);
-	}
+  }
+  componentWillMount() {
+    // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
+		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
+    const self = this;
+    this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
+        var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+            dataDictionary: { ItemId: itemId }
+        });
+        self.props.componentData(componentDescriptor, 'GetData');
+    });
+		this.props.componentData(this.componentDescriptor, 'GetData');
+  }
   componentWillUnmount() {
-        this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
+    this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
   }
 	upsertSubmitChange(hlcItemStatusDate: any) {
 

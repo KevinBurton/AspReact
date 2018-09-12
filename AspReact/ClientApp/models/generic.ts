@@ -44,6 +44,6 @@ export interface ComponentDescriptor {
     returnObjectType: string;
     returnObjectIndexed: boolean;
     stateFunction: string;
-    dataDictionary: object;
+    dataDictionary: {};
     onComponentOperationComplete: Function;
 }
