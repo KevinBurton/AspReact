@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import HelpButton from './HelpButton';
-import { Input, TextArea, Label } from './Form';
+import { ComponentDescriptor } from '../models/generic'
 import { ApplicationState }  from '../store';
 import * as TitleDescriptionStore from '../store/TitleDescription';
 
@@ -9,6 +8,36 @@ type TitleDescriptionProps =
     TitleDescriptionStore.TitleDescriptionState;
 
 class TitleDescription extends React.Component<TitleDescriptionProps, any> {
+    titleHelpText: string = "Titles are required to create an idea or submit a session. Titles should not be more than 90 characters. Character count does not include title tags, such as Workshop or Roundtable. Use action verbs in your title and ensure that your title and description work together. For more information on creating great titles, click <a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/93c6b180-c926-4ed0-a6c1-747c9ce9205b'>here</a>.";
+    descHelpText: string = "Descriptions are required to create an idea or submit a session. Descriptions should not be more than 400 characters, including spaces. Character count does not include key issues (if any). Write your description with the client/attendee in mind and assume it will be client-facing at some point. Descriptions should include action verbs, key words, and target industry (if there is one) framed as How To advice. Avoid passive or weak verbs, buzzwords, and cryptic language the attendee wont understand. For more information on writing great descriptions, click <a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/93c6b180-c926-4ed0-a6c1-747c9ce9205b'>here</a>";
+    componentDescriptor: ComponentDescriptor;
+    constructor(props: any) {
+        super(props);
+        this.componentDescriptor = {
+            name: 'TitleDescription',
+            returnObjectType: '',
+            returnObjectIndexed: false,
+            stateFunction:
+            '(objectAssign.default({}, state, { TitleDescription: action.newObject});)',
+            dataDictionary: {
+                ID: 0,
+                ItemId: 0,
+                VendorId: 0
+            },
+            onComponentOperationComplete: () => void
+        };
+        // Bindings
+        this.handleChange = this.handleChange.bind(this);
+        this.upsertChange = this.upsertChange.bind(this);
+    }
+    upsertChange(e: any) {
+        this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
+        this.props.componentData(this.componentDescriptor, 'Upsert');
+
+    }
+    handleChange(e: any) {
+        this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
+    }
     public render() {
         return (
             <div id="titleDescription">

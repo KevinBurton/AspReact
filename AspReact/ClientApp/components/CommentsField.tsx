@@ -15,23 +15,25 @@ export interface CommentsFieldProps {
 
 class Comments extends React.Component<CommentsFieldProps, any> {
     componentDescriptor: ComponentDescriptor;
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.componentDescriptor = {
             name: 'CommentsField',
-            returnObjectIndexed: true,
+            returnObjectType: '',
+            returnObjectIndexed: false,
             stateFunction:
             '(objectAssign.default({}, state, { CommentsField: action.newObject[0]});)',
             dataDictionary: {
                 ID: '', 
                 Comments: ''
-            }
-        }
+            },
+           onComponentOperationComplete: () => void
+         };
 
         this.componentDescriptor.dataDictionary = {
             ID: this.props.Comments.ID.Value,
             Comments: this.props.Comments.Comments.Value
-        }
+        };
 
         this.props.componentData(this.componentDescriptor, 'GetData');
 
