@@ -1,0 +1,121 @@
+﻿.finalManagementReviewDialog .alertify-message {
+	padding: 20px 20px 0 20px !important;
+}
+
+.finalManagementReviewDialog .finalManagementReviewScroll {
+	overflow-y: auto;
+	height: 100px;	
+}
+
+@media only screen and (min-height : 300px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 100px;
+	}
+}
+
+@media only screen and (min-height : 400px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 200px;
+	}
+}
+
+@media only screen and (min-height : 500px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 300px;
+	}
+}
+
+@media only screen and (min-height : 600px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 400px;
+	}
+}
+
+@media only screen and (min-height : 700px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 500px;
+	}
+}
+
+@media only screen and (min-height : 800px) {
+	.finalManagementReviewDialog .finalManagementReviewScroll {
+		overflow-y: auto;
+		height: 600px;
+	}
+}
+
+.finalManagementReviewDialog label {
+	padding-left: 20px;
+}
+
+.table-overview {
+	background: #fff;
+	color: #4c4c4c;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-weight: normal; 
+	text-align: left; 
+	margin: 0 20px 20px; 
+	padding: 0; 
+	width: 510px; 
+	max-width: 510px;
+	border: 0;
+}
+
+.table-overview > thead {
+	display: table-header-group;
+}
+
+.table-overview > thead > tr > th {
+	color: #d54000; 
+	font-size: 14px; 
+	line-height: 1.42857143; 
+	vertical-align: top; 
+	border-top: 0px solid #b9d0dc; 
+	vertical-align: bottom; 
+	border-bottom: 2px solid #b9d0dc; 
+	padding: 5px; 
+	text-transform: uppercase;
+}
+
+.table-overview > tbody > tr:nth-of-type(odd) {
+	background-color: #f9f9f9;
+}
+
+.table-overview > tbody > tr:nth-of-type(even) {
+	background-color: #fff;
+}
+
+.table-overview > tbody > tr:nth-of-type(odd) > td {
+	font-size: 14px; 
+	padding: 5px; 
+	line-height: 1.42857143; 
+	vertical-align: top; 
+	border-top: 0px; 
+}
+
+.table-overview > tbody > tr:nth-of-type(odd) > td:nth-child(1) {
+	width: 20px;
+}
+
+.table-overview > tbody > tr:nth-of-type(odd) > td:nth-child(2) {
+	width: 490px;
+}
+
+.table-overview > tbody > tr > td img {
+	border: 0;
+	width: 16px;
+	height: 16px;
+}
+
+.table-overview > tbody > tr:nth-of-type(even) > td {
+	font-size: 14px;
+	padding: 5px;
+	line-height: 1.42857143; 
+	vertical-align: top;
+	border-top: 1px solid #b9d0dc; 
+}

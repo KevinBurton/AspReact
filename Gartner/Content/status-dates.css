@@ -1,0 +1,92 @@
+﻿.slimScrollDiv {
+	position: relative !important; 
+	overflow: hidden !important; 
+	width: auto !important; 
+	height: 124px !important;
+}
+
+.scrolly {
+	height: 124px !important; 
+	overflow-y: auto !important; 
+	width: auto !important;
+}
+
+.demote {
+	width: 81px !important;
+}
+
+.promote {
+	width: 100px !important;
+}
+.scrollEvent{
+    max-height: calc(44vh - 125px);
+    overflow-y: auto;
+}
+
+#hlc-status-dates {
+	padding: 0;
+}
+
+#hlc-status-dates table > tbody > tr {
+	border-radius: 0px;
+}
+
+#hlc-status-dates table > tbody > tr > td:nth-child(1) {
+	width: 24.6%;
+}
+
+#hlc-status-dates table > tbody > tr > td:nth-child(2),
+#hlc-status-dates table > tbody > tr > td:nth-child(3),
+#hlc-status-dates table > tbody > tr > td:nth-child(4) {
+	width: 17.5%;
+}
+
+#hlc-status-dates table > tbody > tr > td:last-child {
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 8.7%;
+}
+
+/* Force width of button column when no buttons */
+#hlc-status-dates table > tbody > tr > td:last-child > div {
+	width: 55px;
+}
+
+/* Alternate row colors */
+#hlc-status-dates table > tbody > tr:nth-child(even) {
+	background-color: #F2F2F2;
+}
+
+#hlc-status-dates table > tbody > tr > td {
+	padding-left: 15px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	vertical-align: top;
+}
+
+#hlc-status-dates .block-content {
+	padding: 0px;
+	float: none;
+}
+
+#hlc-status-dates .btn-link {
+	width: 33px;
+}
+
+#hlc-status-dates .btn-action {
+	width:55px;
+}
+
+#hlc-status-dates .btn-action {
+	background-color: #23527c;
+	color: #ffffff;
+	border-radius: 9%;
+	padding: 1px;
+}
+
+#hlc-status-dates .btn-demote {
+	background-color: #ffffff;
+	color: #23527c;
+	border: 1px solid #23527c;
+	margin-top: 5px;
+}

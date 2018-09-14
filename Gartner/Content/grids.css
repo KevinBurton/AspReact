@@ -1,0 +1,72 @@
+﻿.k-grid .k-button {
+	float: right;
+}
+
+.k-grid-toolbar {
+	padding-top: 10px;
+}
+
+.k-filter-menu .k-button.k-primary {
+	background-color: #4f7995 !important;
+    color: #fff;
+}
+
+.k-filter-menu .k-button.k-primary:hover {
+	background-color: #4597ce !important;
+    color: #fff;
+}
+
+.k-grid-excel:hover, 
+.k-grid-save-changes:hover, 
+.k-grid-cancel-changes:hover,
+.k-filter-menu .k-button:hover,
+.k-grid-batchApproveAsEventPM:hover,
+.k-grid-batchDeclineAsEventPM:hover,
+.k-grid-batchApproveAsCC:hover,
+.k-grid-batchDeclineAsCC:hover {
+    background-color: #f2faff;
+    border: 1px solid #4597ce;
+    color: #4597ce;
+}
+
+.filter-dropdown {
+	height: inherit;
+	width: 184px;
+}
+
+#EventItemsGrid .k-item {
+	-moz-box-shadow:         2px 1px 10px 1px rgba(50, 50, 50, 0.30);
+	-webkit-box-shadow:         2px 1px 10px 1px rgba(50, 50, 50, 0.30);
+	box-shadow:         2px 1px 10px 1px rgba(50, 50, 50, 0.30);
+}
+
+.grid-filter {
+	margin-bottom: 10px;
+}
+
+/* Styling for show declined items checkbox */
+.k-header .k-checkbox-label {
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.show-declined-checkbox-group input {
+	visibility: visible;
+	width: 13px;
+}
+
+#allApprovalCount {
+    background-color: #fff;
+    color: #585858;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+/* replace in cpp-styles
+	
+.k-icon.k-i-arrow-s {
+	margin: 6px 0;
+}
+
+with
+*/

@@ -1,0 +1,39 @@
+﻿.panel-loading {
+	text-align: center;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background-image: url("../Images/ajax-loader.gif");
+    width: 32px;
+    height: 32px;
+    display: block;
+    background-repeat: no-repeat;
+	z-index: 1020;
+}
+
+.panel-loading-bg {
+	z-index: 1010;
+	position: absolute;
+	background-color: white;
+	opacity: .70;
+}
+
+.loading {
+	background-image: url("../Images/ajax-loader.gif");
+	margin: 100px auto;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.loading-no-padding {
+	background-image: url("../Images/ajax-loader.gif");
+	margin: 20px auto auto auto;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: block;
+    background-repeat: no-repeat;
+}

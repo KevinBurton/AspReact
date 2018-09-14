@@ -1,0 +1,12 @@
+﻿#errorDisplay:not(:empty) {
+	margin-top: 20px;
+}
+
+#errorDisplay button.close {
+	right: 0 !important;
+}
+
+.inline {
+	display: inline-block;
+	height: initial !important;
+}
