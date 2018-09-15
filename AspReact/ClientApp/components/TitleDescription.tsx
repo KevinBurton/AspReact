@@ -34,11 +34,12 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
     }
     upsertChange(e: any) {
         this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
-
+        //this.props.componentData(this.componentDescriptor, 'Upsert');
+        console.log('upsertChange', e);
     }
     handleChange(e: any) {
-        this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
+        //this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
+        console.log('handleChange', e);
     }
     public render() {
         return (
@@ -47,7 +48,7 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
                     <div className="form-group" >
                         <Label id="Title_Label" text="TITLE  " required={this.props.TitleDescription.Title.IsRequired} />
                         <span  className="pull-right" >
-                            <HelpButton  title="Title"  text={titleHelpText}  />
+                            <HelpButton  title="Title"  text={this.titleHelpText}  />
                         </span>
                         <div  >
                             <Input className="form-control"
@@ -62,7 +63,7 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
                     <div className="form-group" >
                         <Label id="Description_Label" text="DESCRIPTION  " required={this.props.TitleDescription.Description.IsRequired} />
                         <span  className="pull-right" >
-                            <HelpButton title="Description"  text={descHelpText}  />
+                            <HelpButton title="Description"  text={this.descHelpText}  />
                         </span>
                         <div >
                             <TextArea className="form-control" rows="3"
