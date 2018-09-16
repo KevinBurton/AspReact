@@ -6,9 +6,6 @@ import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 
 export interface HlcItemStatusDatesProps {
-  itemId?: number;
-	componentDescriptor?: ComponentDescriptor;
-  HlcItemStatusDates?: [any];
 }
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
@@ -16,7 +13,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
     itemId: 0
   }
   componentData(componentDescriptor: ComponentDescriptor, operation: string) {
-    
+
   }
 	componentDescriptor: ComponentDescriptor;
 	plannedDateList: string[];

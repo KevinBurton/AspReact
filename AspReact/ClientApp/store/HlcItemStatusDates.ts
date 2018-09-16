@@ -1,10 +1,13 @@
 import { Action, Reducer } from 'redux';
+import { ComponentDescriptor } from '../models/generic';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface HlcItemStatusDatesState {
-    itemId?: number;
+  itemId?: number;
+	componentDescriptor?: ComponentDescriptor;
+  HlcItemStatusDates?: [any];
 }
 
 // -----------------
