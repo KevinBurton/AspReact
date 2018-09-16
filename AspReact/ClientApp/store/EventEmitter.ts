@@ -1,21 +1,7 @@
-const EventEmitter = require('events');
+///<reference path="../../node_modules/@types/node/index.d.ts" />
+import {EventEmitter} from 'events';
 
-let contextClass : any = EventEmitter;
+const instance = new EventEmitter();
+Object.freeze(instance);
 
-const LocalEventEmitter = (function () {
-  var instance: typeof EventEmitter;
-
-  function createInstance() : typeof EventEmitter {
-      let object : typeof EventEmitter = new contextClass();
-      return object;
-  }
-
-  return {
-      getInstance: function () {
-          if (!instance) {
-              instance = createInstance();
-          }
-          return instance;
-      }
-  };
-})();
+export default instance as EventEmitter;
