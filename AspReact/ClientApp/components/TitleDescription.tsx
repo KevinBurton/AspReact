@@ -4,8 +4,7 @@ import HelpButton from './HelpButton';
 import { Label, Input, TextArea } from './Form';
 import { ComponentDescriptor } from '../models/generic'
 import { ApplicationState }  from '../store';
-import { actionCreators } from '../store/TitleDescription';
-import { TitleDescriptionState } from '../store/TitleDescription';
+import { TitleDescriptionState, actionCreators } from '../store/TitleDescription';
 
 type TitleDescriptionProps =
     TitleDescriptionState;
