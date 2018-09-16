@@ -4,6 +4,7 @@ import HelpButton from './HelpButton';
 import { Label, Input, TextArea } from './Form';
 import { ComponentDescriptor } from '../models/generic'
 import { ApplicationState }  from '../store';
+import { actionCreators } from '../store/TitleDescription';
 import { TitleDescriptionState } from '../store/TitleDescription';
 
 type TitleDescriptionProps =
@@ -96,5 +97,5 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
 // Wire up the React component to the Redux store
 export default connect(
     (state: ApplicationState) => state.titleDescription, // Selects which state properties are merged into the component's props
-    TitleDescriptionStore.actionCreators                 // Selects which action creators are merged into the component's props
+    actionCreators                                       // Selects which action creators are merged into the component's props
 )(TitleDescription) as typeof TitleDescription;
