@@ -1,56 +1,47 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
-import * as ajax from '../utils/ajax';
+import { ApplicationState }  from '../store';
+import { ComponentDescriptor } from '../models/generic';
+import { HlcSessionFileDetailsState, actionCreators } from '../store/HlcSessionFileDetails';
+type HlcSessionFileDetailsProps = HlcSessionFileDetailsState;
 
-let fileSrc;
-const urlStr = window.location.href;
-const itemId = urlStr.substring(urlStr.lastIndexOf('/') + 1);
-
-ajax.get<any>('/api/GenericDataHandler/GetSessionFileSrc/?id=' + itemId)
-    .then((fileSrcUrl: string) => {
-        console.log('fileSrcUrl: ', fileSrcUrl);
-        fileSrc = fileSrcUrl;
-        setFileSrc(fileSrc);
-    })
-    .fail(() => {
-        console.log('Failed to retrieve file source URL');
-    });
-
-function setFileSrc(url) {
-    var ele = document.getElementById("fileDetails");
-    if(ele) ele.setAttribute("src", url);
-}
-
-enum SfdType {
-    List,
-    Content
-}
-
-export interface SessionFileDetailsProps {
-    SessionFileDetail: any;
-    sfdType: string;
-}
-
-export const HlcSessionFileDetailsComponent = React.createClass<SessionFileDetailsProps, any>({
+class HlcSessionFileDetails extends React.Component<HlcSessionFileDetailsProps, any> {
+  componentDescriptor: ComponentDescriptor;
+  constructor(props: any) {
+      super(props);
+      this.componentDescriptor = {
+          name: 'DownloadTemplateButton',
+          returnObjectType: '',
+          returnObjectIndexed: false,
+          stateFunction:
+          '(objectAssign.default({}, state, { DownloadTemplateButton: action.newObject});)',
+          onComponentOperationComplete: () => {},
+          dataDictionary: {
+              ID: 0,
+              ItemId: 0,
+              VendorId: 0
+          }
+      };
+      // Bindings
+  }
     componentWillMount() {
         if (this.props.sfdType === 'List') {
-
             this.componentDescriptor = {
                 name: 'SessionFileDetail',
+                returnObjectType: '',
                 returnObjectIndexed: true,
                 stateFunction:
                     '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
-                dataDictionary: {
-                    ItemId: itemId
+                onComponentOperationComplete: () => {},
+                    dataDictionary: {
+                    ItemId: this.props.itemId
                 }
             }
-            this.props.componentData(this.componentDescriptor, 'GetData');
+            // this.props.componentData(this.componentDescriptor, 'GetData');
         }
-    },
-
+    }
     render() {
-        var isEnabled = this.props.SessionFileDetail ? this.props.SessionFileDetail.ItemId.IsEnabled : false;
+        var isEnabled = this.props.SessionFileDetail.ItemId ? this.props.SessionFileDetail.ItemId.IsEnabled : false;
         return (
             this.props.sfdType === 'List' && isEnabled ?
                 <li role="presentation" >
@@ -58,46 +49,20 @@ export const HlcSessionFileDetailsComponent = React.createClass<SessionFileDetai
                         All Session Files
                     </a>
                 </li>
-                : this.props.sfdType === 'List' ? <li display='none'></li>
+                // https://stackoverflow.com/questions/37728951/how-to-css-displaynone-within-conditional-with-react-jsx
+                : this.props.sfdType === 'List' ? <li style={{display: 'none'}}></li>
                     : this.props.sfdType === 'Content' && isEnabled ?
                         <div role="tabpanel" className="tab-pane fade" id="files2">
                             <div className="intrinsic-container intrinsic-container-16x9">
                                 <iframe className="embed-responsive-item" id="fileDetails" name="iframe1" height="900" width="1100" scrolling="auto" src=""></iframe>
                             </div>
-                            </div> : <div id="files2" display='none'></div>
+                            </div> : <div id="files2" style={{display: 'none'}}></div>
         );
     }
-});
+}
 
-const mapStateToProps = (state) => {
-    if (!state.SessionCategory) {
-        const { itemId } = state;
-
-        return {
-            itemId: state.itemId,
-            SessionFileDetail: {
-                ItemId: {
-                    Value: itemId,
-                    IsEnabled: true
-
-                }
-            }
-        };
-    }
-
-    return {
-        itemId: state.itemId,
-        SessionFileDetail: state.SessionFileDetail
-    };
-};
-
-export const HlcSessionFileDetailsContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(HlcSessionFileDetailsComponent as React.ClassicComponentClass<any>);
-
-export default HlcSessionFileDetailsComponent;
-
-
+export default connect(
+  (state: ApplicationState) => state.hlcSessionFileDetails, // Selects which state properties are merged into the component's props
+  actionCreators                                             // Selects which action creators are merged into the component's props
+)(HlcSessionFileDetails) as typeof HlcSessionFileDetails;
 

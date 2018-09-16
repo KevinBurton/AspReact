@@ -69,7 +69,7 @@ export default class HlcItemDetails extends React.Component<HlcItemDetailProps, 
                                 Peer Review
                             </a>
                         </li>
-                        <HlcSessionFileDetails sfdType='List' SessionFileDetail={null}/>
+                        <HlcSessionFileDetails sfdType={'List'} SessionFileDetail={{}}/>
                     </ul>
                     <div className="tab-content" id="item-details-main">
                         <div id="hlcItemDetails" className="tab-pane active" role="tabpanel">
@@ -116,7 +116,7 @@ export default class HlcItemDetails extends React.Component<HlcItemDetailProps, 
                                 </div>
                             </div>
                         </div>
-                        <HlcSessionFileDetails sfdType='Content' SessionFileDetail={null}/>
+                        <HlcSessionFileDetails sfdType={'Content'} SessionFileDetail={{}}/>
                     </div>
                 </div>
 
