@@ -4,7 +4,7 @@ import { Action, Reducer } from 'redux';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface TitleDescriptionState {
-    TitleDescription: {
+    TitleDescription?: {
       Title: {
         IsRequired: boolean;
         Value: string;

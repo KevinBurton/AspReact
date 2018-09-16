@@ -60,32 +60,32 @@ class TitleDescription extends React.Component<TitleDescriptionProps, any> {
             <div id="titleDescription">
                 <div >
                     <div className="form-group" >
-                        <Label id="Title_Label" text="TITLE  " required={this.props.TitleDescription.Title.IsRequired} />
+                        <Label id="Title_Label" text="TITLE  " required={this.props.TitleDescription ? this.props.TitleDescription.Title.IsRequired : false} />
                         <span  className="pull-right" >
                             <HelpButton  title="Title"  text={this.titleHelpText}  />
                         </span>
                         <div  >
                             <Input className="form-control"
                                 id='Title'
-                                value={this.props.TitleDescription.Title.Value}
+                                value={this.props.TitleDescription ? this.props.TitleDescription.Title.Value : ''}
                                 onChange={this.handleChange}
                                 onBlur={this.upsertChange}
-                                maxLength={this.props.TitleDescription.Title.MaxLength} />
+                                maxLength={this.props.TitleDescription ? this.props.TitleDescription.Title.MaxLength : 0} />
                         </div>
                         <span className="help-block">For more information on creating high-quality titles, click (<a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/93c6b180-c926-4ed0-a6c1-747c9ce9205b'>here</a>).</span>
                     </div>
                     <div className="form-group" >
-                        <Label id="Description_Label" text="DESCRIPTION  " required={this.props.TitleDescription.Description.IsRequired} />
+                        <Label id="Description_Label" text="DESCRIPTION  " required={this.props.TitleDescription ? this.props.TitleDescription.Description.IsRequired : false} />
                         <span  className="pull-right" >
                             <HelpButton title="Description"  text={this.descHelpText}  />
                         </span>
                         <div >
                             <TextArea className="form-control" rows="3"
                                 id='Description'
-                                value={this.props.TitleDescription.Description.Value}
+                                value={this.props.TitleDescription ? this.props.TitleDescription.Description.Value : ''}
                                 onChange={this.handleChange}
                                 onBlur={this.upsertChange}
-                                maxLength={this.props.TitleDescription.Description.MaxLength} />
+                                maxLength={this.props.TitleDescription ? this.props.TitleDescription.Description.MaxLength : 0} />
                         </div>
                     </div>
                 </div>
