@@ -1,33 +1,47 @@
 ﻿﻿import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
 import { ApplicationState }  from '../store';
-import * as ViewParentAssociationItemWorkFlowStageStore from '../store/ViewParentAssociationItemWorkFlowStage';
+import { ComponentDescriptor } from '../models/generic'
+import { ViewParentAssociationItemWorkFlowStageState, actionCreators } from '../store/ViewParentAssociationItemWorkFlowStage';
 
-export interface ViewParentAssociationItemWorkFlowStageProps {
-    SessionFileDetail?: Object;
-    componentDescriptor?: ComponentDescriptor;
+type ViewParentAssociationItemWorkFlowStageProps  = ViewParentAssociationItemWorkFlowStageState;
+
+class ViewParentAssociationItemWorkFlowStage extends React.Component<ViewParentAssociationItemWorkFlowStageProps, any> {
+  componentDescriptor: ComponentDescriptor;
+  constructor(props: any) {
+    super(props);
+    this.componentDescriptor = {
+        name: 'TitleDescription',
+        returnObjectType: '',
+        returnObjectIndexed: false,
+        stateFunction:
+        '(objectAssign.default({}, state, { TitleDescription: action.newObject});)',
+        onComponentOperationComplete: () => {},
+        dataDictionary: {
+            ID: 0,
+            ItemId: 0,
+            VendorId: 0
+        }
+    };
+    // Bindings
 }
-
-
-export const ViewParentAssociationItemWorkFlowStage = React.createClass<ViewParentAssociationItemWorkFlowStageProps, any>({
-    componentWillMount() {
-
+componentWillMount() {
         this.componentDescriptor = {
-            name: 'SessionFileDetail',
+            name: 'ViewParentAssociationItemWorkFlowStage',
+            returnObjectType: '',
             returnObjectIndexed: true,
             stateFunction:
             '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
+            onComponentOperationComplete: () => {},
             dataDictionary: {
                 ItemId: ''
             }
         }
 
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        // this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail.EventTemplateDownload;
-        this.props.componentData(this.componentDescriptor, 'GetData');
-
-    },
+        this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail ? this.props.SessionFileDetail.EventTemplateDownload : {};
+        // this.props.componentData(this.componentDescriptor, 'GetData');
+    }
     render() {
         var eventTemplateUrl = this.props.SessionFileDetail != null ? this.props.SessionFileDetail.EventTemplateDownload.DefaultValue : '';
         return (
@@ -36,32 +50,9 @@ export const ViewParentAssociationItemWorkFlowStage = React.createClass<ViewPare
                 className="btn btn-primary btn-sm btn-block">Download Template</a>
         );
     }
-});
-
-const mapStateToProps = (state: any) => {
-    if (!state.SessionCategory) {
-        const { itemId } = state;
-
-        return {
-            itemId: state.itemId,
-            SessionFileDetail: {
-                ItemId: {
-                    Value: itemId,
-                    IsEnabled: true
-                },
-                EventTemplateDownload: { Value: '', DefaultValue: '' }
-            }
-        };
-    }
-
-    return {
-        itemId: state.itemId,
-        SessionFileDetail: state.SessionFileDetail
-    };
-};
+}
 
 export default connect(
   (state: ApplicationState) => state.viewParentAssociationItemWorkFlowStage, // Selects which state properties are merged into the component's props
-  ViewParentAssociationItemWorkFlowStageStore.actionCreators                 // Selects which action creators are merged into the component's props
+  actionCreators                                                             // Selects which action creators are merged into the component's props
 )(ViewParentAssociationItemWorkFlowStage) as typeof ViewParentAssociationItemWorkFlowStage;
-;
