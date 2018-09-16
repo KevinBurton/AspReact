@@ -10,7 +10,7 @@ type TitleDescriptionProps =
     TitleDescriptionStore.TitleDescriptionState;
 
 class TitleDescription extends React.Component<TitleDescriptionProps, any> {
-  static defaultProps = {
+  static defaultProps:any = {
     TitleDesciption: {
       Title: {
         Value: '',
