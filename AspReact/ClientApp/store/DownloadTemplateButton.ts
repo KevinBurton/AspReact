@@ -1,10 +1,17 @@
 import { Action, Reducer } from 'redux';
+import { ComponentDescriptor, IOption } from '../models/generic';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface DownloadTemplateButtonState {
-    itemId: number;
+    itemId?: number;
+    SessionFileDetail?: {
+      EventTemplateDownload: {
+        DefaultValue: string;
+      }
+    };
+    componentDescriptor?: ComponentDescriptor;
 }
 
 // -----------------

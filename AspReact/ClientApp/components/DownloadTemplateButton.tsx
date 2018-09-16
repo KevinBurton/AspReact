@@ -2,65 +2,58 @@
 import { connect } from 'react-redux';
 import { ComponentDescriptor, IOption } from '../models/generic';
 import { ApplicationState }  from '../store';
-import * as DownloadTemplateButtonStore from '../store/DownloadTemplateButton';
+import { DownloadTemplateButtonState, actionCreators } from '../store/DownloadTemplateButton';
 
-export interface DownloadTemplateButtonProps {
-    SessionFileDetail?: Object;
-    componentDescriptor?: ComponentDescriptor;
-}
+type DownloadTemplateButtonProps = DownloadTemplateButtonState;
 
-export const DownloadTemplateButton = React.createClass<DownloadTemplateButtonProps, any>({
-    componentWillMount() {
-
+class DownloadTemplateButton extends React.Component<DownloadTemplateButtonProps, any> {
+  componentDescriptor: ComponentDescriptor;
+  constructor(props: any) {
+      super(props);
+      this.componentDescriptor = {
+          name: 'DownloadTemplateButton',
+          returnObjectType: '',
+          returnObjectIndexed: false,
+          stateFunction:
+          '(objectAssign.default({}, state, { DownloadTemplateButton: action.newObject});)',
+          onComponentOperationComplete: () => {},
+          dataDictionary: {
+              ID: 0,
+              ItemId: 0,
+              VendorId: 0
+          }
+      };
+      // Bindings
+  }
+  componentWillMount() {
         this.componentDescriptor = {
-            name: 'SessionFileDetail',
-            returnObjectIndexed: true,
+            name: 'DownloadTemplateButton',
+            returnObjectType: '',
+            returnObjectIndexed: false,
             stateFunction:
             '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
+            onComponentOperationComplete: () => {},
             dataDictionary: {
                 ItemId: ''
             }
         }
 
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        // this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail.EventTemplateDownload;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail ? this.props.SessionFileDetail.EventTemplateDownload : '';
+        //this.props.componentData(this.componentDescriptor, 'GetData');
 
-    },
+    }
     render() {
-        var eventTemplateUrl = this.props.SessionFileDetail != null ? this.props.SessionFileDetail.EventTemplateDownload.DefaultValue : '';
+        var eventTemplateUrl = this.props.SessionFileDetail ? this.props.SessionFileDetail.EventTemplateDownload.DefaultValue : '';
         return (
             <a href={eventTemplateUrl}
                 id="DownloadTemplate"
                 className="btn btn-primary btn-sm btn-block">Download Template</a>
         );
     }
-});
-
-const mapStateToProps = (state: any) => {
-    if (!state.SessionCategory) {
-        const { itemId } = state;
-
-        return {
-            itemId: state.itemId,
-            SessionFileDetail: {
-                ItemId: {
-                    Value: itemId,
-                    IsEnabled: true
-                },
-                EventTemplateDownload: { Value: '', DefaultValue: '' }
-            }
-        };
-    }
-
-    return {
-        itemId: state.itemId,
-        SessionFileDetail: state.SessionFileDetail
-    };
-};
+}
 
 export default connect(
   (state: ApplicationState) => state.downloadTemplateButton, // Selects which state properties are merged into the component's props
-  DownloadTemplateButtonStore.actionCreators                 // Selects which action creators are merged into the component's props
+  actionCreators                                             // Selects which action creators are merged into the component's props
 )(DownloadTemplateButton) as typeof DownloadTemplateButton;
-;
