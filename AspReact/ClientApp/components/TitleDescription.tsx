@@ -4,14 +4,14 @@ import HelpButton from './HelpButton';
 import { Label, Input, TextArea } from './Form';
 import { ComponentDescriptor } from '../models/generic'
 import { ApplicationState }  from '../store';
-import * as TitleDescriptionStore from '../store/TitleDescription';
+import { TitleDescriptionState } from '../store/TitleDescription';
 
 type TitleDescriptionProps =
-    TitleDescriptionStore.TitleDescriptionState;
+    TitleDescriptionState;
 
 class TitleDescription extends React.Component<TitleDescriptionProps, any> {
-  static defaultProps:any = {
-    TitleDesciption: {
+  static defaultProps:TitleDescriptionState = {
+    TitleDescription: {
       Title: {
         Value: '',
         IsRequired: false,
