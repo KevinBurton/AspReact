@@ -10,6 +10,20 @@ type TitleDescriptionProps =
     TitleDescriptionStore.TitleDescriptionState;
 
 class TitleDescription extends React.Component<TitleDescriptionProps, any> {
+  static defaultProps = {
+    TitleDesciption: {
+      Title: {
+        Value: '',
+        IsRequired: false,
+        MaxLength: 0
+      },
+      Description: {
+        Value: '',
+        IsRequired: false,
+        MaxLength: 0
+      }
+    }
+  };
     titleHelpText: string = "Titles are required to create an idea or submit a session. Titles should not be more than 90 characters. Character count does not include title tags, such as Workshop or Roundtable. Use action verbs in your title and ensure that your title and description work together. For more information on creating great titles, click <a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/93c6b180-c926-4ed0-a6c1-747c9ce9205b'>here</a>.";
     descHelpText: string = "Descriptions are required to create an idea or submit a session. Descriptions should not be more than 400 characters, including spaces. Character count does not include key issues (if any). Write your description with the client/attendee in mind and assume it will be client-facing at some point. Descriptions should include action verbs, key words, and target industry (if there is one) framed as How To advice. Avoid passive or weak verbs, buzzwords, and cryptic language the attendee wont understand. For more information on writing great descriptions, click <a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/93c6b180-c926-4ed0-a6c1-747c9ce9205b'>here</a>";
     componentDescriptor: ComponentDescriptor;
