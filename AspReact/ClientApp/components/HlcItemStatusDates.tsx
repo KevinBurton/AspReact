@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/generic';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
-import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
+import { HlcItemStatusDatesState, actionCreators } from '../store/HlcItemStatusDates';
 
-export interface HlcItemStatusDatesProps {
-}
+type HlcItemStatusDatesProps = HlcItemStatusDatesState;
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   static defaultProps = {

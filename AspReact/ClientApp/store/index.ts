@@ -18,8 +18,11 @@ import * as HlcBasicInfo from './HlcBasicInfo'
 import * as Comments from './Comments'
 import * as HlcSessionFileDetails from './HlcSessionFileDetails'
 
+import {EventEmitter} from 'events';
+
 // The top-level state object
 export interface ApplicationState {
+    eventEmitter: EventEmitter;
     hlcSessionFileDetails: HlcSessionFileDetails.HlcSessionFileDetailsState;
     comments: Comments.CommentsState;
     hlcBasicInfo: HlcBasicInfo.HlcBasicInfoState;
