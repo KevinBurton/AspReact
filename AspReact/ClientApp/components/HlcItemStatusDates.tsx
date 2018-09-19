@@ -5,6 +5,7 @@ import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 import HelpButton from './HelpButton';
+import PQFModal from './PQFModal';
 
 export interface HlcItemStatusDatesProps {
 	itemId: number;
