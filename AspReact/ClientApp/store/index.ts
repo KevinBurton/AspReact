@@ -19,6 +19,8 @@ import * as Comments from './Comments'
 import * as HlcSessionFileDetails from './HlcSessionFileDetails'
 import * as PQFModal from './PQFModal'
 
+import {EventEmitter} from 'events';
+
 // The top-level state object
 export interface ApplicationState {
     reviewApproved: PQFModal.PQFModalState;

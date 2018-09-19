@@ -1,7 +1,7 @@
 ///<reference path="../../node_modules/@types/node/index.d.ts" />
 import {EventEmitter} from 'events';
 
-const instance = new EventEmitter();
-Object.freeze(instance);
+const eventEmitter = new EventEmitter();
+Object.freeze(eventEmitter);
 
-export default instance as EventEmitter;
+export default eventEmitter;
