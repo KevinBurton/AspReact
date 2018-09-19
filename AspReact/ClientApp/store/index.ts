@@ -17,9 +17,11 @@ import * as GraphicDesignerBench from './GraphicDesignerBench'
 import * as HlcBasicInfo from './HlcBasicInfo'
 import * as Comments from './Comments'
 import * as HlcSessionFileDetails from './HlcSessionFileDetails'
+import * as PQFModal from './PQFModal'
 
 // The top-level state object
 export interface ApplicationState {
+    reviewApproved: PQFModal.PQFModalState;
     hlcSessionFileDetails: HlcSessionFileDetails.HlcSessionFileDetailsState;
     comments: Comments.CommentsState;
     hlcBasicInfo: HlcBasicInfo.HlcBasicInfoState;
@@ -45,6 +47,7 @@ export interface ApplicationState {
 // the reducer with the matching name. It's important that the names match exactly, and that the reducer
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
+    pqfModal: PQFModal.reducer,
     hlcSessionFileDetails: HlcSessionFileDetails.reducer,
     comments: Comments.reducer,
     hlcBasicInfo: HlcBasicInfo.reducer,

@@ -1,14 +1,12 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
 import { ComponentDescriptor } from '../models/generic';
 import CheckBox from './Checkbox';
 import CheckList from './CheckList';
 import CheckListRow from './CheckListRow';
+import { ApplicationState }  from '../store';
+import { PQFModalState, actionCreators } from '../store/PQFModal';
 
-interface PQFModalState {
-    reviewApproved: boolean;
-};
 
 export interface PQFModalProps {
 
@@ -18,26 +16,21 @@ export interface PQFModalProps {
     reviewApproved: boolean;
 }
 
-
-export const PQFModalComponent = React.createClass<PQFModalProps, PQFModalState>({
+class PQFModal extends React.Component<PQFModalProps, PQFModalState> {
 
     getInitialState() {
         return {
             reviewApproved: false
         };
-    },
-
-    componentWillMount() {
-        
-    },
+    }
 
     onReviewApproved() {
         this.setState({
             reviewApproved: !this.state.reviewApproved
         });
-    },
+    }
 
-    upsertChange: function (e) {
+    upsertChange(e) {
 
         if (this.state.reviewApproved) {
             let formattedDate = new Intl.DateTimeFormat('en-GB',
@@ -63,8 +56,7 @@ export const PQFModalComponent = React.createClass<PQFModalProps, PQFModalState>
             this.props.hlcItemStatusDateProps.eventEmitter
                 .emitEvent('ItemStatusDatesRefresh', [hlcItemStatusDate.ItemId.Value]);
         }
-    },
-
+    }
     render() {
 
         return (
@@ -136,7 +128,7 @@ export const PQFModalComponent = React.createClass<PQFModalProps, PQFModalState>
             </div>
         );
     }
-});
+}
 
 const mapStateToProps = (state) => {
     if (!state) {
@@ -154,14 +146,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-export const PQFModalContainer =
-    connect(
-        mapStateToProps,
-        actions
-    )(PQFModalComponent as React.ClassicComponentClass<any>);
-
-
-export default PQFModalComponent;
+// Wire up the React component to the Redux store
+export default connect(
+    (state: ApplicationState) => state.reviewApproved, // Selects which state properties are merged into the component's props
+    actionCreators                                       // Selects which action creators are merged into the component's props
+)(PQFModal) as typeof PQFModal;
 
 
 

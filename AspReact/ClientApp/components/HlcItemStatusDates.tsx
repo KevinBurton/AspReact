@@ -4,8 +4,11 @@ import { ComponentDescriptor } from '../models/generic';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
+import HelpButton from './HelpButton';
 
 export interface HlcItemStatusDatesProps {
+	itemId: number;
+	HlcItemStatusDates: any;
 }
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
@@ -195,7 +198,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 								<table>
 									<tbody>
 										{(typeof (hisdList[0]) !== 'undefined' && (typeof (hisdList[0].ID.Value) !== 'undefined' || hisdList[0].ID.Value != null)) && hisdList[0].ID.Value != '0'   ?
-											hisdList.sort((a, b) => {
+											hisdList.sort((a: any, b: any) => {
 												var id1 = parseInt(a.HLCSortOrder.Value);
 												var id2 = parseInt(b.HLCSortOrder.Value);
 
