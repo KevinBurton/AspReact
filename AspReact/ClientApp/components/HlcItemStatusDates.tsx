@@ -14,7 +14,8 @@ export interface HlcItemStatusDatesProps {
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   static defaultProps = {
-    itemId: 0
+	itemId: 0,
+	HlcItemStatusDates: {}
   }
   componentData(componentDescriptor: ComponentDescriptor, operation: string) {
 
