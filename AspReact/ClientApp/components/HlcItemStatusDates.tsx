@@ -22,7 +22,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   }
 	componentDescriptor: ComponentDescriptor;
 	plannedDateList: string[];
-	modalSelector: string;
+	modalSelector: string = '#PQFPopUp';
 	constructor(props: any) {
 		super(props);
 		this.componentDescriptor = {
@@ -43,7 +43,6 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
     };
 
 		this.plannedDateList =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use']
-    this.modalSelector = '#showPQFModal';
 
     // Bindings
     this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
@@ -56,12 +55,11 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   componentWillMount() {
     // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-    const self = this;
     this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
-        var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+        var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
-        self.props.componentData(componentDescriptor, 'GetData');
+        this.props.componentData(componentDescriptor, 'GetData');
     });
 		this.props.componentData(this.componentDescriptor, 'GetData');
   }
@@ -84,10 +82,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    var self = this;
     this.componentDescriptor.onComponentOperationComplete = () => {
-        self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
-        self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
+        this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+        this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 		this.props.componentData(this.componentDescriptor, 'Submit');
 	}
@@ -107,16 +104,15 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    var self = this;
     this.componentDescriptor.onComponentOperationComplete = () => {
-            self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
-            self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
+            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
         };
 
 		this.props.componentData(this.componentDescriptor, 'Promote');
 	}
  	upsertPromoteWithModalChange(hlcItemStatusDate: any) {
-		var result = $("#showPQFModal").trigger("click");
+		$(this.modalSelector).modal('show');
 	}
 	upsertDemoteChange(hlcItemStatusDate: any) {
 
@@ -134,10 +130,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    var self = this;
     this.componentDescriptor.onComponentOperationComplete = () => {
-            self.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [self.props.itemId]);
-            self.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [self.props.itemId]);
+            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 
 		this.props.componentData(this.componentDescriptor, 'Demote');
@@ -176,129 +171,129 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		}
 		return '';
 	}
-
 	public	render() {
-
 		$(this.modalSelector).modal("hide");
 		const hisdList = this.props.HlcItemStatusDates;
 
-		return (
-				<div className="portlet" >
-					<div className="portlet-title">
-						<div className="caption">
-							Status Dates
-						</div>
-						<div className="actions">
-							<span  className="pull-right" >
-								<HelpButton  title="Item Status Dates"  text={HlcItemStatusDatesHelpText}  /></span>
-						</div>
+        return (
+
+			<div className="portlet" >
+				<div className="portlet-title">
+					<div className="caption">
+						Status Dates
 					</div>
-					<div className="portlet-body" id="hlc-status-dates">
-						<div className="slimScrollDiv">
-							<div className="scrolly">
+					<div className="actions">
+						<span  className="pull-right" >
+							<HelpButton  title="Item Status Dates"  text={HlcItemStatusDatesHelpText}  /></span>
+					</div>
+				</div>
+				<div className="portlet-body" id="hlc-status-dates">
+					<div className="slimScrollDiv">
+						<div className="scrolly">
 
-								<table>
-									<tbody>
-										{(typeof (hisdList[0]) !== 'undefined' && (typeof (hisdList[0].ID.Value) !== 'undefined' || hisdList[0].ID.Value != null)) && hisdList[0].ID.Value != '0'   ?
-											hisdList.sort((a: any, b: any) => {
-												var id1 = parseInt(a.HLCSortOrder.Value);
-												var id2 = parseInt(b.HLCSortOrder.Value);
+							<table>
+								<tbody>
+                                    {typeof (hisdList[0]) !== 'undefined' && typeof (hisdList[0].ID.Value) !== 'undefined' && hisdList[0].ID.Value != null && hisdList[0].ID.Value != '0' ?
+										hisdList.sort((a, b) => {
+											var id1 = parseInt(a.HLCSortOrder.Value);
+											var id2 = parseInt(b.HLCSortOrder.Value);
 
-												if (id1 < id2) {
-													return -1;
-												} else if (id1 > id2) {
-													return 1;
-												} else {
-													return 0;
-												}
-											})
-												.map((hisd: any) => (
-													<tr key={hisd.ID.Value}>
+											if (id1 < id2) {
+												return -1;
+											} else if (id1 > id2) {
+												return 1;
+											} else {
+												return 0;
+											}
+										})
+											.map((hisd: any) => (
+												<tr key={hisd.ID.Value}>
 
-														<td>
-															{hisd.ItemStatusDescription.DefaultValue}
-														</td>
-														<td>
+													<td>
+														{hisd.ItemStatusDescription.DefaultValue}
+													</td>
+													<td>
+														<div>Planned Date</div>
+														{ this.plannedDateList.indexOf(hisd.ItemStatusDescription.DefaultValue) >= 0 ?
+															<div className="text-muted"> { this.getFormattedDate(hisd.PlannedDate.Value) } </div>
+															:
+															<div className="text-muted">N/A</div>
+														}
+													</td>
+													<td>
+														<div>Actual Date</div>
+														{(hisd.EmployeeName.Value != '') && (hisd.ActualEndDate.Value != '') ?
+															<div className="text-muted"> {this.getFormattedDate(hisd.ActualEndDate.Value) } </div>
+															:
+															<div className="text-muted">Pending...</div>
+														}
 
-															<div>Planned Date</div>
-															{ this.plannedDateList.indexOf(hisd.ItemStatusDescription.DefaultValue) >= 0 ?
-																<div className="text-muted"> { this.getFormattedDate(hisd.DateValue.Value) } </div>
-																:
-																<div className="text-muted">N/A</div>
-															}
-														</td>
-														<td>
-															<div>Actual Date</div>
-															{(hisd.EmployeeName.Value != '') && (hisd.ItemStatusDateTypeId.Value == '2') || (hisd.ItemStatusDateTypeId.Value == '3') ?
-																<div className="text-muted"> {this.getFormattedDate(hisd.DateValue.Value) } </div>
-																:
-																<div className="text-muted">Pending...</div>
-															}
+													</td>
 
-														</td>
+													<td>
+														<div>Completed By</div>
+														{(hisd.EmployeeName.Value != '')  ?
+															<div className="text-muted" id="ideaCompleted"> {hisd.EmployeeName.Value} </div>
+															:
+															(hisd.IsSuccess.Value == 'Y') && (hisd.DeclineButton.IsVisible == true)?
+																<div className="text-muted">Declined...</div>
+																: <div className="text-muted">Pending...</div>
+														}
+													</td>
+													<td>
+														{(hisd.SubmitButton.IsVisible == true) ?
+															<button type="submit" className="btn-link btn-action" autoFocus  onClick={() => this.upsertSubmitChange(hisd) }  >
+																Submit
+															</button>
+															: <td></td>}
 
-														<td>
-															<div>Completed By</div>
-															{((hisd.EmployeeName.Value != '') && (hisd.ItemStatusDateTypeId.Value == '3')) ?
-																<div className="text-muted" id="ideaCompleted"> {hisd.EmployeeName.Value} </div>
-																:
-																(hisd.IsSuccess.Value == 'Y') && (hisd.DeclineButton.IsVisible == true)?
-																	<div className="text-muted">Declined...</div>
-																	: <div className="text-muted">Pending...</div>
-															}
-														</td>
-														<td>
-															{(hisd.SubmitButton.IsVisible == true) ?
-																<button type="submit" className="btn-link btn-action" autoFocus  onClick={() => this.upsertSubmitChange(hisd) }  >
-																	Submit
+														{(hisd.ApproveButton.IsVisible == true) ?
+															<button type= "submit" className= "btn-link" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
+																<span className="icon-check"></span>
+															</button>
+                                                            : <td></td>}
+
+														{(hisd.DeclineButton.IsVisible == true) ?
+															<button type= "submit" className= "btn-link" onClick={() => this.upsertDemoteChange(hisd) }  >
+																<span className="icon-declined"></span>
+															</button>
+                                                            : <td></td>}
+
+														{(hisd.PromoteButton.IsVisible == true) ?
+															<button type="submit" className="btn-link btn-action" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
+																{hisd.PromoteButton.DefaultValue}
 																</button>
-																: <div></div>}
+                                                            : <td></td>}
+														{(hisd.PromoteWithModalButton.IsVisible == true) ?
+															<div>
+																<PQFModal promote={() => this.upsertPromoteChange(hisd)} />
+																<button type="submit" className="btn-link btn-action" autoFocus  onClick={() => this.upsertPromoteWithModalChange(hisd) }  >
+																Promote
+															</button>
+															</div>
+                                                            : <td></td>}
 
-															{(hisd.ApproveButton.IsVisible == true) ?
-																<button type= "submit" className= "btn-link" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
-																	<span className="icon-check"></span>
-																</button>
-																: <div></div>}
+														{(hisd.DemoteButton.IsVisible == true ) ?
+															<button type="submit" className="btn-link btn-action btn-demote" onClick={() => this.upsertDemoteChange(hisd) }  >
+															   Demote
+															</button>
+                                                            : <td></td>}
+													</td>
+												</tr>
+											)
+											)
+                                        : <tr></tr>
+									}
+								</tbody>
+							</table>
 
-															{(hisd.DeclineButton.IsVisible == true) ?
-																<button type= "submit" className= "btn-link" onClick={() => this.upsertDemoteChange(hisd) }  >
-																	<span className="icon-declined"></span>
-																</button>
-																: <div></div>}
-
-															{(hisd.PromoteButton.IsVisible == true) ?
-																<button type="submit" className="btn-link btn-action" autoFocus onClick={() => this.upsertPromoteChange(hisd) }  >
-																	{hisd.PromoteButton.DefaultValue}
-																	</button>
-																: <div></div>}
-															{(hisd.PromoteWithModalButton.IsVisible == true) ?
-																<div>
-																	<PQFModal hlcItemStatusDate={hisd} hlcItemStatusDateProps={this.props}
-																		hlcItemStatusDateComponentDescriptor={this.componentDescriptor} reviewApproved={false} />
-																	<button type="submit" className="btn-link btn-action" autoFocus  onClick={() => this.upsertPromoteWithModalChange(hisd) }  >
-																	Promote
-																</button>
-																</div>
-																: <div></div>}
-
-															{(hisd.DemoteButton.IsVisible == true ) ?
-																<button type="submit" className="btn-link btn-action btn-demote" onClick={() => this.upsertDemoteChange(hisd) }  >
-																Demote
-																</button>
-																: <div></div>}
-														</td>
-													</tr>
-												)
-												)
-											: <tr></tr>
-										}
-									</tbody>
-								</table>
-							</div>
 						</div>
 					</div>
 				</div>
-			);
+			</div>
+
+
+		);
 		}
 }
 
