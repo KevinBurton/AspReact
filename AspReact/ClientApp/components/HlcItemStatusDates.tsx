@@ -7,42 +7,27 @@ import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 
-export interface HlcItemStatusDatesProps {
-	itemId: number;
-	HlcItemStatusDates: any;
-}
-
-class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
-  static defaultProps = {
-	itemId: 0,
-	HlcItemStatusDates: {}
-  }
-  componentData(componentDescriptor: ComponentDescriptor, operation: string) {
-
-  }
-	componentDescriptor: ComponentDescriptor;
-	plannedDateList: string[];
+class HlcItemStatusDates extends React.Component<any, any> {
+	componentDescriptor: ComponentDescriptor = {
+    name: 'HlcItemStatusDates',
+    returnObjectIndexed: false,
+    returnObjectType: 'hlcItemStatusDates',
+    stateFunction:
+    '(objectAssign.default({}, state, { HlcItemStatusDates: action.newObject});)',
+    dataDictionary: {
+      ID: '0',
+      ItemId: '',
+      ItemStatusId: '',
+      ItemStatusDateTypeId: '',
+      DateValue: '',
+      EmployeeId: ''
+    },
+    onComponentOperationComplete: () => {}
+  };
+	plannedDateList: string[] =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use'];
 	modalSelector: string = '#PQFPopUp';
 	constructor(props: any) {
 		super(props);
-		this.componentDescriptor = {
-			name: 'HlcItemStatusDates',
-			returnObjectIndexed: false,
-			returnObjectType: 'hlcItemStatusDates',
-			stateFunction:
-			'(objectAssign.default({}, state, { HlcItemStatusDates: action.newObject});)',
-			dataDictionary: {
-				ID: '0',
-				ItemId: '',
-				ItemStatusId: '',
-				ItemStatusDateTypeId: '',
-				DateValue: '',
-				EmployeeId: ''
-			},
-			onComponentOperationComplete: () => {}
-    };
-
-		this.plannedDateList =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use']
 
     // Bindings
     this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
@@ -299,6 +284,10 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 
 // Wire up the React component to the Redux store
 export default connect(
-    (state: ApplicationState) => state.hlcItemStatusDates, // Selects which state properties are merged into the component's props
-    HlcItemStatusDatesStore.actionCreators                 // Selects which action creators are merged into the component's props
+    (state: ApplicationState) => { // Selects which state properties are merged into the component's props
+                                   return { hlcItemStatusDates: state.hlcItemStatusDates,
+                                            eventEmitter: state.eventEmitter,
+                                            componentData: state.componentData };
+                                  },
+    HlcItemStatusDatesStore.actionCreators                      // Selects which action creators are merged into the component's props
 )(HlcItemStatusDates) as typeof HlcItemStatusDates;

@@ -23,6 +23,8 @@ import {EventEmitter} from 'events';
 
 // The top-level state object
 export interface ApplicationState {
+    eventEmitter: EventEmitter;
+    componentData: Function;
     reviewApproved: PQFModal.PQFModalState;
     hlcSessionFileDetails: HlcSessionFileDetails.HlcSessionFileDetailsState;
     comments: Comments.CommentsState;
