@@ -20,7 +20,7 @@ const PQFModal = React.createClass<PQFModalProps, PQFModalState>({
 	},
 
 	onReviewApproved() {
-		this.setState((prevState) => { return { reviewApproved: !prevState.reviewApproved } });
+		this.setState((prevState:any) => { return { reviewApproved: !prevState.reviewApproved } });
 	},
 
 	render() {
