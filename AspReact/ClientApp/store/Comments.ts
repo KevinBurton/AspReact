@@ -5,6 +5,7 @@ import { Reducer } from 'redux';
 
 export interface CommentsState {
     itemId?: number;
+    
 }
 
 // -----------------

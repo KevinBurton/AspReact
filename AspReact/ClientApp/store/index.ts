@@ -23,6 +23,7 @@ import {EventEmitter} from 'events';
 
 // The top-level state object
 export interface ApplicationState {
+    itemId: number;
     eventEmitter: EventEmitter;
     componentData: Function;
     reviewApproved: PQFModal.PQFModalState;
