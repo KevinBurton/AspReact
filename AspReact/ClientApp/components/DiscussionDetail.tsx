@@ -2,6 +2,7 @@ import * as React from 'react';
 import Avatar from './Avatar';
 import DiscussionReplyModal from './DiscussionReplyModal';
 import { ComponentDescriptor } from '../models/componentDescriptor';
+import * as $ from "jquery";
 
 export interface DiscussionDetailProps {
 	discussionToReplyTo: Object;

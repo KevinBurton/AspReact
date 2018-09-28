@@ -6,6 +6,7 @@ import DiscussionDetail from './DiscussionDetail';
 import DiscussionAddModal from './DiscussionAddModal';
 import { ApplicationState }  from '../store';
 import * as DiscussionStore from '../store/Discussion';
+import * as $ from "jquery";
 
 export interface DiscussionProps {
 	Discussion?: Object;

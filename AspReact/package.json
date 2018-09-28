@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "@types/history": "4.6.0",
+    "@types/jquery": "^3.3.10",
     "@types/node": "^10.9.4",
     "@types/react": "15.0.35",
     "@types/react-dom": "15.5.1",
@@ -42,7 +43,7 @@
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0"
   },
- "dependencies": {
+  "dependencies": {
     "events": "^3.0.0"
   }
 }

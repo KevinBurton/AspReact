@@ -6,6 +6,7 @@ import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
+import * as $ from "jquery";
 
 class HlcItemStatusDates extends React.Component<any, any> {
 	componentDescriptor: ComponentDescriptor = {

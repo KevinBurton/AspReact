@@ -5,6 +5,7 @@ import { IOption } from '../models/IOption';
 import { Input, FormGroup, TextArea, Label } from './Form';
 import Avatar from './Avatar';
 import { CKEditor } from './CKEditor';
+import * as $ from "jquery";
 
 interface DiscussionReplyModalState {
 

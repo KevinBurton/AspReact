@@ -1,6 +1,6 @@
 import * as React from 'react';
-
 import ComboBox from './kendo/ComboBox';
+import * as $ from "jquery";
 
 export interface EmployeePickerProps {
     id: string; // combo box id
@@ -9,7 +9,6 @@ export interface EmployeePickerProps {
     isEnabled?: boolean;
 }
 
-declare var $;
 
 const EmployeePicker = (props: EmployeePickerProps) => {
     const comboBoxId = props.id;
