@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import ComboBox from './kendo/ComboBox';
 
@@ -38,7 +38,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
 
     upsertChange: function (vendor: any) {
         if (vendor != "") {
-         
+
             this.componentDescriptor.dataDictionary['VendorId'] = vendor;
             this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
 
@@ -56,7 +56,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
     },
 
     removeSelectedVendor(vendor: any) {
-     
+
         this.componentDescriptor.dataDictionary['ID'] = vendor.ID.Value;
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['VendorId'] = vendor.VendorId.Value;
@@ -72,7 +72,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
 
 
     render() {
-        
+
         return (
             <div id="VendorBench">
                 <div className="form-group">

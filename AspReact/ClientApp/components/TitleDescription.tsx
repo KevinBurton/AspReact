@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import HelpButton from './HelpButton';
 import { Label, Input, TextArea } from './Form';
-import { ComponentDescriptor } from '../models/generic'
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import { ApplicationState }  from '../store';
 import { TitleDescriptionState, actionCreators } from '../store/TitleDescription';
 

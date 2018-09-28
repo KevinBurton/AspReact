@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';

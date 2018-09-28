@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import DiscussionDetail from './DiscussionDetail';
 import DiscussionAddModal from './DiscussionAddModal';
 import { ApplicationState }  from '../store';
@@ -25,7 +25,7 @@ class Discussion extends React.Component<DiscussionProps, any> {
 		};
 		this.openAdd = this.openAdd.bind(this);
 	}
-	
+
 	componentWillMount() {
 		this.props.componentData(this.componentDescriptor, 'GetData');
 	}

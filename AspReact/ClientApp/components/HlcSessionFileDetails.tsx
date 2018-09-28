@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import { HlcSessionFileDetailsState, actionCreators } from '../store/HlcSessionFileDetails';
+
 type HlcSessionFileDetailsProps = HlcSessionFileDetailsState;
 
 class HlcSessionFileDetails extends React.Component<HlcSessionFileDetailsProps, any> {

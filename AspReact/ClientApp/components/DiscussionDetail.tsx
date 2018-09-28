@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Avatar from './Avatar';
 import DiscussionReplyModal from './DiscussionReplyModal';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 
 export interface DiscussionDetailProps {
 	discussionToReplyTo: Object;
@@ -22,7 +22,7 @@ export const DiscussionDetail = React.createClass<DiscussionDetailProps, any>({
         var d = new Date(date+" UTC");
         var dateString = ("0" + d.getDate()).slice(-2) + " " + ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][d.getMonth()] + " " + d.getFullYear() + ", " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
         return dateString;
-    }, 
+    },
 	render() {
 
 		const discussionToReplyTo = this.props.discussionToReplyTo;

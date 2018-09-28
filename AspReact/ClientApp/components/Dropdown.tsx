@@ -1,9 +1,10 @@
-﻿﻿﻿import * as React from 'react';
-﻿﻿import { IOption } from '../models/generic';
+﻿﻿import * as React from 'react';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 
 export interface DropdownProps {
     id: string; // combo box id
-    onSelect: (number) => void;
+    onSelect: (n: number) => void;
     placeholder: string;
     selectedValue?: any;
     isEnabled?: boolean;

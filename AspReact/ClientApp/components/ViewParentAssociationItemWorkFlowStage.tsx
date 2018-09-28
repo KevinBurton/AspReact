@@ -1,7 +1,7 @@
 ﻿﻿import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
-import { ComponentDescriptor } from '../models/generic'
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import { ViewParentAssociationItemWorkFlowStageState, actionCreators } from '../store/ViewParentAssociationItemWorkFlowStage';
 
 type ViewParentAssociationItemWorkFlowStageProps  = ViewParentAssociationItemWorkFlowStageState;

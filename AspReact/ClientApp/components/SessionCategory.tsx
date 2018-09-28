@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
-import { ComponentDescriptor, IOption } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import HelpButton from './HelpButton';
 import Dropdown from './Dropdown';
@@ -41,7 +41,7 @@ export const SessionCategoryComponent = React.createClass<SessionCategoryProps, 
     },
 
     componentDidMount() {
-        
+
     },
 
     upsertChange: function (e) {
@@ -54,7 +54,7 @@ export const SessionCategoryComponent = React.createClass<SessionCategoryProps, 
     render() {
 
         const listOptions: Array<IOption> = this.props.SessionCategory.DataList;
-       
+
         let selectedValue = this.props.SessionCategory.SessionCategoryId
             ? this.props.SessionCategory.SessionCategoryId.Value
             : "0";
@@ -67,7 +67,7 @@ export const SessionCategoryComponent = React.createClass<SessionCategoryProps, 
                             <span  className="pull-right" >
                                 <HelpButton  title="Session Category"  text={sessCategoryHelpText}  />
                             </span>
-                       
+
                             {(listOptions[0].text != 'default') ?
                                 <Dropdown id="sessionCategoryList" listOptions={listOptions} placeholder="Select Session Category" selectedValue={selectedValue} onSelect={(selectedItem) => this.upsertChange(selectedItem) } isEnabled={this.props.SessionCategory.SessionCategoryId.IsEnabled} />
                             :

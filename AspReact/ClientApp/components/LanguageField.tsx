@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
-import { ComponentDescriptor, IOption } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import DropdownStrings from './DropdownStrings';
 

@@ -1,6 +1,7 @@
 ﻿﻿import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentDescriptor, IOption } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 import { ApplicationState }  from '../store';
 import { DownloadTemplateButtonState, actionCreators } from '../store/DownloadTemplateButton';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/genericActions';
-import { ComponentDescriptor, IOption } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
+import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
 
@@ -39,7 +39,7 @@ export const SeriesDefinitionComponent = React.createClass<SeriesDefinitionProps
     },
 
     componentDidMount() {
-        
+
     },
 
     upsertChange: function (e) {
@@ -52,7 +52,7 @@ export const SeriesDefinitionComponent = React.createClass<SeriesDefinitionProps
     render() {
 
         const listOptions: Array<IOption> = this.props.SeriesDefinition.DataList;
-       
+
         let selectedValue = this.props.SeriesDefinition.SeriesDefinitionId
             ? this.props.SeriesDefinition.SeriesDefinitionId.Value
             : "0";

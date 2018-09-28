@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 import { TextArea, Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as CommentsStore from '../store/Comments';
 
 export interface CommentsFieldProps {
-
     getComponentData: (component: Object) => void;
     Comments: any;
     componentDescriptor: ComponentDescriptor;
@@ -24,7 +23,7 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             stateFunction:
             '(objectAssign.default({}, state, { CommentsField: action.newObject[0]});)',
             dataDictionary: {
-                ID: '', 
+                ID: '',
                 Comments: ''
             },
            onComponentOperationComplete: () => void
@@ -80,11 +79,11 @@ class Comments extends React.Component<CommentsFieldProps, any> {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
     if (!state.CommentsField) {
 
         const { itemId } = state;
-       
+
         return {
             CommentsField: {
                 ID: {
