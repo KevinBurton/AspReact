@@ -13,6 +13,7 @@ import eventEmitter from '../utils/eventEmitter';
 type HlcItemStatusDatesProps = ApplicationState;
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
+  HlcItemStatusDatesHelpText:string = "Status dates are based on the event currently selected for the session. When there is no event selected, all status dates will be blank. You will see the event-specific target dates for: promote to Peer Review, promote to Management Review, promote to Editing, and Complete date. Once a session is submitted for approval, the Status Dates section will show approvals and promotions of the session throughout the workflow process.";
 	componentDescriptor: ComponentDescriptor = {
     name: 'HlcItemStatusDates',
     returnObjectIndexed: false,
@@ -163,7 +164,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 	}
 	public	render() {
 		$(this.modalSelector).modal("hide");
-		const hisdList = this.props.HlcItemStatusDates;
+		const hisdList = this.props.hlcItemStatusDates;
 
         return (
 
@@ -174,7 +175,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 					</div>
 					<div className="actions">
 						<span  className="pull-right" >
-							<HelpButton  title="Item Status Dates"  text={HlcItemStatusDatesHelpText}  /></span>
+							<HelpButton  title="Item Status Dates"  text={this.HlcItemStatusDatesHelpText}  /></span>
 					</div>
 				</div>
 				<div className="portlet-body" id="hlc-status-dates">
@@ -184,7 +185,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 							<table>
 								<tbody>
                                     {typeof (hisdList[0]) !== 'undefined' && typeof (hisdList[0].ID.Value) !== 'undefined' && hisdList[0].ID.Value != null && hisdList[0].ID.Value != '0' ?
-										hisdList.sort((a:any, b:any) => {
+										(hisdList as any[]).sort((a:any, b:any) => {
 											var id1 = parseInt(a.HLCSortOrder.Value);
 											var id2 = parseInt(b.HLCSortOrder.Value);
 
