@@ -10,7 +10,9 @@ import * as $ from "jquery";
 import componentData from '../utils/componentData';
 import eventEmitter from '../utils/eventEmitter';
 
-class HlcItemStatusDates extends React.Component<any, any> {
+type HlcItemStatusDatesProps = ApplicationState;
+
+class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 	componentDescriptor: ComponentDescriptor = {
     name: 'HlcItemStatusDates',
     returnObjectIndexed: false,
