@@ -8,6 +8,7 @@ import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 import * as $ from "jquery";
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
 
 class HlcItemStatusDates extends React.Component<any, any> {
 	componentDescriptor: ComponentDescriptor = {
@@ -51,7 +52,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 		componentData(this.componentDescriptor, 'GetData');
   }
   componentWillUnmount() {
-    this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
+    eventEmitter.removeListener('ItemStatusDatesRefresh');
   }
 	upsertSubmitChange(hlcItemStatusDate: any) {
 

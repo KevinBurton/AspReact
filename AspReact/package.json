@@ -45,7 +45,6 @@
   "dependencies": {
     "@types/jquery": "^3.3.10",
     "@types/toastr": "^2.1.35",
-    "events": "^3.0.0",
     "toastr": "^2.1.4"
   }
 }

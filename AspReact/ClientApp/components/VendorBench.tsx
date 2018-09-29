@@ -59,10 +59,9 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['VendorId'] = vendor.VendorId.Value;
 
-        var self = this;
-        this.componentDescriptor.onComponentOperationComplete = () => {
-            self.props.eventEmitter.emitEvent('ReviewerRefresh', [self.props.itemId]);
-            self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
+         this.componentDescriptor.onComponentOperationComplete = () => {
+            this.props.eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
+            this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
         };
 
         componentData(this.componentDescriptor, 'Delete');
@@ -79,7 +78,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
                         <ComboBox
                             id="vendorList"
                             name="vendorList"
-                            onSelect={(selectedItem) => this.upsertChange(selectedItem) }
+                            onSelect={(selectedItem:any) => this.upsertChange(selectedItem) }
                             url="/GenericApiHelper/GetVendors"
                             dataTextField="VendorNmTxt"
                             dataValueField="VendorId"
