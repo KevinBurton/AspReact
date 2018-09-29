@@ -4,6 +4,7 @@ import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import { ApplicationState }  from '../store';
 import * as OwnerBenchStore from '../store/OwnerBench';
+import componentData from '../utils/componentData';
 
 
 export interface OwnerBenchProps {
@@ -23,7 +24,7 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
             }
         }
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
     },
 
 
@@ -33,7 +34,7 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
             this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
             this.componentDescriptor.dataDictionary["ItemAuthorTypeId"] = '2';
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
             this.props.eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
             this.props.eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);
         }
@@ -45,7 +46,7 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
             this.componentDescriptor.dataDictionary['EmployeeId'] = Owner.EmployeeId.Value;
             this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
             this.componentDescriptor.dataDictionary['ItemAuthorTypeId'] = "MakePrimary";
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
 
     },
@@ -56,7 +57,7 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['EmployeeId'] = Owner.EmployeeId.Value;
 
-        this.props.componentData(this.componentDescriptor, 'Delete');
+        componentData(this.componentDescriptor, 'Delete');
 
         this.props.eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
         this.props.eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);

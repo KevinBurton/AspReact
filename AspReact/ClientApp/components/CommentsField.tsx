@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { TextArea, Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as CommentsStore from '../store/Comments';
+import componentData from '../utils/componentData';
 
 export interface CommentsFieldProps {
     getComponentData: (component: Object) => void;
@@ -34,7 +35,7 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             Comments: this.props.Comments.Comments.Value
         };
 
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
         // Bindings
         this.upsertChange = this.upsertChange.bind(this);
@@ -50,7 +51,7 @@ class Comments extends React.Component<CommentsFieldProps, any> {
 
     upsertChange(e) {
         this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     }
 
     handleChange(e) {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
+import componentData from '../utils/componentData';
 
 export interface ReviewerAddProps {
     ReviewerAdd?: Object;
@@ -20,12 +21,7 @@ export const ReviewerAddComponent = React.createClass<ReviewerAddProps, any>({
 
 
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
-
-    },
-
-    componentWillUnmount() {
-
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -40,7 +36,7 @@ export const ReviewerAddComponent = React.createClass<ReviewerAddProps, any>({
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = '1';
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
 
             this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
 

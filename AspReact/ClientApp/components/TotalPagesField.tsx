@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Input, Label } from './Form';
+import componentData from '../utils/componentData';
 
 
 export interface TotalPagesProps {
@@ -33,7 +34,7 @@ export const TotalPagesComponent = React.createClass<TotalPagesProps, any>({
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.TotalPagesField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -51,7 +52,7 @@ export const TotalPagesComponent = React.createClass<TotalPagesProps, any>({
         this.componentDescriptor.dataDictionary['TotalPages'] = e.target.value;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.TotalPagesField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     handleChange(e) {

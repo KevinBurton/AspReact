@@ -5,6 +5,7 @@ import EmployeePicker from './EmployeePicker';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as ReviewerBenchStore from '../store/ReviewerBench';
+import componentData from '../utils/componentData';
 
 export interface ReviewerBenchProps {
     ReviewerBench?: Object;
@@ -23,14 +24,13 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
 
 
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
-        const self = this;
         this.props.eventEmitter.addListener('ReviewerRefresh', (itemId: number) => {
-            var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+            var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                 dataDictionary: { ItemId: itemId }
             });
-           self.props.componentData(componentDescriptor, 'GetData');
+            componentData(componentDescriptor, 'GetData');
         });
 
     },
@@ -48,12 +48,11 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = '1';
 
-            var self = this;
             this.componentDescriptor.onComponentOperationComplete = () => {
-                self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
+                this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
             };
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
     },
 
@@ -69,11 +68,10 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
             this.componentDescriptor.dataDictionary["EmployeeId"] = Reviewer.EmployeeId.Value;
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = Reviewer.ItemReviewerTypeId.Value;
 
-            var self = this;
             this.componentDescriptor.onComponentOperationComplete = () => {
-                self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
+                this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
             };
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
 
         }
     },
@@ -89,7 +87,7 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
             this.componentDescriptor.onComponentOperationComplete = () => {
                 self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
             };
-            this.props.componentData(this.componentDescriptor, 'Delete');
+            componentData(this.componentDescriptor, 'Delete');
         }
     },
     getNames: function (DelegateNames: string) {

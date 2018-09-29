@@ -5,6 +5,7 @@ import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import { ApplicationState }  from '../store';
 import * as SpeakerBenchStore from '../store/SpeakerBench';
+import componentData from '../utils/componentData';
 
 export interface SpeakerBenchProps {
     SpeakerBench?: Object;
@@ -21,7 +22,7 @@ export const SpeakerBench = React.createClass<SpeakerBenchProps, any>({
             }
         }
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -30,7 +31,7 @@ export const SpeakerBench = React.createClass<SpeakerBenchProps, any>({
             this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
     },
 
@@ -40,7 +41,7 @@ export const SpeakerBench = React.createClass<SpeakerBenchProps, any>({
             this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.EmployeeId.Value;
 
-            this.props.componentData(this.componentDescriptor, 'Delete');
+            componentData(this.componentDescriptor, 'Delete');
         }
     },
 

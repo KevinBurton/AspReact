@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
+import componentData from '../utils/componentData';
 
 
 export interface SeriesDefinitionProps {
@@ -34,19 +35,15 @@ export const SeriesDefinitionComponent = React.createClass<SeriesDefinitionProps
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
-    componentDidMount() {
-
-    },
-
-    upsertChange: function (e) {
+    upsertChange: function (e: any) {
         this.componentDescriptor.dataDictionary['SeriesDefinitionId'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.SeriesDefinition.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

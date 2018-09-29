@@ -1,7 +1,9 @@
 import { ComponentDescriptor } from '../models/componentDescriptor';
 import * as ajax from '../utils/ajax';
+import objectAssign from '../utils/objectAssign';
+import * as toastr from 'toastr'
 
-export const componentData = (componentDescriptor: ComponentDescriptor, operation: string) => {
+export default function componentData(componentDescriptor: ComponentDescriptor, operation: string): Function {
   return (dispatch: Function, getState: Function) => {
       const state = getState();
       const { itemId } = state;
@@ -47,4 +49,4 @@ export const componentData = (componentDescriptor: ComponentDescriptor, operatio
               console.error("could not retrieve data for item id ");
           });
   };
-};
+}

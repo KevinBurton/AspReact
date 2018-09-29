@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import CheckBox from './CheckBox';
+import componentData from '../utils/componentData';
 
 
 export interface NeedsExternalReviewFieldProps {
@@ -33,7 +34,7 @@ export const NeedsExternalReviewFieldComponent = React.createClass<NeedsExternal
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.NeedsExternalReviewField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -41,7 +42,7 @@ export const NeedsExternalReviewFieldComponent = React.createClass<NeedsExternal
         this.componentDescriptor.dataDictionary['NeedsExternalReviewFlg'] = this.props.NeedsExternalReviewField.NeedsExternalReviewFlg.Value == 'N' ? 'Y' : 'N';
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.NeedsExternalReviewField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/componentDescriptor';
 import { TextArea, Label } from './Form';
+import componentData from '../utils/componentData';
 
 
 
@@ -32,7 +33,7 @@ componentWillMount() {
 		}
 	}
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
 
 
@@ -47,7 +48,7 @@ upsertChange : function (e: any)
 	{
 
 
-		this.props.componentData(this.componentDescriptor, 'Upsert');
+		componentData(this.componentDescriptor, 'Upsert');
 
 	}
 
@@ -67,7 +68,7 @@ componentDidUpdate : function (e: any)
 	{
 
 
-		this.props.componentData(this.componentDescriptor, 'Upsert');
+		componentData(this.componentDescriptor, 'Upsert');
 
 	}
 

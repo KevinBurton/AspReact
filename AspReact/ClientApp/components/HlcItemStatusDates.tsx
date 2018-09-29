@@ -7,6 +7,7 @@ import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 import * as $ from "jquery";
+import componentData from '../utils/componentData';
 
 class HlcItemStatusDates extends React.Component<any, any> {
 	componentDescriptor: ComponentDescriptor = {
@@ -45,9 +46,9 @@ class HlcItemStatusDates extends React.Component<any, any> {
         var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
-        this.props.componentData(componentDescriptor, 'GetData');
+        componentData(componentDescriptor, 'GetData');
     });
-		this.props.componentData(this.componentDescriptor, 'GetData');
+		componentData(this.componentDescriptor, 'GetData');
   }
   componentWillUnmount() {
     this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
@@ -72,7 +73,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
         this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
         this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
-		this.props.componentData(this.componentDescriptor, 'Submit');
+		componentData(this.componentDescriptor, 'Submit');
 	}
 
 	upsertPromoteChange(hlcItemStatusDate: any) {
@@ -95,7 +96,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
             this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
         };
 
-		this.props.componentData(this.componentDescriptor, 'Promote');
+		componentData(this.componentDescriptor, 'Promote');
 	}
  	upsertPromoteWithModalChange(hlcItemStatusDate: any) {
 		$(this.modalSelector).modal('show');
@@ -121,7 +122,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
             this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 
-		this.props.componentData(this.componentDescriptor, 'Demote');
+		componentData(this.componentDescriptor, 'Demote');
 	}
 
 	upsertDateChange(date: any, hlcItemStatusDate: any) {
@@ -139,7 +140,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 			this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = hlcItemStatusDate.ItemStatusDateTypeId.Value;
 			this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
 
-			this.props.componentData(this.componentDescriptor, 'Upsert');
+			componentData(this.componentDescriptor, 'Upsert');
 	}
 
 	getFormattedDate(date: string) {
@@ -180,7 +181,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 							<table>
 								<tbody>
                                     {typeof (hisdList[0]) !== 'undefined' && typeof (hisdList[0].ID.Value) !== 'undefined' && hisdList[0].ID.Value != null && hisdList[0].ID.Value != '0' ?
-										hisdList.sort((a, b) => {
+										hisdList.sort((a:any, b:any) => {
 											var id1 = parseInt(a.HLCSortOrder.Value);
 											var id2 = parseInt(b.HLCSortOrder.Value);
 
@@ -287,8 +288,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 export default connect(
     (state: ApplicationState) => { // Selects which state properties are merged into the component's props
                                    return { hlcItemStatusDates: state.hlcItemStatusDates,
-                                            eventEmitter: state.eventEmitter,
-                                            componentData: state.componentData };
+                                            eventEmitter: state.eventEmitter};
                                   },
     HlcItemStatusDatesStore.actionCreators                      // Selects which action creators are merged into the component's props
 )(HlcItemStatusDates) as typeof HlcItemStatusDates;

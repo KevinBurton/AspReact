@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import DropdownStrings from './DropdownStrings';
+import componentData from '../utils/componentData';
 
 
 export interface LanguageProps {
@@ -34,7 +35,7 @@ export const LanguageComponent = React.createClass<LanguageProps, any>({
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.LanguageField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -52,7 +53,7 @@ export const LanguageComponent = React.createClass<LanguageProps, any>({
         this.componentDescriptor.dataDictionary['Language'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.LanguageField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

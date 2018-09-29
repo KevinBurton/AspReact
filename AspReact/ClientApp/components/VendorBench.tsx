@@ -4,18 +4,16 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import ComboBox from './kendo/ComboBox';
+import componentData from '../utils/componentData';
 
 
-export interface Vendor {
+interface Vendor {
     Id: number;
     VendorNmTxt: string;
     VendorId: string;
 }
 
 export interface VendorBenchProps {
-    getComponentData: (component: Object) => void;
-    componentDescriptor: ComponentDescriptor;
-    VendorBench: Object;
 }
 
 const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
@@ -33,7 +31,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
             }
         }
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
     },
 
     upsertChange: function (vendor: any) {
@@ -48,7 +46,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
                 self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
             };
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
 
         this.props.eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
@@ -67,7 +65,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
             self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
         };
 
-        this.props.componentData(this.componentDescriptor, 'Delete');
+        componentData(this.componentDescriptor, 'Delete');
     },
 
 

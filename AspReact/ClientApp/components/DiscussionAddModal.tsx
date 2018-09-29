@@ -14,7 +14,7 @@ interface DiscussionAddModalState {
 	replyCompleted: boolean;
 };
 
-export interface DiscussionAddModalProps {
+interface DiscussionAddModalProps {
 
 	discussionToAdd: Object;
 	discussionToAddToProps: Object;
@@ -48,13 +48,13 @@ export const DiscussionAddModalComponent = React.createClass<DiscussionAddModalP
 		});
 	},
 
-	onCommentChange(e) {
+	onCommentChange(e:any) {
 		this.setState({
 			commentDetail: e.editor.getData()
 		});
 	},
 
-	upsertChange: function (e) {
+	upsertChange: function (e:any) {
 		this.props.discussionToAddToComponentDescriptor.dataDictionary['ID'] = '';
 		this.props.discussionToAddToComponentDescriptor.dataDictionary['ItemId'] = this.props.discussionToAddToProps.itemId;
 		this.props.discussionToAddToComponentDescriptor.dataDictionary['CommentDetail'] = encodeURIComponent(this.state.commentDetail.trim());
@@ -109,7 +109,7 @@ export const DiscussionAddModalComponent = React.createClass<DiscussionAddModalP
 	}
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
 	if (!state) {
 		const { itemId } = state;
 

@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
+import componentData from '../utils/componentData';
 
 
 export interface IndustryFieldProps {
@@ -34,7 +35,7 @@ export const IndustryFieldComponent = React.createClass<IndustryFieldProps, any>
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.IndustryField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -52,7 +53,7 @@ export const IndustryFieldComponent = React.createClass<IndustryFieldProps, any>
         this.componentDescriptor.dataDictionary['IndustryId'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.IndustryField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

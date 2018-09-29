@@ -4,9 +4,9 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import DropdownStrings from './DropdownStrings';
+import componentData from '../utils/componentData';
 
-
-export interface ContentMaturityProps {
+interface ContentMaturityProps {
 
     getComponentData: (component: Object) => void;
     ContentMaturityField: Object;
@@ -34,7 +34,7 @@ export const ContentMaturityComponent = React.createClass<ContentMaturityProps, 
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ContentMaturityField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -46,7 +46,7 @@ export const ContentMaturityComponent = React.createClass<ContentMaturityProps, 
         this.componentDescriptor.dataDictionary['ContentMaturity'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ContentMaturityField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

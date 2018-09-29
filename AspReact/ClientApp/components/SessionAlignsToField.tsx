@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
+import componentData from '../utils/componentData';
 
 
 export interface SessionAlignsToProps {
@@ -34,11 +35,7 @@ export const SessionAlignsToComponent = React.createClass<SessionAlignsToProps, 
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.SessionAlignsToField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
-
-    },
-
-    componentDidMount() {
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -46,7 +43,7 @@ export const SessionAlignsToComponent = React.createClass<SessionAlignsToProps, 
         this.componentDescriptor.dataDictionary['NewnessCategoryId'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.SessionAlignsToField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import Dropdown from './Dropdown';
+import componentData from '../utils/componentData';
 
 export interface ResearchElementTypeFieldProps {
 
@@ -33,7 +34,7 @@ export const ResearchElementTypeFieldComponent = React.createClass<ResearchEleme
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ResearchElementTypeField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -47,11 +48,11 @@ export const ResearchElementTypeFieldComponent = React.createClass<ResearchEleme
         }
     },
 
-    upsertChange: function (e) {
+    upsertChange: function (e:any) {
         this.componentDescriptor.dataDictionary['ResearchElementTypeId'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ResearchElementTypeField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

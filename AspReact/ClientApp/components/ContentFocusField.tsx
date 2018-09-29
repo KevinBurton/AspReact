@@ -4,6 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import DropdownStrings from './DropdownStrings';
+import componentData from '../utils/componentData';
 
 export interface ContentFocusProps {
 
@@ -33,7 +34,7 @@ export const ContentFocusComponent = React.createClass<ContentFocusProps, any>({
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ContentFocusField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
@@ -45,7 +46,7 @@ export const ContentFocusComponent = React.createClass<ContentFocusProps, any>({
         this.componentDescriptor.dataDictionary['ContentFocus'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.ContentFocusField.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as ResearchAgendaStore from '../store/ResearchAgenda';
+import componentData from '../utils/componentData';
 
 export interface ResearchAgendaProps {
     ResearchAgenda?: Object;
@@ -23,14 +24,13 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
         }
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
-        const self = this;
         this.props.eventEmitter.addListener('ResearchAgendaRefresh', (itemId: number) => {
-            var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+            var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                 dataDictionary: { ItemId: itemId }
             });
-            self.props.componentData(componentDescriptor, 'GetData');
+            componentData(componentDescriptor, 'GetData');
         });
     },
     componentWillUnmount() {
@@ -48,7 +48,7 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
                 self.props.eventEmitter.emitEvent('ReviewerRefresh', [self.props.itemId]);
                 self.props.eventEmitter.emitEvent('QVRRefresh', [self.props.itemId]);
             };
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
     },
 
@@ -56,7 +56,7 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
         this.componentDescriptor.dataDictionary['ID'] = agenda.ID.Value;
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['AgendaId'] = agenda.AgendaId.Value;
-        this.props.componentData(this.componentDescriptor, 'Delete');
+        componentData(this.componentDescriptor, 'Delete');
 
     },
 
@@ -68,7 +68,7 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
             this.componentDescriptor.dataDictionary["ID"] = '0';
             this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
             this.componentDescriptor.dataDictionary["PrimaryFlag"] = "N";
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
         }
     },
     render() {

@@ -5,6 +5,7 @@ import Rating from './Rating';
 import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as QVRBenchStore from '../store/QVRBench';
+import componentData from '../utils/componentData';
 
 export interface QVRBenchProps {
     QVRBench?: Object;
@@ -22,16 +23,15 @@ export const QVRBench = React.createClass<QVRBenchProps, any>({
             }
         }
 
-        const self = this;
         this.props.eventEmitter.addListener('QVRRefresh', (itemId: number) => {
-            var componentDescriptor = objectAssign({}, self.componentDescriptor, {
+            var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                dataDictionary: { ItemId: itemId }
             });
-            self.props.componentData(componentDescriptor, 'GetData');
+            componentData(componentDescriptor, 'GetData');
         });
 
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
     },
 
     componentWillUnmount() {
@@ -49,7 +49,7 @@ export const QVRBench = React.createClass<QVRBenchProps, any>({
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = '1';
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
 
         }
     },
@@ -63,7 +63,7 @@ export const QVRBench = React.createClass<QVRBenchProps, any>({
             this.componentDescriptor.dataDictionary["Rating"] = rating.toString();
             this.componentDescriptor.dataDictionary["EmployeeId"] = Reviewer.EmployeeId.Value;
 
-            this.props.componentData(this.componentDescriptor, 'Upsert');
+            componentData(this.componentDescriptor, 'Upsert');
 
         }
     },

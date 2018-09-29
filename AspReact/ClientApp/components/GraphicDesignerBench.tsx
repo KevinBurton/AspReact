@@ -4,8 +4,9 @@ import EmployeePicker from './EmployeePicker';
 import { Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as GraphicDesignerBenchStore from '../store/GraphicDesignerBench';
+import componentData from '../utils/componentData';
 
-export interface GraphicDesignerBenchProps {
+interface GraphicDesignerBenchProps {
     GraphicDesignerBench?: Object;
 }
 
@@ -24,7 +25,7 @@ const GraphicDesignerBench = React.createClass<GraphicDesignerBenchProps, any>({
             }
         }
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
     },
 
 
@@ -36,7 +37,7 @@ const GraphicDesignerBench = React.createClass<GraphicDesignerBenchProps, any>({
 
         this.componentDescriptor.dataDictionary['EmployeeId'] = employee.id;
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
 
     },
 
@@ -45,7 +46,7 @@ const GraphicDesignerBench = React.createClass<GraphicDesignerBenchProps, any>({
         this.componentDescriptor.dataDictionary['ID'] = GraphicDesigner.ID.Value;
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['EmployeeId'] = GraphicDesigner.EmployeeId.Value;
-        this.props.componentData(this.componentDescriptor, 'Delete');
+        componentData(this.componentDescriptor, 'Delete');
     },
 
 

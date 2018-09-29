@@ -6,12 +6,11 @@ import DiscussionDetail from './DiscussionDetail';
 import DiscussionAddModal from './DiscussionAddModal';
 import { ApplicationState }  from '../store';
 import * as DiscussionStore from '../store/Discussion';
-import * as $ from "jquery";
 
-export interface DiscussionProps {
-	Discussion?: Object;
-	componentData?: (a:ComponentDescriptor, b:string) => void;
-}
+import * as $ from 'jquery';
+import componentData from '../utils/componentData';
+
+type DiscussionProps = ApplicationState;
 
 class Discussion extends React.Component<DiscussionProps, any> {
  	componentDescriptor: any;
@@ -28,7 +27,7 @@ class Discussion extends React.Component<DiscussionProps, any> {
 	}
 
 	componentWillMount() {
-		this.props.componentData(this.componentDescriptor, 'GetData');
+    componentData(this.componentDescriptor, 'GetData');
 	}
 
 	openAdd() {
@@ -37,7 +36,7 @@ class Discussion extends React.Component<DiscussionProps, any> {
 
 	render() {
 
-		const Discussion = this.props.Discussion;
+		const Discussion = this.props.discussion;
 		return (
 			<div id="Discussion">
 				<div className="form-group">
@@ -49,8 +48,8 @@ class Discussion extends React.Component<DiscussionProps, any> {
 						Add Comment
 					</button>
 					<div>
-						{Discussion && (<any[]>Discussion)[0] && Discussion[0].ID.Value != '0' ?
-							Discussion.map((Discussion: any) => (
+						{Discussion && (Discussion as any[])[0] && Discussion[0].ID.Value != '0' ?
+							(Discussion as any[]).map((Discussion: any) => (
 								<div key={Discussion.ID.Value}>
 									{Discussion.ParentId.Value == '' ?
                                         <span>

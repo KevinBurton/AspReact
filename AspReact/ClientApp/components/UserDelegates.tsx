@@ -1,5 +1,6 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
+import componentData from '../utils/componentData';
 
 export interface UserDelegatesProps {
     UserDelegates?: Object;
@@ -26,7 +27,7 @@ export const UserDelegatesComponent = React.createClass<UserDelegatesProps, any>
         }
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 

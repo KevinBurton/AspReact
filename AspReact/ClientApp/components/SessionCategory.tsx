@@ -5,6 +5,7 @@ import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import HelpButton from './HelpButton';
 import Dropdown from './Dropdown';
+import componentData from '../utils/componentData';
 
 const sessCategoryHelpText = "Session Category is required to create an idea or submit a session. Session Category defines the type of session going to be presented. You can find out more about session categories by clicking <a href='http://share.gartner.com/share/page/site/respub/document-details?nodeRef=workspace://SpacesStore/08610bd8-dee2-4f03-9d93-22a949f38133'>here</a>. If you have further questions, contact <a href='mailto:research.events@gartner.com'>Research Events</a>.";
 
@@ -36,19 +37,15 @@ export const SessionCategoryComponent = React.createClass<SessionCategoryProps, 
 
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
 
     },
 
-    componentDidMount() {
-
-    },
-
-    upsertChange: function (e) {
+    upsertChange: function (e: any) {
         this.componentDescriptor.dataDictionary['SessionCategoryId'] = e;
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         this.componentDescriptor.dataDictionary["ID"] = this.props.SessionCategory.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
     },
 
     render() {

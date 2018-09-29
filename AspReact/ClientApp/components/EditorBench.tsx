@@ -4,6 +4,7 @@ import EmployeePicker from './EmployeePicker';
 import { Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as EditorBenchStore from '../store/EditorBench';
+import componentData from '../utils/componentData';
 
 export interface EditorBenchProps {
     EditorBench?: Object;
@@ -24,7 +25,7 @@ const EditorBench = React.createClass<EditorBenchProps, any>({
             }
         }
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.props.componentData(this.componentDescriptor, 'GetData');
+        componentData(this.componentDescriptor, 'GetData');
     },
 
     upsertChange: function (employee: any) {
@@ -32,7 +33,7 @@ const EditorBench = React.createClass<EditorBenchProps, any>({
         this.componentDescriptor.dataDictionary['EmployeeId'] = employee.id;
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         this.componentDescriptor.dataDictionary['ID'] = this.props.EditorBench.ID.Value;
-        this.props.componentData(this.componentDescriptor, 'Upsert');
+        componentData(this.componentDescriptor, 'Upsert');
 
     },
 
