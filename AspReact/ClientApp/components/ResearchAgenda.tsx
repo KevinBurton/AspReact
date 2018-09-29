@@ -4,6 +4,8 @@ import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as ResearchAgendaStore from '../store/ResearchAgenda';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
+
 
 export interface ResearchAgendaProps {
     ResearchAgenda?: Object;
@@ -26,7 +28,7 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
         this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
         componentData(this.componentDescriptor, 'GetData');
 
-        this.props.eventEmitter.addListener('ResearchAgendaRefresh', (itemId: number) => {
+        eventEmitter.addListener('ResearchAgendaRefresh', (itemId: number) => {
             var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                 dataDictionary: { ItemId: itemId }
             });
@@ -34,7 +36,7 @@ export const ResearchAgenda = React.createClass<ResearchAgendaProps, any>({
         });
     },
     componentWillUnmount() {
-        this.props.eventEmitter.removeListener('ResearchAgendaRefresh');
+        eventEmitter.removeListener('ResearchAgendaRefresh');
     },
     makePrimary: function (Agenda: any) {
         if (Agenda != "") {

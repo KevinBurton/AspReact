@@ -5,6 +5,7 @@ import { IOption } from '../models/IOption';
 import { Label } from './Form';
 import ComboBox from './kendo/ComboBox';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
 
 
 interface Vendor {
@@ -49,7 +50,7 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
             componentData(this.componentDescriptor, 'Upsert');
         }
 
-        this.props.eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
 
     },
 
@@ -60,8 +61,8 @@ const VendorBenchComponent = React.createClass<VendorBenchProps, any>({
         this.componentDescriptor.dataDictionary['VendorId'] = vendor.VendorId.Value;
 
          this.componentDescriptor.onComponentOperationComplete = () => {
-            this.props.eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ReviewerRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
         };
 
         componentData(this.componentDescriptor, 'Delete');

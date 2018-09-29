@@ -5,8 +5,6 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { TextArea, Label } from './Form';
 import componentData from '../utils/componentData';
 
-
-
 export interface CopyrightPermissionsFieldProps {
     getComponentData: (component: Object) => void;
     CopyrightPermissionsField: Object;
@@ -106,9 +104,6 @@ return (
     if (!state.CopyrightPermissionsField) {
         return {
             itemId: state.itemId,
-
-			eventEmitter: state.eventEmitter,
-
             CopyrightPermissionsField: [{
 
 			ItemId: {	Value: '' }
@@ -120,9 +115,6 @@ return (
 
 	 return {
         itemId: state.itemId,
-
-		eventEmitter: state.eventEmitter,
-
         CopyrightPermissionsField: state.CopyrightPermissionsField
     };
 };

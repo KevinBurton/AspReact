@@ -43,7 +43,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
   componentWillMount() {
     // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-    this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
+    eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
         var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
@@ -71,8 +71,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-        this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-        this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 		componentData(this.componentDescriptor, 'Submit');
 	}
@@ -93,8 +93,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
         };
 
 		componentData(this.componentDescriptor, 'Promote');
@@ -119,8 +119,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 
 		componentData(this.componentDescriptor, 'Demote');

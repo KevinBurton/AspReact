@@ -6,6 +6,8 @@ import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as ReviewerBenchStore from '../store/ReviewerBench';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
+
 
 export interface ReviewerBenchProps {
     ReviewerBench?: Object;
@@ -26,7 +28,7 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
         this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
         componentData(this.componentDescriptor, 'GetData');
 
-        this.props.eventEmitter.addListener('ReviewerRefresh', (itemId: number) => {
+        eventEmitter.addListener('ReviewerRefresh', (itemId: number) => {
             var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                 dataDictionary: { ItemId: itemId }
             });
@@ -35,7 +37,7 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
 
     },
     componentWillUnmount() {
-        this.props.eventEmitter.removeListener('ReviewerRefresh');
+        eventEmitter.removeListener('ReviewerRefresh');
     },
     upsertChange(employee: any) {
         if (employee != '') {
@@ -49,7 +51,7 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = '1';
 
             this.componentDescriptor.onComponentOperationComplete = () => {
-                this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
+                eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
             };
 
             componentData(this.componentDescriptor, 'Upsert');
@@ -69,7 +71,7 @@ export const ReviewerBench = React.createClass<ReviewerBenchProps, any>({
             this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = Reviewer.ItemReviewerTypeId.Value;
 
             this.componentDescriptor.onComponentOperationComplete = () => {
-                this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
+                eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
             };
             componentData(this.componentDescriptor, 'Upsert');
 

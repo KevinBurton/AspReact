@@ -23,7 +23,6 @@ import * as PQFModal from './PQFModal'
 // The top-level state object
 export interface ApplicationState {
     itemId: number;
-    eventEmitter: EventEmitter;
     reviewApproved: PQFModal.PQFModalState;
     hlcSessionFileDetails: HlcSessionFileDetails.HlcSessionFileDetailsState;
     comments: Comments.CommentsState;
