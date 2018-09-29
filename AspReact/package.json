@@ -45,6 +45,7 @@
   "dependencies": {
     "@types/jquery": "^3.3.10",
     "@types/toastr": "^2.1.35",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "wolfy87-eventemitter": "^5.2.5"
   }
 }

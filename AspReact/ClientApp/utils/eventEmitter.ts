@@ -1,6 +1,6 @@
 
-import {EventEmitter} from 'events'
+var EventEmitter = require('wolfy87-eventemitter');
 
-let eventEmitter:  EventEmitter = new EventEmitter();
+let eventEmitter = new EventEmitter();
 
 export default eventEmitter;
