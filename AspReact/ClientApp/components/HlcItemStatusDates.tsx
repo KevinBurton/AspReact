@@ -10,7 +10,8 @@ import * as $ from "jquery";
 import componentData from '../utils/componentData';
 import eventEmitter from '../utils/eventEmitter';
 
-type HlcItemStatusDatesProps = ApplicationState;
+type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
+                               typeof HlcItemStatusDatesStore.actionCreators;
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   HlcItemStatusDatesHelpText:string = "Status dates are based on the event currently selected for the session. When there is no event selected, all status dates will be blank. You will see the event-specific target dates for: promote to Peer Review, promote to Management Review, promote to Editing, and Complete date. Once a session is submitted for approval, the Status Dates section will show approvals and promotions of the session throughout the workflow process.";
