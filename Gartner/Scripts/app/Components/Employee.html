@@ -1,0 +1,52 @@
+﻿<div class="panel panel-default" >
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion-backups"
+			   data-bind="attr : { href : '#collapseSection' + sectionType()}, click: clearEmployeeInformation">
+				<span class="title" data-bind="text:heading()"></span>
+				<span class="badge badge-info pull-right" data-bind="text:selectedEmployees().length"></span>
+			</a> <a class="icon-help" href="#" id=""></a>
+		</h4>
+	</div>
+	<div data-bind="attr : { id : 'collapseSection' + sectionType()}" class="panel-collapse collapse">
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="input-group">
+					<input data-bind="attr : { id : employeeInputId, name : employeeInputId }, value: selectedEmployee" type="text" />
+					<div class="input-group-btn">
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-primary" data-bind="click: addEmployee, attr : { id : sectionType() + 'AddButton'}">Add</button>
+						</div>
+					</div>
+				</div>
+				<div data-bind="if: selectedEmployees().length > 0">
+					<h5><span data-bind="text:caption"></span></h5>
+					<div class="table-responsive">
+						<table class="table table-condensed last" data-bind="attr : { id : 'employee-selections' + sectionType()}">
+							<thead>
+								<tr>
+									<th>Employee Name</th>
+									<th>Employee ID</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody data-bind="foreach: selectedEmployees">
+								<tr>
+									<td data-bind="text: EmployeeName"></td>
+									<td data-bind="text: EmployeeId"></td>
+									<td class="text-right">
+										<button type="button" class="btn btn-xs btn-custom " data-bind="click: $parent.removeEmployee">
+											<span class="icon-trash"></span>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

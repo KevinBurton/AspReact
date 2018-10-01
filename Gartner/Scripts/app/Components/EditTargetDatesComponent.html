@@ -1,0 +1,16 @@
+﻿<div class="modal-body">
+	<div>
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Target Date to Publish <span class="orange">*</span> <a class="icon-help pull-right" href="#"></a></label>
+				<div class="col-sm-10">
+					<input type="date" tabindex="1" class="form-control" id="targetDateToPublish" placeholder="Add a target date to publish" data-bind="value: targetDateToPublish" max="2000">
+				</div>
+			</div>
+		</form>		
+	</div>
+</div>
+<div class="modal-footer">
+	<!--<button id="cancelSave" type="button" class="btn btn-default" data-bind="enable: !isSaving(), click: cancel">Cancel</button>-->
+	<button id="saveInformation" tabindex="3" type="button" class="btn btn-primary" data-bind="click: save, text: isSaving() ? 'Saving...' : 'Save', enable: canSave()">Save</button>
+</div>

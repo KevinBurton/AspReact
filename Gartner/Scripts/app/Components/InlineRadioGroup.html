@@ -1,0 +1,9 @@
+﻿<!-- ko foreach: items -->
+<label class="radio radio-inline" data-bind="click: $parent.select, css: { checked: selected }">
+	<span class="icons">
+		<span class="first-icon fui-radio-unchecked"></span>
+		<span class="second-icon fui-radio-checked"></span>
+	</span>
+	<span data-bind="text: text()"></span>
+</label>
+<!-- /ko -->

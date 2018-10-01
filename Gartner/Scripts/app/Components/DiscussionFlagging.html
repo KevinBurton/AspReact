@@ -1,0 +1,17 @@
+﻿<div class="form-group critical-block">
+	<div id="need-author-attention">
+		<!-- ko if: needAuthorAttentionVisible -->
+		<checkbox params="text: needAuthorAttentionText, checked: needAuthorAttention"></checkbox>
+		<!-- /ko -->
+	</div>
+	<div id="need-author-attention-resolved">
+		<!-- ko if: commentResolvedVisible -->
+		<checkbox params="text: commentResolvedText, checked: commentResolved"></checkbox>
+		<!-- /ko -->
+	</div>
+	<div id="user-review-completed">
+		<!-- ko if: userReviewOptionVisible-->
+		<checkbox params="text:userReviewText,checked:userReviewCompleted"></checkbox>
+		<!-- /ko -->
+	</div>
+</div>

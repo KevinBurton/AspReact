@@ -1,0 +1,36 @@
+﻿<h4 class="panel-title">
+	<span class="title" data-bind="text:heading()"></span>	
+</h4>
+<div class="input-group">
+	<input data-bind="attr : { id : employeeInputId, name : employeeInputId }, value: selectedEmployee" type="text" />
+	<div class="input-group-btn">
+		<div class="btn-group" role="group">
+			<button type="button" class="btn btn-primary" data-bind="click: addEmployee, attr : { id : sectionType() + 'AddButton'}">Add</button>
+		</div>
+	</div>
+</div>
+<div data-bind="if: selectedEmployees().length > 0">
+	<h5><span data-bind="text:caption"></span></h5>
+	<div class="table-responsive">
+		<table class="table table-condensed last" data-bind="attr : { id : 'employee-selections' + sectionType()}">
+			<thead>
+				<tr>
+					<th>Employee Name</th>
+					<th>Employee ID</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: selectedEmployees">
+				<tr>
+					<td data-bind="text: EmployeeName"></td>
+					<td data-bind="text: EmployeeId"></td>
+					<td class="text-right">
+						<button type="button" class="btn btn-xs btn-custom " data-bind="click: $parent.removeEmployee">
+							<span class="icon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,110 @@
+﻿<div data-bind="visible: isLoading">
+	<span class="loading"></span>
+</div>
+<div data-bind="visible: !isLoading()" style="display: none;">
+	<h4>
+		Edit Agenda
+		<button
+			type="button"
+			id="saveInformationAgenda"
+			class="btn btn-success"
+			data-bind="click: save
+						, text: isSaving() ? 'Saving...' : 'Save'
+						, enable: canSave()">
+			Save
+		</button>
+		<small class="muted-text pull-right">
+			<span class="orange">*</span> Required to submit for approval
+		</small>
+	</h4>
+	<div class="agenda-tabs">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active"><a href="#tab-primary-agenda" aria-controls="tab-primary-agenda" role="tab" data-toggle="tab">Primary Agenda</a></li>
+			<!--<li><a href="#tab-secondary-agenda" aria-controls="tab-secondary-agenda" role="tab" data-toggle="tab">Secondary Agenda</a></li>-->
+		</ul>
+
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane fade in active" id="tab-primary-agenda">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="agenda-combo" class="col-sm-2 control-label">Primary Agenda <span class="orange">*</span> <a class="icon-help pull-right" href="#" id=""></a></label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<input id="agenda-combo" name="agenda-combo" type="text"/>
+								<div class="input-group-btn">
+									<div class="btn-group" role="group">
+										<button id="addAgendaButton" type="button" class="btn btn-gray" data-bind="click: addUpdatePrimaryAgenda, enable: agendaReadyForAdd, text: addButtonText"></button>
+									</div>
+								</div>
+							</div>
+							<small class="help-block">Add the primary agenda you would like to submit this item to. You can have only one primary agenda. To add secondary agendas, click the menu link above.</small>
+						</div>
+					</div>
+				</form>
+				<!-- ko if: primaryAgenda() !== undefined -->
+				<div class="selected-item-block" data-bind="with: primaryAgenda">
+					<h5>Selected Agenda Information</h5>
+					<div class="block">
+						<h6>Primary Agenda</h6>
+						<p>
+							<span data-bind="text: name"></span>
+							<a href="#" title="Delete" data-bind="click: $parent.removeAgenda">&times;</a>
+						</p>
+					</div><!-- end block -->
+
+					<!-- ko if: roles() && roles().length > 0-->
+					<h6>Primary Role <span class="orange">*</span></h6>
+					<form class="form-horizontal" role="form">
+						<inlineradiogroup params="items: roles"></inlineradiogroup>
+					</form>
+					<!-- /ko -->
+					<!-- end block -->
+
+					<div class="block">
+						<h6>Key Initiative(s)/Phase(s) <span class="orange">*</span></h6>
+						<div class="panel-group" data-bind="attr:{ id: 'accordian' + agendaId }">
+							<!-- ko foreach: orderedKeyInitiatives -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a class="accordion-toggle" data-toggle="collapse" data-bind="attr: { 'data-parent': '#accordian' + $parent.agendaId, href: '#panelCollapse' + id }">
+											<span class=" icon-arrow-right">
+											</span>
+											<span data-bind="text: name"></span> 
+											<!-- ko if: primary -->
+											<span class="label label-primary">primary</span>
+											<!-- /ko --> 
+											<span class="pull-right text-muted" data-bind="text: phaseCount"></span>
+										</a>
+									</h4>
+								</div>
+								<div class="panel-collapse collapse" data-bind="attr: { id: 'panelCollapse' + id }">
+									<div class="panel-body">
+										<label class="radio" data-bind="click: $parent.makePrimary, css: { checked: primary }">
+											<span class="icons">
+												<span class="first-icon fui-radio-unchecked"></span>
+												<span class="second-icon fui-radio-checked"></span>
+											</span>
+											Primary Key Initiative
+										</label>
+										<h6>Phase <span class="orange">*</span></h6>
+										<form class="form-compact" role="form">
+											<!-- ko foreach: orderedPhases -->
+											<div class="form-group">
+												<checkbox params="text: text, checked: selected"></checkbox>
+											</div>
+											<!-- /ko -->
+										</form>
+									</div>
+								</div>
+							</div>
+							<!-- /ko -->
+						</div>
+					</div><!-- end block -->
+				</div>
+				<!-- /ko -->
+			</div><!-- end tab-primary-agenda -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="modal-body">
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="content-type-combo" class="col-sm-2 control-label">Content Type<span class="orange">*</span> <a class="icon-help pull-right" href="#"></a></label>
+			<div class="col-sm-10">
+				<input id="content-type-combo" name="content-type-combo" type="text"/>
+			</div>
+		</div>
+	</form>
+	<small class="help-block">Add a Content Type</small>
+	
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="content-subtype-combo" class="col-sm-2 control-label">Content Sub Type<span class="orange">*</span> <a class="icon-help pull-right" href="#"></a></label>
+			<div class="col-sm-10">
+				<input id="content-subtype-combo" name="content-subtype-combo" type="text"/>
+			</div>
+		</div>
+	</form>
+	<small class="help-block">Add a Content Sub Type</small>
+	
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Authoring Language <span class="orange">*</span> <a class="icon-help pull-right" href="#"></a></label>
+			<div class="col-sm-10">
+				<select tabindex="2" class="form-control" name="authoringLanguageDropDown" id="authoringLanguageDropDown" data-bind="value: authoringLanguage">
+					<option value="1">Chinese</option>
+					<option value="2" selected>English</option>
+					<option value="3">Finnish</option>
+					<option value="4">German</option>
+					<option value="5">Japanese</option>
+					<option value="6">Portuguese</option>
+				</select>
+			</div>
+		</div>
+	</form>
+	<small class="help-block">Add an Authoring Language</small>
+</div>
+<div class="modal-footer">
+	<!--<button id="cancelSave" type="button" class="btn btn-default" data-bind="enable: !isSaving(), click: cancel">Cancel</button>-->
+	<button id="saveContentTypeInformation" tabindex="3" type="button" class="btn btn-primary" data-bind="click: save, text: isSaving() ? 'Saving...' : 'Save', enable: canSave()">Save</button>
+</div>
