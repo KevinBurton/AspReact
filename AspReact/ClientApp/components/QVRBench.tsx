@@ -6,6 +6,8 @@ import objectAssign from '../utils/objectAssign';
 import { ApplicationState }  from '../store';
 import * as QVRBenchStore from '../store/QVRBench';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
+
 
 export interface QVRBenchProps {
     QVRBench?: Object;
@@ -23,7 +25,7 @@ export const QVRBench = React.createClass<QVRBenchProps, any>({
             }
         }
 
-        this.props.eventEmitter.addListener('QVRRefresh', (itemId: number) => {
+        eventEmitter.addListener('QVRRefresh', (itemId: number) => {
             var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                dataDictionary: { ItemId: itemId }
             });
@@ -35,7 +37,7 @@ export const QVRBench = React.createClass<QVRBenchProps, any>({
     },
 
     componentWillUnmount() {
-        this.props.eventEmitter.removeListener('QVRRefresh');
+        eventEmitter.removeListener('QVRRefresh');
     },
 
     upsertChange(employee: any) {

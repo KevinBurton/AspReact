@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { ComponentDescriptor } from '../models/generic';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.

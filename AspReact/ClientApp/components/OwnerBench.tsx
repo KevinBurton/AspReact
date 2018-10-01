@@ -5,6 +5,7 @@ import EmployeePicker from './EmployeePicker';
 import { ApplicationState }  from '../store';
 import * as OwnerBenchStore from '../store/OwnerBench';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
 
 
 export interface OwnerBenchProps {
@@ -35,8 +36,8 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
             this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
             this.componentDescriptor.dataDictionary["ItemAuthorTypeId"] = '2';
             componentData(this.componentDescriptor, 'Upsert');
-            this.props.eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);
         }
     },
 
@@ -59,8 +60,8 @@ export const OwnerBench = React.createClass<OwnerBenchProps, any>({
 
         componentData(this.componentDescriptor, 'Delete');
 
-        this.props.eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
-        this.props.eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('QVRReviewerRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ItemStatusDatesRefresh', [this.props.itemId]);
 
     },
     render() {

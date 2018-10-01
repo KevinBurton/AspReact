@@ -10,7 +10,11 @@ import * as $ from "jquery";
 import componentData from '../utils/componentData';
 import eventEmitter from '../utils/eventEmitter';
 
-class HlcItemStatusDates extends React.Component<any, any> {
+type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
+                               typeof HlcItemStatusDatesStore.actionCreators;
+
+class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
+  HlcItemStatusDatesHelpText:string = "Status dates are based on the event currently selected for the session. When there is no event selected, all status dates will be blank. You will see the event-specific target dates for: promote to Peer Review, promote to Management Review, promote to Editing, and Complete date. Once a session is submitted for approval, the Status Dates section will show approvals and promotions of the session throughout the workflow process.";
 	componentDescriptor: ComponentDescriptor = {
     name: 'HlcItemStatusDates',
     returnObjectIndexed: false,
@@ -43,7 +47,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
   componentWillMount() {
     // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-    this.props.eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
+    eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
         var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
@@ -71,8 +75,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-        this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-        this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+        eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 		componentData(this.componentDescriptor, 'Submit');
 	}
@@ -93,8 +97,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
         };
 
 		componentData(this.componentDescriptor, 'Promote');
@@ -119,8 +123,8 @@ class HlcItemStatusDates extends React.Component<any, any> {
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
     this.componentDescriptor.onComponentOperationComplete = () => {
-            this.props.eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            this.props.eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
     };
 
 		componentData(this.componentDescriptor, 'Demote');
@@ -161,7 +165,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 	}
 	public	render() {
 		$(this.modalSelector).modal("hide");
-		const hisdList = this.props.HlcItemStatusDates;
+		const hisdList = this.props.hlcItemStatusDates;
 
         return (
 
@@ -172,7 +176,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 					</div>
 					<div className="actions">
 						<span  className="pull-right" >
-							<HelpButton  title="Item Status Dates"  text={HlcItemStatusDatesHelpText}  /></span>
+							<HelpButton  title="Item Status Dates"  text={this.HlcItemStatusDatesHelpText}  /></span>
 					</div>
 				</div>
 				<div className="portlet-body" id="hlc-status-dates">
@@ -182,7 +186,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 							<table>
 								<tbody>
                                     {typeof (hisdList[0]) !== 'undefined' && typeof (hisdList[0].ID.Value) !== 'undefined' && hisdList[0].ID.Value != null && hisdList[0].ID.Value != '0' ?
-										hisdList.sort((a:any, b:any) => {
+										(hisdList as any[]).sort((a:any, b:any) => {
 											var id1 = parseInt(a.HLCSortOrder.Value);
 											var id2 = parseInt(b.HLCSortOrder.Value);
 
@@ -288,8 +292,7 @@ class HlcItemStatusDates extends React.Component<any, any> {
 // Wire up the React component to the Redux store
 export default connect(
     (state: ApplicationState) => { // Selects which state properties are merged into the component's props
-                                   return { hlcItemStatusDates: state.hlcItemStatusDates,
-                                            eventEmitter: state.eventEmitter};
+                                   return { hlcItemStatusDates: state.hlcItemStatusDates };
                                   },
     HlcItemStatusDatesStore.actionCreators                      // Selects which action creators are merged into the component's props
 )(HlcItemStatusDates) as typeof HlcItemStatusDates;

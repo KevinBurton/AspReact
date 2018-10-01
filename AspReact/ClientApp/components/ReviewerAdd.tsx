@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Label } from './Form';
 import EmployeePicker from './EmployeePicker';
 import componentData from '../utils/componentData';
+import eventEmitter from '../utils/eventEmitter';
+
 
 export interface ReviewerAddProps {
     ReviewerAdd?: Object;
@@ -38,7 +40,7 @@ export const ReviewerAddComponent = React.createClass<ReviewerAddProps, any>({
 
             componentData(this.componentDescriptor, 'Upsert');
 
-            this.props.eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
+            eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
 
         }
     },
