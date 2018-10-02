@@ -8,5 +8,4 @@ export interface ComponentDescriptor {
     returnObjectIndexed: boolean;
     stateFunction: string;
     dataDictionary: {};
-    onComponentOperationComplete: Function;
 }
