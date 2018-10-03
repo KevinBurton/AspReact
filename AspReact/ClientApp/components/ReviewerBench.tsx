@@ -7,16 +7,13 @@ import { ApplicationState }  from '../store';
 import * as ReviewerBenchStore from '../store/ReviewerBench';
 import BackupReviewersModal from './BackupReviewersModal';
 import { ComponentDescriptor } from '../models/componentDescriptor';
-import componentData from '../utils/componentData';
 import eventEmitter from '../utils/eventEmitter';
 import * as $ from "jquery";
 // Import to get rid of modal error
 //https://stackoverflow.com/questions/32735396/error-ts2339-property-modal-does-not-exist-on-type-jquery
 import * as bootstrap from "bootstrap"
 
-type ReviewerBenchProps = {
-    ReviewerBench?: Object;
-} & ApplicationState;
+type ReviewerBenchProps = ReviewerBenchStore.ReviewerBenchState & typeof ReviewerBenchStore.actionCreators;
 
 class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
     componentDescriptor: ComponentDescriptor;
@@ -50,13 +47,13 @@ class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
         };
     }
     componentWillMount() {
-        componentData(this.componentDescriptor, 'GetData');
+        this.props.componentData(this.componentDescriptor, 'GetData');
 
         eventEmitter.addListener('ReviewerRefresh', (itemId: number) => {
             var componentDescriptor = objectAssign({}, this.componentDescriptor, {
                 dataDictionary: { ItemId: itemId }
             });
-            componentData(componentDescriptor, 'GetData');
+            this.props.componentData(componentDescriptor, 'GetData');
         });
 
     }
@@ -74,7 +71,7 @@ class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
 			this.componentDescriptor.dataDictionary["EmployeeId"] = employee.id;
 			this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = '1';
 
-			componentData(this.componentDescriptor, 'Upsert');
+			this.props.componentData(this.componentDescriptor, 'Upsert');
 			eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
 		}
     }
@@ -91,7 +88,7 @@ class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
 			this.componentDescriptor.dataDictionary["EmployeeId"] = Reviewer.EmployeeId.Value;
 			this.componentDescriptor.dataDictionary["ItemReviewerTypeId"] = Reviewer.ItemReviewerTypeId.Value;
 
-			componentData(this.componentDescriptor, 'Upsert');
+			this.props.componentData(this.componentDescriptor, 'Upsert');
             eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
 		}
     }
@@ -103,7 +100,7 @@ class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
 			this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 			this.componentDescriptor.dataDictionary["EmployeeId"] = employee.EmployeeId.Value;
 
-			componentData(this.componentDescriptor, 'Delete');
+			this.props.componentData(this.componentDescriptor, 'Delete');
 			eventEmitter.emitEvent('QVRRefresh', [this.props.itemId]);
 		}
     }
@@ -160,7 +157,7 @@ class ReviewerBench extends React.Component<ReviewerBenchProps, any> {
 
         const getReviewers = (itemReviewerTypeId: any) => {
             return this.props.reviewerBench && this.props.reviewerBench[0].ID.Value != '0' ?
-                (this.props.ReviewerBench as any[])
+                this.props.reviewerBench
                     .filter((Reviewer) => Reviewer.ItemReviewerTypeId.Value === itemReviewerTypeId)
                     .sort(this.reviewersSort)
                 : [];
