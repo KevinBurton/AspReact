@@ -2,6 +2,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import * as ajax from '../utils/ajax';
 import objectAssign from '../utils/objectAssign';
 import * as toastr from 'toastr'
+import receiveComponentData from './receiveComponentData';
 
 export default function componentData(componentDescriptor: ComponentDescriptor, operation: string): Function {
   return (dispatch: Function, getState: Function) => {
@@ -41,7 +42,6 @@ export default function componentData(componentDescriptor: ComponentDescriptor, 
 
               if (!(Object.keys(newObject).length === 0 && newObject.constructor === Object)) {
                   dispatch(receiveComponentData(combinedObject, componentDescriptor));
-                  componentDescriptor.onComponentOperationComplete && componentDescriptor.onComponentOperationComplete();
               }
 
           })

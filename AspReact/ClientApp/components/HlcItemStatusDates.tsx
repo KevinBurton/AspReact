@@ -7,7 +7,6 @@ import * as HlcItemStatusDatesStore from '../store/HlcItemStatusDates';
 import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 import * as $ from "jquery";
-import componentData from '../utils/componentData';
 import eventEmitter from '../utils/eventEmitter';
 
 type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
@@ -15,26 +14,27 @@ type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
 
 class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
   HlcItemStatusDatesHelpText:string = "Status dates are based on the event currently selected for the session. When there is no event selected, all status dates will be blank. You will see the event-specific target dates for: promote to Peer Review, promote to Management Review, promote to Editing, and Complete date. Once a session is submitted for approval, the Status Dates section will show approvals and promotions of the session throughout the workflow process.";
-	componentDescriptor: ComponentDescriptor = {
-    name: 'HlcItemStatusDates',
-    returnObjectIndexed: false,
-    returnObjectType: 'hlcItemStatusDates',
-    stateFunction:
-    '(objectAssign.default({}, state, { HlcItemStatusDates: action.newObject});)',
-    dataDictionary: {
-      ID: '0',
-      ItemId: '',
-      ItemStatusId: '',
-      ItemStatusDateTypeId: '',
-      DateValue: '',
-      EmployeeId: ''
-    },
-    onComponentOperationComplete: () => {}
-  };
+	componentDescriptor: ComponentDescriptor;
 	plannedDateList: string[] =['Peer Review', 'Final Management Review', 'Presentation Templating', 'Graphic Review', 'Ready For Use'];
 	modalSelector: string = '#PQFPopUp';
-	constructor(props: any) {
+	constructor(props: HlcItemStatusDatesProps) {
 		super(props);
+
+    this.componentDescriptor = {
+      name: 'HlcItemStatusDates',
+      returnObjectIndexed: false,
+      returnObjectType: 'hlcItemStatusDates',
+      stateFunction:
+      '(objectAssign.default({}, state, { HlcItemStatusDates: action.newObject});)',
+      dataDictionary: {
+        ID: '0',
+        ItemId: '',
+        ItemStatusId: '',
+        ItemStatusDateTypeId: '',
+        DateValue: '',
+        EmployeeId: ''
+      }
+    };
 
     // Bindings
     this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
@@ -51,9 +51,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
         var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
-        componentData(componentDescriptor, 'GetData');
+        this.props.componentData(componentDescriptor, 'GetData');
     });
-		componentData(this.componentDescriptor, 'GetData');
+		this.props.componentData(this.componentDescriptor, 'GetData');
   }
   componentWillUnmount() {
     eventEmitter.removeListener('ItemStatusDatesRefresh');
@@ -74,12 +74,11 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.componentDescriptor.onComponentOperationComplete = () => {
-        eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-        eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
-    };
-		componentData(this.componentDescriptor, 'Submit');
-	}
+    this.props.componentData(this.componentDescriptor, 'Submit');
+
+    eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+    eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+}
 
 	upsertPromoteChange(hlcItemStatusDate: any) {
 		let formattedDate = new Intl.DateTimeFormat('en-GB', {
@@ -96,13 +95,11 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.componentDescriptor.onComponentOperationComplete = () => {
-            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
-        };
+    this.props.componentData(this.componentDescriptor, 'Promote');
 
-		componentData(this.componentDescriptor, 'Promote');
-	}
+    eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+    eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+  }
  	upsertPromoteWithModalChange(hlcItemStatusDate: any) {
 		$(this.modalSelector).modal('show');
 	}
@@ -122,13 +119,11 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.componentDescriptor.onComponentOperationComplete = () => {
-            eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
-            eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
-    };
+    this.props.componentData(this.componentDescriptor, 'Demote');
 
-		componentData(this.componentDescriptor, 'Demote');
-	}
+    eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
+    eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
+}
 
 	upsertDateChange(date: any, hlcItemStatusDate: any) {
 
@@ -145,7 +140,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 			this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = hlcItemStatusDate.ItemStatusDateTypeId.Value;
 			this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
 
-			componentData(this.componentDescriptor, 'Upsert');
+			this.props.componentData(this.componentDescriptor, 'Upsert');
 	}
 
 	getFormattedDate(date: string) {
