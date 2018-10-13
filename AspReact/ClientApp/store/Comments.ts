@@ -5,7 +5,15 @@ import { Reducer } from 'redux';
 
 export interface CommentsState {
   itemId: number;
-  comments: [any];
+  comments: {
+    ID: {
+      Value: string;
+    },
+    Comments: {
+      Value: string;
+      MaxLength: number;
+    }
+  };
 }
 
 // -----------------
