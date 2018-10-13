@@ -8,6 +8,7 @@ import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 import * as $ from "jquery";
 import eventEmitter from '../utils/eventEmitter';
+import componentData from '../store/componentData';
 
 type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
                                typeof HlcItemStatusDatesStore.actionCreators;
@@ -51,9 +52,9 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
         var componentDescriptor = objectAssign({}, this.componentDescriptor, {
             dataDictionary: { ItemId: itemId }
         });
-        this.props.componentData(componentDescriptor, 'GetData');
+        componentData(componentDescriptor, 'GetData');
     });
-		this.props.componentData(this.componentDescriptor, 'GetData');
+		componentData(this.componentDescriptor, 'GetData');
   }
   componentWillUnmount() {
     eventEmitter.removeListener('ItemStatusDatesRefresh');
@@ -74,7 +75,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.props.componentData(this.componentDescriptor, 'Submit');
+    componentData(this.componentDescriptor, 'Submit');
 
     eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
     eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
@@ -95,7 +96,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.props.componentData(this.componentDescriptor, 'Promote');
+    componentData(this.componentDescriptor, 'Promote');
 
     eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
     eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
@@ -119,7 +120,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 		this.componentDescriptor.dataDictionary['DateValue'] = '';
     this.componentDescriptor.dataDictionary["ItemId"] = this.props.itemId;
 
-    this.props.componentData(this.componentDescriptor, 'Demote');
+    componentData(this.componentDescriptor, 'Demote');
 
     eventEmitter.emitEvent('ViewParentAssociationItemWorkFlowStageRefresh', [this.props.itemId]);
     eventEmitter.emitEvent('ResearchAgendaRefresh', [this.props.itemId]);
@@ -140,7 +141,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 			this.componentDescriptor.dataDictionary['ItemStatusDateTypeId'] = hlcItemStatusDate.ItemStatusDateTypeId.Value;
 			this.componentDescriptor.dataDictionary['DateValue'] = formattedDate;
 
-			this.props.componentData(this.componentDescriptor, 'Upsert');
+			componentData(this.componentDescriptor, 'Upsert');
 	}
 
 	getFormattedDate(date: string) {
@@ -286,8 +287,6 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 
 // Wire up the React component to the Redux store
 export default connect(
-    (state: ApplicationState) => { // Selects which state properties are merged into the component's props
-                                   return { itemId: state.itemId, hlcItemStatusDates: state.hlcItemStatusDates };
-                                  },
+    (state: ApplicationState) => { state.itemId, state.hlcItemStatusDates },
     HlcItemStatusDatesStore.actionCreators                      // Selects which action creators are merged into the component's props
 )(HlcItemStatusDates) as typeof HlcItemStatusDates;

@@ -26,8 +26,7 @@ type KnownAction = RefreshHlcItemStatusDatesAction & ReceiveComponentDataAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    refresh: () => <RefreshHlcItemStatusDatesAction>{ type: 'REFRESH_HLC_STATUS_DATES' },
-    componentData: componentData
+    refresh: () => <RefreshHlcItemStatusDatesAction>{ type: 'REFRESH_HLC_STATUS_DATES' }
 };
 
 // ----------------
