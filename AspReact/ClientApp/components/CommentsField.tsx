@@ -9,7 +9,11 @@ import componentData from '../store/componentData';
 type CommentsFieldProps = CommentsStore.CommentsState &
                           typeof CommentsStore.actionCreators;
 
-class Comments extends React.Component<CommentsFieldProps, any> {
+interface ComponentCommentsFieldState {
+    text: string;
+};
+
+class Comments extends React.Component<CommentsFieldProps, ComponentCommentsFieldState> {
     componentDescriptor: ComponentDescriptor;
     constructor(props: any) {
         super(props);
@@ -36,7 +40,11 @@ class Comments extends React.Component<CommentsFieldProps, any> {
         this.upsertChange = this.upsertChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
+    getInitialState(): ComponentCommentsFieldState {
+        return {
+            text: ''
+        };
+    }
     componentDidUpdate() {
         this.componentDescriptor.dataDictionary = {
             ID: this.props.comments.ID.Value,
@@ -50,7 +58,8 @@ class Comments extends React.Component<CommentsFieldProps, any> {
     }
 
     handleChange(e:any) {
-        this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
+      let text: string = e.target.value;
+      this.setState(() => { return { text: text } });
     }
 
     public render() {
@@ -63,7 +72,7 @@ class Comments extends React.Component<CommentsFieldProps, any> {
                         <div  >
                             <TextArea className="form-control"
                                 id='Comments'
-                                value={this.props.comments.Comments.Value}
+                                value={this.state.text}
                                 onChange={this.handleChange}
                                 onBlur={this.upsertChange}
                                 maxLength={this.props.comments.Comments.MaxLength} />

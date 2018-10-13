@@ -34,8 +34,7 @@ type KnownAction = RefreshCommentsAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    refresh: () => <RefreshCommentsAction>{ type: 'REFRESH_COMMENTS' },
-    updateState: (componentDescriptor: ComponentDescriptor, id: string, value: string) => <UpdateStateAction>{ type: 'UPDATE_STATE'}
+    refresh: () => <RefreshCommentsAction>{ type: 'REFRESH_COMMENTS' }
 };
 
 // ----------------
