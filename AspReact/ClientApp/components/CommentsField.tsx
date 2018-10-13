@@ -6,12 +6,8 @@ import { ApplicationState }  from '../store';
 import * as CommentsStore from '../store/Comments';
 import componentData from '../utils/componentData';
 
-export interface CommentsFieldProps {
-    getComponentData: (component: Object) => void;
-    Comments: any;
-    componentDescriptor: ComponentDescriptor;
-    updateState: Function;
-}
+type CommentsFieldProps = CommentsStore.CommentsState &
+                          typeof CommentsStore.actionCreators;
 
 class Comments extends React.Component<CommentsFieldProps, any> {
     componentDescriptor: ComponentDescriptor;
@@ -26,13 +22,12 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             dataDictionary: {
                 ID: '',
                 Comments: ''
-            },
-           onComponentOperationComplete: () => void
+            }
          };
 
         this.componentDescriptor.dataDictionary = {
-            ID: this.props.Comments.ID.Value,
-            Comments: this.props.Comments.Comments.Value
+            ID: this.props.comments.ID.Value,
+            Comments: this.props.comments.Comments.Value
         };
 
         componentData(this.componentDescriptor, 'GetData');
@@ -44,8 +39,8 @@ class Comments extends React.Component<CommentsFieldProps, any> {
 
     componentDidUpdate() {
         this.componentDescriptor.dataDictionary = {
-            ID: this.props.CommentsField.ID.Value,
-            Comments: this.props.CommentsField.Comments.Value
+            ID: this.props.comments.ID.Value,
+            Comments: this.props.comments.Comments.Value
         }
     }
 
@@ -68,10 +63,10 @@ class Comments extends React.Component<CommentsFieldProps, any> {
                         <div  >
                             <TextArea className="form-control"
                                 id='Comments'
-                                value={this.props.CommentsField.Comments.Value}
+                                value={this.props.comments.Comments.Value}
                                 onChange={this.handleChange}
                                 onBlur={this.upsertChange}
-                                maxLength={this.props.CommentsField.Comments.MaxLength} />
+                                maxLength={this.props.comments.Comments.MaxLength} />
                         </div>
                     </div>
                 </div>
@@ -79,28 +74,6 @@ class Comments extends React.Component<CommentsFieldProps, any> {
         );
     }
 }
-
-const mapStateToProps = (state:any) => {
-    if (!state.CommentsField) {
-
-        const { itemId } = state;
-
-        return {
-            CommentsField: {
-                ID: {
-                    Value: itemId
-                },
-                Comments: {
-                    Value: ''
-                }
-            }
-        };
-    }
-
-    return {
-        CommentsField: state.CommentsField
-    };
-};
 
 // Wire up the React component to the Redux store
 export default connect(

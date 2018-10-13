@@ -4,8 +4,8 @@ import { Reducer } from 'redux';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface CommentsState {
-    itemId?: number;
-    
+  itemId: number;
+  comments: [any];
 }
 
 // -----------------

@@ -287,7 +287,7 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
 // Wire up the React component to the Redux store
 export default connect(
     (state: ApplicationState) => { // Selects which state properties are merged into the component's props
-                                   return { hlcItemStatusDates: state.hlcItemStatusDates };
+                                   return { itemId: state.itemId, hlcItemStatusDates: state.hlcItemStatusDates };
                                   },
     HlcItemStatusDatesStore.actionCreators                      // Selects which action creators are merged into the component's props
 )(HlcItemStatusDates) as typeof HlcItemStatusDates;
