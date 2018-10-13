@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { ComponentDescriptor } from '../models/componentDescriptor';
+import eventEmitter from '../utils/eventEmitter'
 import { SetComponentDescriptorRefresh } from '../utils/eventEmitter';
 
 
@@ -13,7 +14,7 @@ function ReviewerRefresh(itemId: number) {
 			ID: '0', ItemId: itemId, Reason: '', ReviewedByEmployeeId: '', ReviewStatus: '', ReviewTimeUTC: '', EmployeeId: '', Description: '', ItemReviewerTypeId: ''
 		}
 	}
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 
 }
 
@@ -27,7 +28,7 @@ function QVRByReviewerRefresh(itemId: number) {
 		}
 	}
 
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 }
 
 function ItemStatusDatesRefresh(itemId: number) {
@@ -42,7 +43,7 @@ function ItemStatusDatesRefresh(itemId: number) {
 			EmployeeId: ''
 		}
 	}
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 }
 
 function QVRRefresh(itemId: number) {
@@ -55,7 +56,7 @@ function QVRRefresh(itemId: number) {
 		}
 	}
 
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 }
 
 function ItemStatusDisplayRefresh(itemId: number) {
@@ -66,7 +67,7 @@ function ItemStatusDisplayRefresh(itemId: number) {
 			ID: '0', ItemId: itemId, Description: ''
 		}
 	}
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 }
 
 function ResearchAgendaRefresh(itemId: number) {
@@ -90,7 +91,7 @@ function DiscussionRefresh(itemId: number) {
 		}
 	}
 
-	return this.emitEvent('SetComponentDescriptorRefresh', [cd]);
+	return eventEmitter.emitEvent('SetComponentDescriptorRefresh', [cd]);
 }
 
 
@@ -115,26 +116,26 @@ export const EventEmitterBenchComponent = React.createClass<EventEmitterBenchPro
 
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
 
-		this.props.eventEmitter.addListener('QVRByReviewerRefresh', QVRByReviewerRefresh);
-		this.props.eventEmitter.addListener('ReviewerRefresh', ReviewerRefresh);
-		this.props.eventEmitter.addListener('SetComponentDescriptorRefresh', SetComponentDescriptorRefresh);
-		this.props.eventEmitter.addListener('ItemStatusDisplayRefresh', ItemStatusDisplayRefresh);
-		this.props.eventEmitter.addListener('ItemStatusDatesRefresh', ItemStatusDatesRefresh);
-		this.props.eventEmitter.addListener('QVRRefresh', QVRRefresh);
-		this.props.eventEmitter.addListener('ResearchAgendaRefresh', ResearchAgendaRefresh);
-		this.props.eventEmitter.addListener('DiscussionRefresh', DiscussionRefresh);
+		eventEmitter.addListener('QVRByReviewerRefresh', QVRByReviewerRefresh);
+	  eventEmitter.addListener('ReviewerRefresh', ReviewerRefresh);
+		eventEmitter.addListener('SetComponentDescriptorRefresh', SetComponentDescriptorRefresh);
+		eventEmitter.addListener('ItemStatusDisplayRefresh', ItemStatusDisplayRefresh);
+		eventEmitter.addListener('ItemStatusDatesRefresh', ItemStatusDatesRefresh);
+		eventEmitter.addListener('QVRRefresh', QVRRefresh);
+		eventEmitter.addListener('ResearchAgendaRefresh', ResearchAgendaRefresh);
+		eventEmitter.addListener('DiscussionRefresh', DiscussionRefresh);
 	},
 
 
 	componentWillUnmount() {
-		this.props.eventEmitter.removeListener('QVRByReviewerRefresh');
-		this.props.eventEmitter.removeListener('ReviewerRefresh');
-		this.props.eventEmitter.removeListener('SetComponentDescriptorRefresh');
-		this.props.eventEmitter.removeListener('ItemStatusDisplayRefresh');
-		this.props.eventEmitter.removeListener('ItemStatusDatesRefresh');
-		this.props.eventEmitter.removeListener('QVRRefresh');
-		this.props.eventEmitter.removeListener('ResearchAgendaRefresh');
-		this.props.eventEmitter.removeListener('DiscussionRefresh');
+		eventEmitter.removeListener('QVRByReviewerRefresh');
+		eventEmitter.removeListener('ReviewerRefresh');
+		eventEmitter.removeListener('SetComponentDescriptorRefresh');
+		eventEmitter.removeListener('ItemStatusDisplayRefresh');
+		eventEmitter.removeListener('ItemStatusDatesRefresh');
+		eventEmitter.removeListener('QVRRefresh');
+		eventEmitter.removeListener('ResearchAgendaRefresh');
+		eventEmitter.removeListener('DiscussionRefresh');
 	},
 
 	render() {
@@ -147,7 +148,7 @@ export const EventEmitterBenchComponent = React.createClass<EventEmitterBenchPro
 	}
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state:any) => {
 	if (!state.EventEmitterBench) {
 		const { itemId } = state;
 		return {
