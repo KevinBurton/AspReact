@@ -36,14 +36,14 @@ class Comments extends React.Component<CommentsFieldProps, ComponentCommentsFiel
 
         componentData(this.componentDescriptor, 'GetData');
 
+        // Initialize component state
+        this.state = {
+          text: ''
+        };
+
         // Bindings
         this.upsertChange = this.upsertChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-    getInitialState(): ComponentCommentsFieldState {
-        return {
-            text: ''
-        };
     }
     componentDidUpdate() {
         this.componentDescriptor.dataDictionary = {
