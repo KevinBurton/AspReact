@@ -44,12 +44,12 @@ class Comments extends React.Component<CommentsFieldProps, any> {
         }
     }
 
-    upsertChange(e) {
+    upsertChange(e:any) {
         this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
         componentData(this.componentDescriptor, 'Upsert');
     }
 
-    handleChange(e) {
+    handleChange(e:any) {
         this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
     }
 
@@ -59,7 +59,7 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             <div id="Comments">
                 <div >
                     <div className="form-group" >
-                        <Label id="Comments_Label" text="COMMENTS  " required={this.props.CommentsField.Comments.IsRequired} />
+                        <Label id="Comments_Label" text="COMMENTS  " required={this.props.comments.Comments.IsRequired} />
                         <div  >
                             <TextArea className="form-control"
                                 id='Comments'

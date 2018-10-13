@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { ComponentDescriptor } from '../models/componentDescriptor';
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -12,6 +13,7 @@ export interface CommentsState {
     Comments: {
       Value: string;
       MaxLength: number;
+      IsRequired: boolean;
     }
   };
 }
@@ -21,6 +23,7 @@ export interface CommentsState {
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
 interface RefreshCommentsAction { type: 'REFRESH_COMMENTS' }
+interface UpdateStateAction { type: 'UPDATE_STATE'}
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
@@ -31,7 +34,8 @@ type KnownAction = RefreshCommentsAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    refresh: () => <RefreshCommentsAction>{ type: 'REFRESH_COMMENTS' }
+    refresh: () => <RefreshCommentsAction>{ type: 'REFRESH_COMMENTS' },
+    updateState: (componentDescriptor: ComponentDescriptor, id: string, value: string) => <UpdateStateAction>{ type: 'UPDATE_STATE'}
 };
 
 // ----------------
