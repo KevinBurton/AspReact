@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ApplicationState }  from '../store';
 import { ComponentDescriptor } from '../models/componentDescriptor';
 import { ViewParentAssociationItemWorkFlowStageState, actionCreators } from '../store/ViewParentAssociationItemWorkFlowStage';
+import componentData from '../utils/componentData';
 
 type ViewParentAssociationItemWorkFlowStageProps  = ViewParentAssociationItemWorkFlowStageState;
 
@@ -16,31 +17,31 @@ class ViewParentAssociationItemWorkFlowStage extends React.Component<ViewParentA
         returnObjectIndexed: false,
         stateFunction:
         '(objectAssign.default({}, state, { TitleDescription: action.newObject});)',
-        onComponentOperationComplete: () => {},
         dataDictionary: {
             ID: 0,
             ItemId: 0,
             VendorId: 0
         }
     };
+    // componentWillMount
+    this.componentDescriptor = {
+      name: 'ViewParentAssociationItemWorkFlowStage',
+      returnObjectType: '',
+      returnObjectIndexed: true,
+      stateFunction:
+      '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
+      dataDictionary: {
+          ItemId: ''
+      }
+  }
+
+  this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
+  this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail ? this.props.SessionFileDetail.EventTemplateDownload : {};
+  componentData(this.componentDescriptor, 'GetData');
+
     // Bindings
 }
 componentWillMount() {
-        this.componentDescriptor = {
-            name: 'ViewParentAssociationItemWorkFlowStage',
-            returnObjectType: '',
-            returnObjectIndexed: true,
-            stateFunction:
-            '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
-            onComponentOperationComplete: () => {},
-            dataDictionary: {
-                ItemId: ''
-            }
-        }
-
-        this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
-        this.componentDescriptor.dataDictionary['EventTemplateDownload'] = this.props.SessionFileDetail ? this.props.SessionFileDetail.EventTemplateDownload : {};
-        // this.props.componentData(this.componentDescriptor, 'GetData');
     }
     render() {
         var eventTemplateUrl = this.props.SessionFileDetail != null ? this.props.SessionFileDetail.EventTemplateDownload.DefaultValue : '';

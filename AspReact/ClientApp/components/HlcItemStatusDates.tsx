@@ -8,7 +8,7 @@ import HelpButton from './HelpButton';
 import PQFModal from './PQFModal';
 import * as $ from "jquery";
 import eventEmitter from '../utils/eventEmitter';
-import componentData from '../store/componentData';
+import componentData from '../utils/componentData';
 
 type HlcItemStatusDatesProps = HlcItemStatusDatesStore.HlcItemStatusDatesState &
                                typeof HlcItemStatusDatesStore.actionCreators;
@@ -37,15 +37,6 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
       }
     };
 
-    // Bindings
-    this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
-    this.upsertPromoteWithModalChange = this.upsertPromoteWithModalChange.bind(this);
-    this.upsertDemoteChange = this.upsertDemoteChange.bind(this);
-    this.upsertPromoteChange = this.upsertPromoteChange.bind(this);
-    this.upsertDateChange = this.upsertDateChange.bind(this);
-    this.getFormattedDate = this.getFormattedDate.bind(this);
-  }
-  componentWillMount() {
     // https://stackoverflow.com/questions/49525389/element-implicitly-has-an-any-type-because-type-0-has-no-index-signature
 		this.componentDescriptor.dataDictionary['ItemId'] = this.props.itemId;
     eventEmitter.addListener('ItemStatusDatesRefresh', (itemId: number) => {
@@ -55,6 +46,14 @@ class HlcItemStatusDates extends React.Component<HlcItemStatusDatesProps, any> {
         componentData(componentDescriptor, 'GetData');
     });
 		componentData(this.componentDescriptor, 'GetData');
+
+    // Bindings
+    this.upsertSubmitChange = this.upsertSubmitChange.bind(this);
+    this.upsertPromoteWithModalChange = this.upsertPromoteWithModalChange.bind(this);
+    this.upsertDemoteChange = this.upsertDemoteChange.bind(this);
+    this.upsertPromoteChange = this.upsertPromoteChange.bind(this);
+    this.upsertDateChange = this.upsertDateChange.bind(this);
+    this.getFormattedDate = this.getFormattedDate.bind(this);
   }
   componentWillUnmount() {
     eventEmitter.removeListener('ItemStatusDatesRefresh');

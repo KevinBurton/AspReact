@@ -7,7 +7,7 @@ import { LanguageContainer } from './LanguageField';
 import { ResearchElementTypeFieldContainer } from './ResearchElementTypeField';
 import { IndustryFieldContainer } from './IndustryField';
 import { SessionAlignsToContainer } from './SessionAlignsToField';
-import { CommentsFieldContainer } from './CommentsField';
+import Comments from './CommentsField';
 import { SessionCategoryContainer } from './SessionCategory';
 import { NeedsExternalReviewFieldContainer } from './NeedsExternalReviewField';
 import { TotalPagesFieldContainer } from './TotalPagesField';
@@ -43,7 +43,7 @@ class HlcBasicInfo extends React.Component<HlcBasicInfoProps, any> {
                     <ContentFocusContainer />
                     <ContentAspectContainer />
                     <ContentMaturityContainer />
-                    <CommentsFieldContainer />
+                    <Comments />
                     <TotalPagesFieldContainer />
                     <VendorBenchContainer />
                 </div>

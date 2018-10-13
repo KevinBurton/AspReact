@@ -16,7 +16,6 @@ class HlcSessionFileDetails extends React.Component<HlcSessionFileDetailsProps, 
           returnObjectIndexed: false,
           stateFunction:
           '(objectAssign.default({}, state, { DownloadTemplateButton: action.newObject});)',
-          onComponentOperationComplete: () => {},
           dataDictionary: {
               ID: 0,
               ItemId: 0,
@@ -33,8 +32,7 @@ class HlcSessionFileDetails extends React.Component<HlcSessionFileDetailsProps, 
                 returnObjectIndexed: true,
                 stateFunction:
                     '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
-                onComponentOperationComplete: () => {},
-                    dataDictionary: {
+                dataDictionary: {
                     ItemId: this.props.itemId
                 }
             }

@@ -4,7 +4,7 @@ import { ComponentDescriptor } from '../models/componentDescriptor';
 import { TextArea, Label } from './Form';
 import { ApplicationState }  from '../store';
 import * as CommentsStore from '../store/Comments';
-import componentData from '../store/componentData';
+import componentData from '../utils/componentData';
 
 type CommentsFieldProps = CommentsStore.CommentsState &
                           typeof CommentsStore.actionCreators;
