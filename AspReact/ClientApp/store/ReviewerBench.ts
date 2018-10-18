@@ -51,11 +51,13 @@ export interface ReviewerBenchState {
     reviewerBench: Reviewer[];
 }
 
+type REFRESH_REVIEWER_BENCH_COMPONENT = 'REFRESH_REVIEWER_BENCH_COMPONENT';
+
 // -----------------
 // ACTIONS - These are serializable (hence replayable) descriptions of state transitions.
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
-interface RefreshReviewerBenchAction { type: 'REFRESH_REVIEWER_BENCH_COMPONENT' }
+interface RefreshReviewerBenchAction { type: REFRESH_REVIEWER_BENCH_COMPONENT }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
@@ -66,7 +68,7 @@ type KnownAction = RefreshReviewerBenchAction & ReceiveComponentDataAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    refresh: () => <RefreshReviewerBenchAction>{ type: 'REFRESH_REVIEWER_BENCH_COMPONENT' },
+    refresh: () => <RefreshReviewerBenchAction>{ type: REFRESH_REVIEWER_BENCH_COMPONENT },
     componentData: componentData
 };
 
