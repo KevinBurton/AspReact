@@ -6,14 +6,14 @@ import { ApplicationState }  from '../store';
 import * as CommentsStore from '../store/Comments';
 import componentData from '../utils/componentData';
 
-export interface CommentsFieldProps {
-    getComponentData: (component: Object) => void;
-    Comments: any;
-    componentDescriptor: ComponentDescriptor;
-    updateState: Function;
-}
+type CommentsFieldProps = CommentsStore.CommentsState &
+                          typeof CommentsStore.actionCreators;
 
-class Comments extends React.Component<CommentsFieldProps, any> {
+interface ComponentCommentsFieldState {
+    text: string;
+};
+
+class Comments extends React.Component<CommentsFieldProps, ComponentCommentsFieldState> {
     componentDescriptor: ComponentDescriptor;
     constructor(props: any) {
         super(props);
@@ -26,36 +26,40 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             dataDictionary: {
                 ID: '',
                 Comments: ''
-            },
-           onComponentOperationComplete: () => void
+            }
          };
 
         this.componentDescriptor.dataDictionary = {
-            ID: this.props.Comments.ID.Value,
-            Comments: this.props.Comments.Comments.Value
+            ID: this.props.comments.ID.Value,
+            Comments: this.props.comments.Comments.Value
         };
 
         componentData(this.componentDescriptor, 'GetData');
+
+        // Initialize component state
+        this.state = {
+          text: ''
+        };
 
         // Bindings
         this.upsertChange = this.upsertChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-
     componentDidUpdate() {
         this.componentDescriptor.dataDictionary = {
-            ID: this.props.CommentsField.ID.Value,
-            Comments: this.props.CommentsField.Comments.Value
+            ID: this.props.comments.ID.Value,
+            Comments: this.props.comments.Comments.Value
         }
     }
 
-    upsertChange(e) {
+    upsertChange(e:any) {
         this.componentDescriptor.dataDictionary[e.target.id] = e.target.value;
         componentData(this.componentDescriptor, 'Upsert');
     }
 
-    handleChange(e) {
-        this.props.updateState(this.componentDescriptor, e.target.id, e.target.value);
+    handleChange(e:any) {
+      let text: string = e.target.value;
+      this.setState(() => { return { text: text } });
     }
 
     public render() {
@@ -64,14 +68,14 @@ class Comments extends React.Component<CommentsFieldProps, any> {
             <div id="Comments">
                 <div >
                     <div className="form-group" >
-                        <Label id="Comments_Label" text="COMMENTS  " required={this.props.CommentsField.Comments.IsRequired} />
+                        <Label id="Comments_Label" text="COMMENTS  " required={this.props.comments.Comments.IsRequired} />
                         <div  >
                             <TextArea className="form-control"
                                 id='Comments'
-                                value={this.props.CommentsField.Comments.Value}
+                                value={this.state.text}
                                 onChange={this.handleChange}
                                 onBlur={this.upsertChange}
-                                maxLength={this.props.CommentsField.Comments.MaxLength} />
+                                maxLength={this.props.comments.Comments.MaxLength} />
                         </div>
                     </div>
                 </div>
@@ -79,28 +83,6 @@ class Comments extends React.Component<CommentsFieldProps, any> {
         );
     }
 }
-
-const mapStateToProps = (state:any) => {
-    if (!state.CommentsField) {
-
-        const { itemId } = state;
-
-        return {
-            CommentsField: {
-                ID: {
-                    Value: itemId
-                },
-                Comments: {
-                    Value: ''
-                }
-            }
-        };
-    }
-
-    return {
-        CommentsField: state.CommentsField
-    };
-};
 
 // Wire up the React component to the Redux store
 export default connect(

@@ -1,7 +1,7 @@
 import { ComponentDescriptor } from '../models/componentDescriptor'
 
-export interface ReceiveComponentDataAction { type: 'RECEIVE_COMPONENT_DATA' }
+interface ReceiveComponentDataAction { type: 'RECEIVE_COMPONENT_DATA' }
 
-export function receiveComponentData(newObject: any, componentDescriptor: ComponentDescriptor) {
+export default function receiveComponentData(newObject: any, componentDescriptor: ComponentDescriptor) {
   return <ReceiveComponentDataAction>{ type: 'RECEIVE_COMPONENT_DATA' };
 }

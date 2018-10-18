@@ -17,7 +17,6 @@ class DownloadTemplateButton extends React.Component<DownloadTemplateButtonProps
           returnObjectIndexed: false,
           stateFunction:
           '(objectAssign.default({}, state, { DownloadTemplateButton: action.newObject});)',
-          onComponentOperationComplete: () => {},
           dataDictionary: {
               ID: 0,
               ItemId: 0,
@@ -33,7 +32,6 @@ class DownloadTemplateButton extends React.Component<DownloadTemplateButtonProps
             returnObjectIndexed: false,
             stateFunction:
             '(objectAssign.default({}, state, { SessionFileDetail: action.newObject});)',
-            onComponentOperationComplete: () => {},
             dataDictionary: {
                 ItemId: ''
             }
