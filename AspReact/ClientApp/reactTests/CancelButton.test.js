@@ -8,7 +8,7 @@ describe('A suite', function() {
   });
 
   it('should be selectable by class "foo"', function() {
-    expect(shallow(<CancelButton />).contains(<button className="btn btn-default"></button>).toBe(true);
+    expect(shallow(<CancelButton />).contains(<button className="btn btn-default"></button>)).toBe(true);
     expect(shallow(<CancelButton />).is('.btn')).toBe(true);
   });
 
