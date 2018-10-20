@@ -10,7 +10,7 @@
     "lint": "tslint ClientApp/components ClientApp/models ClientApp/store ClientApp/utils || true"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/ClientApp/reactTests/test-setup.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js"
   },
   "devDependencies": {
     "@types/bootstrap": "^4.1.2",
