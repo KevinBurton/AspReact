@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import CancelButton  from '../ClientApp/components/CancelButton';
 
 describe('A suite', function() {
