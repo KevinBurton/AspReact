@@ -91,6 +91,14 @@
         "@types/react": "*"
       }
     },
+    "@types/enzyme-adapter-react-15": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/@types/enzyme-adapter-react-15/-/enzyme-adapter-react-15-1.0.3.tgz",
+      "integrity": "sha512-tty712UuXrnlanshxG5gPG6lBxJrBjO1ha/zNJVzHjs/lpRNnSstJHo8fXRw0mHPitD+RENPaXSMPcRv7wpFjQ==",
+      "requires": {
+        "@types/enzyme": "*"
+      }
+    },
     "@types/history": {
       "version": "4.6.0",
       "resolved": "https://registry.npmjs.org/@types/history/-/history-4.6.0.tgz",
@@ -3060,6 +3068,15 @@
             "object-assign": "^4.1.1"
           }
         }
+      }
+    },
+    "enzyme-to-json": {
+      "version": "3.3.4",
+      "resolved": "https://registry.npmjs.org/enzyme-to-json/-/enzyme-to-json-3.3.4.tgz",
+      "integrity": "sha1-Z8YEDpMRgvGDQYry659DIyWKp38=",
+      "dev": true,
+      "requires": {
+        "lodash": "^4.17.4"
       }
     },
     "errno": {
