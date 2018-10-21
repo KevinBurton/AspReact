@@ -1,8 +1,7 @@
 const {defaults} = require('jest-config');
 module.exports = {
   transform: {
-      "^.+\\.tsx?$": "ts-jest",
-      "^.+\\.ts?$": "ts-jest"
+      "^.+\\.tsx?$": "ts-jest"
   },
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?|js?)$",
   moduleFileExtensions: [...defaults.moduleFileExtensions,"ts", "tsx"],

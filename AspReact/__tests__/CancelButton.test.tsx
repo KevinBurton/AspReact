@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import { CancelButton } from '../ClientApp/components/CancelButton';
+import CancelButton  from '../ClientApp/components/CancelButton';
 
 describe('A suite', function() {
   it('should render without throwing an error', function() {
