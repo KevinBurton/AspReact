@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import CancelButton  from '../ClientApp/components/CancelButton';
+import CancelButton  from '../CancelButton';
 
 // pwdhttps://medium.com/@mateuszsokola/configuring-react-16-jest-enzyme-typescript-7122e1a1e6e8
 describe('A suite', function() {
